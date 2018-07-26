@@ -1,0 +1,4 @@
+[submodule "OCA/commission"]
+	path = OCA/commission
+	url = git@github.com:OCA/commission.git
+	branch = 11.0
