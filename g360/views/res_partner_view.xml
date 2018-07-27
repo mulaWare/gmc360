@@ -6,7 +6,7 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='category_id']" position="after">
+                <xpath expr="//field[@name='lang']" position="after">
                     <group name="adicionales" attrs="{'invisible': [('is_company', '!=',True)]}">
                       <field name="name_short"/>
                       <field name="casfim"/>
