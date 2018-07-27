@@ -13,6 +13,6 @@
                       <field name="zona"/>
                 </xpath>
             </field>
-          </record>
+        </record>
     </data>
 </odoo>
