@@ -8,7 +8,7 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     name_short = fields.Char(string="Nombre Corto", required=False)
-    casfim = fields.Integer(string="CASFIM", required=True)
+    casfim = fields.Integer(string="CASFIM", required=False)
     figura = fields.Selection([('00','No disponible'),
                                ('01','SOFOM ENR'),
                                ('02','SOFOM ER'),
@@ -26,7 +26,7 @@ class ResPartner(models.Model):
                                ('14','SOCAP'),
                                ('15','Unión de Crédito'),
                               ],
-                              string="Figura", required=True, help="Tipo de figura")
+                              string="Figura", required=False, help="Tipo de figura")
     zona = fields.Selection([('00','No disponible'),
                                ('01','Norte'),
                                ('02','Sur'),
@@ -40,4 +40,4 @@ class ResPartner(models.Model):
                                ('10','Centro-Norte'),
                                ('11','Centro-Sur'),
                               ],
-                              string="Zona", required=True, help="Zona Geográfica")
+                              string="Zona", required=False, help="Zona Geográfica")
