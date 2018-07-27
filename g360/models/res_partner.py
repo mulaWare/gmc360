@@ -8,7 +8,7 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     name_short = fields.Char(string="Nombre Corto", required=False)
-    casfim = fields.Integer(string="CASFIM", required=False)
+    casfim = fields.Char(string="CASFIM", required=False)
     figura = fields.Selection([('00','No disponible'),
                                ('01','SOFOM ENR'),
                                ('02','SOFOM ER'),
