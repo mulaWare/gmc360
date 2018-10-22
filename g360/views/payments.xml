@@ -1,68 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="report_payment_document_mx" inherit_id="account.report_payment_receipt">
-        <xpath expr="//div[1]" position="before">
-            <t t-if="not o.l10n_mx_edi_cfdi_uuid and o.l10n_mx_edi_is_required()">
-                <div class="btn btn-danger">
-                    <h1>A signature of this payment is required, but it is not signed.</h1>
-                </div>
-            </t>
-            <t t-if="o.l10n_mx_edi_cfdi_uuid">
-                <!--New global variables-->
-                <t t-set="xml" t-value="o.l10n_mx_edi_get_xml_etree()"/>
-                <t t-set="tfd" t-value="o.l10n_mx_edi_get_tfd_etree(xml)"/>
-                <t t-set="tfd_original_string" t-value="o._get_l10n_mx_edi_cadena()"/>
-            </t>
-        </xpath>
-        <xpath expr="//div[hasclass('row')]/div[1]" position="after">
-            <div class="col-xs-6" t-if="o.l10n_mx_edi_cfdi_uuid and o.l10n_mx_edi_cfdi_supplier_rfc">
-                <span t-if="o.company_id.vat != o.l10n_mx_edi_cfdi_supplier_rfc">XML VAT: <span t-esc="o.l10n_mx_edi_cfdi_supplier_rfc"></span></span>
-            </div>
-            <div class="col-xs-6" t-if="o.l10n_mx_edi_cfdi_uuid and o.l10n_mx_edi_payment_method_id">
-                <strong>Payment Way CFDI:</strong>
-                <span t-esc="' - '.join([o.l10n_mx_edi_payment_method_id.code, o.l10n_mx_edi_payment_method_id.name])"/>
-            </div>
-        </xpath>
+    <template id="report_payment_document_mx_2" inherit_id="l10n_mx_edi.report_payment_document_mx">
         <xpath expr="//table" position="after">
             <t t-if="o.l10n_mx_edi_cfdi_uuid">
-                <div class="row" id='complement'>
-                    <div class="barcode col-xs-3">
-                        <t t-set="sello" t-value="xml.get('Sello', 'No identificado')[-8:]"/>
-                        <img t-att-src="'/report/barcode/?type=QR&amp;value=%s' % quote_plus(
-                            'https://verificacfdi.facturaelectronica.sat.gob.mx/default.aspx?' + keep_query(
-                                re=o.l10n_mx_edi_cfdi_supplier_rfc, rr=o.l10n_mx_edi_cfdi_customer_rfc,
-                                tt=0, id=o.l10n_mx_edi_cfdi_uuid)
-                                + '&amp;fe=%s' % quote_plus(sello, 'utf-8', 'strict', '=/').replace('%2B', '+'))"/>
-                    </div>
-                    <div class="complement-details col-xs-9">
-                        <div class="digital-stamp">
-                            <span>Digital stamp of the emitter</span>
-                        </div>
-                        <div class="digital-stamp-content">
-                            <span t-esc="xml.get('Sello', 'No identificado')"/>
-                        </div>
-                        <div class="digital-stamp">
-                            <span>Digital stamp SAT</span>
-                        </div>
-                        <div class="digital-stamp-content">
-                            <span t-esc="tfd.get('SelloSAT', 'No identificado')"/>
-                        </div>
-                        <div class="digital-stamp">
-                            <span>Original chain complement of digital certification SAT</span>
-                        </div>
-                        <div class="digital-stamp-content">
-                            <span class="nowrap" t-esc="tfd_original_string"/>
-                        </div>
-                        <div t-if="xml.Emisor.xpath('cfdi:ExpedidoEn', namespaces=xml.nsmap)" class="digital-stamp">
-                            <span>Issued from</span>
-                        </div>
-                        <div t-if="xml.Emisor.xpath('cfdi:ExpedidoEn', namespaces=xml.nsmap)" class="digital-stamp-content">
-                            <span t-esc="xml.get('LugarExpedicion', 'No identificado')"/>
-                        </div>
-                        <div class="digital-stamp">
-                            <span>Extra Info</span>
-                        </div>
-                        <div class="digital-stamp-content">
                             <span>Emitter certificate:</span> <span t-esc="xml.get('NoCertificado')"/>
                             <span> | Expedition place:</span> <span t-esc="xml.get('LugarExpedicion')"/>
                             <span> | Fiscal Regime:</span>
@@ -71,41 +11,6 @@
                             <span> | Emission Date:</span> <span t-esc="xml.get('Fecha', '').replace('T', ' ')"/>
                             <span> | Certification Date:</span> <span t-esc="tfd.get('FechaTimbrado', '').replace('T', ' ')"/>
                             <span> | Fiscal Folio:</span> <span t-esc="tfd.get('UUID')"/>
-                        </div>
-                        <div class="digital-stamp-content text-center">
-                            <strong>This document is a printed representation of a CFDI</strong>
-                        </div>
-                    </div>
-                </div>
-            </t>
-        </xpath>
-        <xpath expr="//table" position="replace">
-            <t t-if="o.l10n_mx_edi_cfdi_uuid">
-                <t t-set="docs_related" t-value="o.l10n_mx_edi_get_payment_etree(xml)"/>
-                <table class="table table-condensed">
-                    <thead>
-                        <tr>
-                            <th>Invoice</th>
-                            <th>UUID</th>
-                            <th class="text-right">Partiality</th>
-                            <th class="text-right">Previous balance</th>
-                            <th class="text-right">Amount Paid</th>
-                            <th class="text-right">Balance</th>
-                            <th>Currency</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr t-foreach="docs_related" t-as="inv">
-                            <td><span t-esc="o.invoice_ids.filtered(lambda i: i.l10n_mx_edi_cfdi_uuid == inv.get('IdDocumento')).number or ''"/></td>
-                            <td><span t-esc="inv.get('IdDocumento')"/></td>
-                            <td class="text-right"><span t-esc="inv.get('NumParcialidad', '')"/></td>
-                            <td class="text-right"><span t-esc="inv.get('ImpSaldoAnt', '')"/></td>
-                            <td class="text-right"><span t-esc="inv.get('ImpPagado', '')"/></td>
-                            <td class="text-right"><span t-esc="inv.get('ImpSaldoInsoluto', '')"/></td>
-                            <td><span t-esc="inv.get('MonedaDR')"/></td>
-                        </tr>
-                    </tbody>
-                </table>
             </t>
             <t t-if="not o.l10n_mx_edi_cfdi_uuid">
                 <table class="table table-condensed">
@@ -129,14 +34,6 @@
                     </tbody>
                 </table>
             </t>
-        </xpath>
-        <!--remove payment method-->
-        <xpath expr="//div[@t-if='o.payment_method_id']" position="replace">
-            <div class="col-xs-6" t-if="o.payment_method_id">
-                <t t-if="not o.l10n_mx_edi_cfdi_uuid">
-                    <strong>Payment Method: </strong><span t-field="o.payment_method_id.name"/>
-                </t>
-            </div>
         </xpath>
     </template>
 </odoo>
