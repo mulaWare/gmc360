@@ -26,7 +26,7 @@
                             <td class="text-right"><span t-esc="xml.Conceptos.get('ClaveUnidad', '')"/></td>  
                             <td class="text-right"><span t-esc="xml.Conceptos.get('ValorUnitariod', '')"/></td>  
                             <td class="text-right"><span t-esc="xml.Conceptos.get('ClaveUnidad', '')"/></td>  
-                            <td><span t-esc="xml.get('Moneda')""/></td>
+                            <td><span t-esc="xml.get('Moneda')"/></td>
                         </tr>
                     </tbody>
                 </table>
