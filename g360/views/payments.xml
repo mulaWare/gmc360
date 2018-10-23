@@ -17,7 +17,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr t-foreach="docs_concept" t-as="con">                            
+                        <tr>
                             <td><span t-esc="tfd.get('UUID', '')"/></td>
                             <td><span t-esc="xml.Conceptos.get('Cantidad', '')"/></td>
                             <td class="text-right"><span t-esc="xml.Conceptos.get('Importe', '')"/></td>
@@ -27,7 +27,7 @@
                             <td class="text-right"><span t-esc="xml.Conceptos.get('ValorUnitariod', '')"/></td>  
                             <td class="text-right"><span t-esc="xml.Conceptos.get('ClaveUnidad', '')"/></td>  
                             <td><span t-esc="xml.get('Moneda')"/></td>
-                        </tr>
+                         </tr>   
                     </tbody>
                 </table>
             </t>            
