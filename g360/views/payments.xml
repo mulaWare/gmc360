@@ -21,7 +21,7 @@
                             <td><span t-esc="tfd.get('UUID', '')"/></td>
                             <td><span t-esc="xml.Conceptos.get('Cantidad', '')"/></td>
                             <td class="text-right"><span t-esc="xml.Conceptos.get('Importe', '')"/></td>
-                            <td class="text-right"><span t-esc="xml.Conceptos.get('ClaveProdServ', '')"/></td>                            <td class="text-right"><span t-esc="inv.get('ImpPagado', '')"/></td>
+                            <td class="text-right"><span t-esc="xml.Conceptos.get('ClaveProdServ', '')"/></td>
                             <td class="text-right"><span t-esc="xml.Conceptos.get('Pago', '')"/></td>
                             <td class="text-right"><span t-esc="xml.Conceptos.get('ClaveUnidad', '')"/></td>  
                             <td class="text-right"><span t-esc="xml.Conceptos.get('ValorUnitariod', '')"/></td>  
