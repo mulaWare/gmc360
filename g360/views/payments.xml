@@ -4,7 +4,7 @@
               <xpath expr="//div[1]" position="before">
                   <t t-if="o.l10n_mx_edi_cfdi_uuid">
                       <!--New global variables-->
-                      <t t-set="pay" t-value="o.l10n_mx_edi_get_payment_etree(xml)"/>
+                      <t t-set="pay" t-value="o.l10n_mx_edi_get_pay_etree(xml)"/>
                   </t>
               </xpath>
               <xpath expr="//div[contains(@class, 'row mt64')]" position="replace">
@@ -16,7 +16,7 @@
                             <t t-if="xml.get('Version', '') == '3.3'"> <span t-esc="xml.Emisor.get('RegimenFiscal', '')"/></t></span>
                       <span><strong>Expedition place:</strong></span> <span t-esc="xml.get('LugarExpedicion')"/>
                       <span><strong>Payment Date: </strong><span t-esc="o.payment_date"/></span>
-                      <strong>Payment Way CFDI:</strong><span t-esc="pay.Pagos.Pago.get('FormaDePagoP')"/>
+                      <strong>Payment Way CFDI:</strong><span t-esc="pay.get('FormaDePagoP')"/>
                       <span><strong>Emitter certificate:</strong></span> <span t-esc="xml.get('NoCertificado')"/>
                       <span><strong>Emission Date:</strong></span> <span t-esc="xml.get('Fecha', '').replace('T', ' ')"/>
                       <span><strong>Certification Date:</strong></span> <span t-esc="tfd.get('FechaTimbrado', '').replace('T', ' ')"/>
