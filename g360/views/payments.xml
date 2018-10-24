@@ -36,7 +36,7 @@
 
                               </div>
               </xpath>
-              <xpath expr="//table" position="before">
+              <xpath expr="//table" position="replace">
                   <t t-if="o.l10n_mx_edi_cfdi_uuid">
 
                   </t>
