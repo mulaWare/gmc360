@@ -3,7 +3,8 @@
     <template id="report_payment_document_mx_2" inherit_id="l10n_mx_edi.report_payment_document_mx">
               <xpath expr="//div[contains(@class, 'row mt64')]" position="replace">
                   <div class="col-xs-6" t-if="o.l10n_mx_edi_cfdi_uuid and o.l10n_mx_edi_payment_method_id">
-                      <h5><strong><span t-esc="xml.Emisor.get('Nombre')"/></strong></h5>
+                      <h4><strong><font color='gray'>Emitter</font></strong></h4>
+                      <strong><span t-esc="xml.Emisor.get('Nombre')"/></strong><br/>
                       <span><strong>VAT: </strong><span t-esc="xml.Emisor.get('Rfc')"/></span>
                       <span><strong>Fiscal Regime: </strong>
                             <t t-if="xml.get('version', '') == '3.2'"> <span t-esc="xml.Emisor.RegimenFiscal.get('Regimen')"/></t>
@@ -16,7 +17,8 @@
                       <strong>Operation: </strong><span t-esc="pay.get('NumOperacion')"/><br/>
                   </div>
                   <div class="col-xs-6" t-if="o.l10n_mx_edi_cfdi_uuid">
-                      <h5><strong><span t-esc="xml.Receptor.get('Nombre')"/></strong></h5>
+                      <h4><strong><font color='gray'>Receiver</font></strong></h4>
+                      <strong><span t-esc="xml.Receptor.get('Nombre')"/></strong><br/>
                       <span><strong>VAT: </strong><span t-esc="xml.Receptor.get('Rfc')"/></span>
                       <span><strong>CFDI Use: </strong><span t-esc="xml.Receptor.get('UsoCFDI')"/></span>
                   </div>
