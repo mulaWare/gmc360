@@ -73,7 +73,7 @@
                       </table>
                   </t>
               </xpath>
-        <xpath expr="//table" position="replace">
+        <xpath expr="//table" position="after">
             <t t-if="o.l10n_mx_edi_cfdi_uuid">
                 <t t-set="docs_related" t-value="o.l10n_mx_edi_get_payment_etree(xml)"/>
                 <table class="table table-sm">
