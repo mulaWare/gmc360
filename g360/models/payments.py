@@ -34,7 +34,7 @@ class AccountPayment(models.Model):
         '''
         if not hasattr(cfdi, 'Complemento'):
             return None
-        attribute = '//pago10:Pago'
+        attribute = '//pago10:Pagos'
         namespace = {'pago10': 'http://www.sat.gob.mx/Pagos'}
         node = cfdi.Complemento.xpath(attribute, namespaces=namespace)
         return node
