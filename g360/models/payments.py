@@ -12,8 +12,6 @@ from odoo.tools import DEFAULT_SERVER_TIME_FORMAT
 from odoo.tools.misc import html_escape
 from odoo.exceptions import UserError
 
-from . import account_invoice
-
 CFDI_TEMPLATE = 'l10n_mx_edi.payment10'
 CFDI_XSLT_CADENA = 'l10n_mx_edi/data/3.3/cadenaoriginal.xslt'
 CFDI_SAT_QR_STATE = {
