@@ -1,39 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="report_payment_document_mx_2" inherit_id="l10n_mx_edi.report_payment_document_mx">
-        <xpath expr="//table" position="after">
-            <t t-if="o.l10n_mx_edi_cfdi_uuid">
-                            <span>Emitter certificate:</span> <span t-esc="xml.get('NoCertificado')"/>
-                            <span> | Expedition place:</span> <span t-esc="xml.get('LugarExpedicion')"/>
-                            <span> | Fiscal Regime:</span>
-                                <t t-if="xml.get('version', '') == '3.2'"> <span t-esc="xml.Emisor.RegimenFiscal.get('Regimen')"/></t>
-                                <t t-if="xml.get('Version', '') == '3.3'"> <span t-esc="xml.Emisor.get('RegimenFiscal', '')"/></t>
-                            <span> | Emission Date:</span> <span t-esc="xml.get('Fecha', '').replace('T', ' ')"/>
-                            <span> | Certification Date:</span> <span t-esc="tfd.get('FechaTimbrado', '').replace('T', ' ')"/>
-                            <span> | Fiscal Folio:</span> <span t-esc="tfd.get('UUID')"/>
-            </t>
-            <t t-if="not o.l10n_mx_edi_cfdi_uuid">
-                <table class="table table-condensed">
-                    <thead>
-                        <tr>
-                            <th>Invoice Date</th>
-                            <th>Invoice Number</th>
-                            <th class="text-right">Original Amount</th>
-                            <th class="text-right">Amount Paid</th>
-                            <th class="text-right">Balance</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr t-foreach="o.invoice_ids" t-as="inv">
-                            <td><span t-field="inv.date_invoice"/></td>
-                            <td><span t-field="inv.number"/></td>
-                            <td class="text-right"><span t-field="inv.amount_total"/></td>
-                            <td class="text-right"><span t-esc="inv.amount_total - inv.residual" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
-                            <td class="text-right"><span t-field="inv.residual"/></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </t>
-        </xpath>
+              <xpath expr="//div[contains(@class, 'row mt64')]" position="replace">
+                  <div class="col-xs-6" t-if="o.l10n_mx_edi_cfdi_uuid and o.l10n_mx_edi_payment_method_id">
+                      <h4><strong><font color='gray'>Emitter</font></strong></h4>
+                      <strong><span t-esc="xml.Emisor.get('Nombre')"/></strong><br/>
+                      <span><strong>VAT: </strong><span t-esc="xml.Emisor.get('Rfc')"/></span>
+                      <span><strong>Fiscal Regime: </strong>
+                            <t t-if="xml.get('version', '') == '3.2'"> <span t-esc="xml.Emisor.RegimenFiscal.get('Regimen')"/></t>
+                            <t t-if="xml.get('Version', '') == '3.3'"> <span t-esc="xml.Emisor.get('RegimenFiscal', '')"/></t></span>
+                      <span><br/><strong>Expedition place: </strong></span> <span t-esc="xml.get('LugarExpedicion')"/>
+                      <t t-set="pay" t-value="o.l10n_mx_edi_get_pay_etree(xml)"/> 
+                      <span><strong>Payment Date: </strong><span t-esc="pay.get('FechaPago', '').replace('T12:00:00', ' ')"/></span><br/>
+                      <strong>Payment Way CFDI: </strong><span t-esc="pay.get('FormaDePagoP')"/><br/>
+                      <strong>Amount: </strong><span t-esc="'  '.join([pay.get('Monto'), pay.get('MonedaP')])"/><br/>
+                      <strong>Operation: </strong><span t-esc="pay.get('NumOperacion')"/><br/>
+                  </div>
+                  <div class="col-xs-6" t-if="o.l10n_mx_edi_cfdi_uuid">
+                      <h4><strong><font color='gray'>Receiver</font></strong></h4>
+                      <strong><span t-esc="xml.Receptor.get('Nombre')"/></strong><br/>
+                      <span><strong>VAT: </strong><span t-esc="xml.Receptor.get('Rfc')"/></span>
+                      <span><strong>CFDI Use: </strong><span t-esc="xml.Receptor.get('UsoCFDI')"/></span>
+                  </div>
+              </xpath>
+              <xpath expr="//div[contains(@class, 'row')]" position="replace">
+                  <div class="col-xs-6" t-if="o.l10n_mx_edi_cfdi_uuid and o.l10n_mx_edi_payment_method_id">
+                      <span><strong>Emitter certificate:</strong></span> <span t-esc="xml.get('NoCertificado')"/><br/>
+                      <span><strong>Emission Date:</strong></span> <span t-esc="xml.get('Fecha', '').replace('T', ' ')"/><br/>
+                      <span><strong>Certification Date:</strong></span> <span t-esc="tfd.get('FechaTimbrado', '').replace('T', ' ')"/><br/>
+                      <span><strong>Fiscal Folio:</strong></span> <span t-esc="tfd.get('UUID')"/><br/>
+                  </div>
+              </xpath>
+              <xpath expr="//div[contains(@class, 'row mb64')]" position="replace">
+                              <div class="row mb64">
+
+                              </div>
+              </xpath>
+              <xpath expr="//table" position="before">
+                  <t t-if="o.l10n_mx_edi_cfdi_uuid">
+
+                  </t>
+                  <t t-if="o.l10n_mx_edi_cfdi_uuid">
+                      <table class="table table-condensed">
+                          <thead>
+                              <tr>
+                                  <th class="text-left">Payments</th>
+                                  <th class="text-left">Amount</th>
+                                  <th class="text-left">Code</th>
+                                  <th class="text-left">Description</th>
+                                  <th class="text-left">Units</th>
+                                  <th class="text-left">Price</th>
+                                  <th class="text-left">Subtotal</th>
+                                  <th class="text-left">Total</th>
+                                  <th class="text-left">Type</th>
+                                  <th class="text-left">Currency</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td class="text-left"><span t-esc="xml.Conceptos.Concepto.get('Cantidad', '')"/></td>
+                                  <td class="text-left"><span t-esc="xml.Conceptos.Concepto.get('Importe', '')"/></td>
+                                  <td class="text-left"><span t-esc="xml.Conceptos.Concepto.get('ClaveProdServ', '')"/></td>
+                                  <td class="text-left"><span t-esc="xml.Conceptos.Concepto.get('Descripcion', '')"/></td>
+                                  <td class="text-left"><span t-esc="xml.Conceptos.Concepto.get('ClaveUnidad', '')"/></td>
+                                  <td class="text-left"><span t-esc="xml.Conceptos.Concepto.get('ValorUnitario', '')"/></td>
+                                  <td class="text-left"><span t-esc="xml.get('SubTotal', '')"/></td>
+                                  <td class="text-left"><span t-esc="xml.get('Total', '')"/></td>
+                                  <td class="text-left"><span t-esc="xml.get('TipoDeComprobante', '')"/></td>
+                                  <td class="text-left"><span t-esc="xml.get('Moneda')"/></td>
+                               </tr>
+                          </tbody>
+                      </table>
+                  </t>
+              </xpath>
     </template>
 </odoo>

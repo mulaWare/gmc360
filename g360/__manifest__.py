@@ -20,7 +20,7 @@
     'version': '0.2',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base','account','l10n_mx_edi',],
 
     # always loaded
     'data': [
@@ -28,9 +28,12 @@
       	'views/res_partner_view.xml',        
         'views/views.xml',
         'views/templates.xml',
+        'views/payments.xml',        
     ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
     ],
+   "installable": True,
+   "auto_install": True,
 }
