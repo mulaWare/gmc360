@@ -13,7 +13,7 @@
                       <t t-set="pay" t-value="o.l10n_mx_edi_get_pay_etree(xml)"/> 
                       <span><strong>Payment Date: </strong><span t-esc="pay.get('FechaPago', '').replace('T12:00:00', ' ')"/></span><br/>
                       <strong>Payment Way CFDI: </strong><span t-esc="pay.get('FormaDePagoP', '')"/><br/>
-                      <strong>Amount: </strong><span t-esc="'{0:,.2f}'.format(float(pay.get('Monto')))", ' ')/><span t-esc="pay.get('MonedaP')])"/><br/>
+                      <strong>Amount: </strong><span t-esc="'{0:,.2f}'.format(float(pay.get('Monto')))"/><span t-esc="pay.get('MonedaP')])"/><br/>
                       <strong>Operation: </strong><span t-esc="pay.get('NumOperacion')"/><br/>
                   </div>
                   <div class="col-xs-6" t-if="o.l10n_mx_edi_cfdi_uuid">
