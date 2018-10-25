@@ -12,7 +12,7 @@
                       <span><br/><strong>Expedition place: </strong></span> <span t-esc="xml.get('LugarExpedicion')"/>
                       <t t-set="pay" t-value="o.l10n_mx_edi_get_pay_etree(xml)"/> 
                       <span><strong>Payment Date: </strong><span t-esc="pay.get('FechaPago', '').replace('T12:00:00', ' ')"/></span><br/>
-                      <strong>Payment Way CFDI: </strong><span t-esc="pay.get('FormaDePagoP', '')"/><br/>
+                      <strong>Payment Way CFDI: </strong><span t-esc="'  '.join([' ', pay.get('FormaDePagoP')])"/><br/>
                       <strong>Amount: </strong><span t-esc="'{0:,.2f}'.format(float(pay.get('Monto')))"/><span t-esc="'  '.join([' ', pay.get('MonedaP')])"/><br/>
                       <strong>Operation: </strong><span t-esc="pay.get('NumOperacion')"/><br/>
                   </div>
