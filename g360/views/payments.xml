@@ -3,7 +3,7 @@
     <template id="report_payment_document_mx_2" inherit_id="l10n_mx_edi.report_payment_document_mx">
               <xpath expr="//div[contains(@class, 'row mt64')]" position="replace">
                   <div class="col-xs-6" t-if="o.l10n_mx_edi_cfdi_uuid and o.l10n_mx_edi_payment_method_id">
-                      <h4><strong><font color='gray'>Emitter</font></strong></h4>
+                      <h4><strong><font color="gray">Emitter</font></strong></h4>
                       <strong><span t-esc="xml.Emisor.get('Nombre')"/></strong><br/>
                       <span><strong>VAT: </strong><span t-esc="xml.Emisor.get('Rfc')"/></span>
                       <span><strong>Fiscal Regime: </strong>
@@ -12,12 +12,12 @@
                       <span><br/><strong>Expedition place: </strong></span> <span t-esc="xml.get('LugarExpedicion')"/>
                       <t t-set="pay" t-value="o.l10n_mx_edi_get_pay_etree(xml)"/> 
                       <span><strong>Payment Date: </strong><span t-esc="pay.get('FechaPago', '').replace('T12:00:00', ' ')"/></span><br/>
-                      <strong>Payment Way CFDI: </strong><span t-esc="pay.get('FormaDePagoP')"/><br/>
-                      <strong>Amount: </strong><span t-esc="'  '.join([pay.get('Monto'), pay.get('MonedaP')])"/><br/>
+                      <strong>Payment Way CFDI: </strong><span t-esc="pay.get('FormaDePagoP', '')"/><br/>
+                      <strong>Amount: </strong><span t-esc="'  '.join(["'{0:,.2f}'.format(float(pay.get('Monto')))", pay.get('MonedaP')])"/><br/>
                       <strong>Operation: </strong><span t-esc="pay.get('NumOperacion')"/><br/>
                   </div>
                   <div class="col-xs-6" t-if="o.l10n_mx_edi_cfdi_uuid">
-                      <h4><strong><font color='gray'>Receiver</font></strong></h4>
+                      <h4><strong><font color="gray">Receiver</font></strong></h4>
                       <strong><span t-esc="xml.Receptor.get('Nombre')"/></strong><br/>
                       <span><strong>VAT: </strong><span t-esc="xml.Receptor.get('Rfc')"/></span>
                       <span><strong>CFDI Use: </strong><span t-esc="xml.Receptor.get('UsoCFDI')"/></span>
@@ -63,9 +63,9 @@
                                   <td class="text-left"><span t-esc="xml.Conceptos.Concepto.get('ClaveProdServ', '')"/></td>
                                   <td class="text-left"><span t-esc="xml.Conceptos.Concepto.get('Descripcion', '')"/></td>
                                   <td class="text-left"><span t-esc="xml.Conceptos.Concepto.get('ClaveUnidad', '')"/></td>
-                                  <td class="text-left"><span t-esc="xml.Conceptos.Concepto.get('ValorUnitario', '')"/></td>
-                                  <td class="text-left"><span t-esc="xml.get('SubTotal', '')"/></td>
-                                  <td class="text-left"><span t-esc="xml.get('Total', '')"/></td>
+                                  <td class="text-right"><span t-esc="'{0:,.2f}'.format(float(xml.Conceptos.Concepto.get('ValorUnitario')))"/></td>
+                                  <td class="text-right"><span t-esc="'{0:,.2f}'.format(float(xml.get('SubTotal')))"/></td>
+                                  <td class="text-right"><span t-esc="'{0:,.2f}'.format(float(xml.get('Total')))"/></td>
                                   <td class="text-left"><span t-esc="xml.get('TipoDeComprobante', '')"/></td>
                                   <td class="text-left"><span t-esc="xml.get('Moneda')"/></td>
                                </tr>
@@ -82,7 +82,7 @@
                             <th>Invoice</th>
                             <th>UUID</th>
                             <th>Way</th>
-                            <th class="text-right">Partiality</th>
+                            <th>Partiality</th>
                             <th class="text-right">Previous balance</th>
                             <th class="text-right">Amount Paid</th>
                             <th class="text-right">Balance</th>
@@ -93,11 +93,11 @@
                         <tr t-foreach="docs_related" t-as="inv">
                             <td><span t-esc="o.invoice_ids.filtered(lambda i: i.l10n_mx_edi_cfdi_uuid == inv.get('IdDocumento')).number or ''"/></td>
                             <td><span t-esc="inv.get('IdDocumento')"/></td>
-                            <td class="text-right"><span t-esc="inv.get('MetodoDePagoDR', '')"/></td>
-                            <td class="text-right"><span t-esc="inv.get('NumParcialidad', '')"/></td>
-                            <td class="text-right"><span t-esc="inv.get('ImpSaldoAnt', '')"/></td>
-                            <td class="text-right"><span t-esc="inv.get('ImpPagado', '')"/></td>
-                            <td class="text-right"><span t-esc="inv.get('ImpSaldoInsoluto', '')"/></td>
+                            <td><span t-esc="inv.get('MetodoDePagoDR', '')"/></td>
+                            <td><span t-esc="inv.get('NumParcialidad', '')"/></td>
+                            <td class="text-right"><span t-esc="'{0:,.2f}'.format(float(inv.get('ImpSaldoAnt')))"/></td>
+                            <td class="text-right"><span t-esc="'{0:,.2f}'.format(float(inv.get('ImpPagado')))"/></td>
+                            <td class="text-right"><span t-esc="'{0:,.2f}'.format(float(inv.get('ImpSaldoInsoluto')))"/></td>
                             <td><span t-esc="inv.get('MonedaDR')"/></td>
                         </tr>
                     </tbody>
