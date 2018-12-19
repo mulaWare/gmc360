@@ -69,7 +69,7 @@ class AccountInvoice(models.Model):
             'use_cfdi': self.l10n_mx_edi_usage,
             'conditions': self._get_string_cfdi(
                 self.payment_term_id.name, 1000) if self.payment_term_id else False,
-        }
+        } 
 
         values.update(self._l10n_mx_get_serie_and_folio(self.number))
         ctx = dict(company_id=self.company_id.id, date=self.date_invoice)
