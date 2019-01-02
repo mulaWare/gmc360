@@ -135,3 +135,44 @@ class AccountInvoice(models.Model):
             values['account_4num'] = None
 
         return values
+    
+    @api.multi
+    def _l10n_mx_edi_create_taxes_cfdi_values(self):
+        '''Create the taxes values to fill the CFDI template.
+        '''
+        self.ensure_one()
+        values = {
+            'total_withhold': 0,
+            'total_transferred': 0,
+            'withholding': [],
+            'transferred': [],
+        }
+        taxes = {}
+        for line in self.invoice_line_ids.filtered('price_subtotal'):
+            price = line.price_unit * (1.0 - (line.discount or 0.0) / 100.0)
+            tax_line = {tax['id']: tax for tax in line.invoice_line_tax_ids.compute_all(
+                price, line.currency_id, line.quantity, line.product_id, line.partner_id)['taxes']}
+            for tax in line.invoice_line_tax_ids.filtered(lambda r: r.l10n_mx_cfdi_tax_type != 'Exento'):
+                tax_dict = tax_line.get(tax.id, {})
+                amount = round(abs(tax_dict.get(
+                    'amount', tax.amount / 100 * float("%.2f" % line.price_subtotal))), 2)
+                if tax.amount not in taxes:
+                    taxes.update({tax.amount: {
+                        'name': (tax.tag_ids[0].name
+                                 if tax.tag_ids else tax.name).upper(),
+                        'amount': amount,
+                        'rate': round(abs(tax.amount), 2),
+                        'type': tax.l10n_mx_cfdi_tax_type,
+                        'tax_amount': tax_dict.get('amount', tax.amount),
+                    }})
+                else:
+                    taxes[tax.amount].update({
+                        'amount': taxes[tax.amount]['amount'] + amount
+                    })
+                if tax.amount >= 0:
+                    values['total_transferred'] += amount
+                else:
+                    values['total_withhold'] += amount
+        values['transferred'] = [tax for tax in taxes.values() if tax['tax_amount'] >= 0]
+        values['withholding'] = [tax for tax in taxes.values() if tax['tax_amount'] < 0]
+        return values
