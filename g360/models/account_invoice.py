@@ -64,3 +64,4 @@ class AccountInvoice(models.Model):
             return 'PPD' if (
                 self.payment_term_id.name != 'PUE') else 'PUE'
         return ''
+    
