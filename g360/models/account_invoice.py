@@ -89,3 +89,23 @@ class AccountInvoice(models.Model):
         self.message_post(
             body=body_msg + create_list_html(post_msg),
             subtype='account.mt_invoice_validated')
+        
+    @api.multi
+    def _l10n_mx_edi_cancel(self):
+        '''Call the cancel service with records that can be signed.
+        '''
+        records = self.search([
+            ('l10n_mx_edi_pac_status', 'in', ['to_sign', 'signed', 'to_cancel', 'retry']),
+            ('id', 'in', self.ids)])
+        for record in records:
+            if record.l10n_mx_edi_pac_status in ['to_sign', 'retry']:
+                record.l10n_mx_edi_pac_status = 'cancelled'
+                record.message_post(body=_('The cancel service has been called with success'),
+                    subtype='account.mt_invoice_validated')
+            else:
+                record.l10n_mx_edi_pac_status = 'signed'
+                record.state = 'open'
+        records = self.search([
+            ('l10n_mx_edi_pac_status', '=', 'signed'),
+            ('id', 'in', self.ids)])
+        records._l10n_mx_edi_call_service('sign')
