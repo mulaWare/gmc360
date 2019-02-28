@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from odoo import api, fields, models, _
 from odoo.osv import expression
 from odoo.tools import float_is_zero, pycompat
@@ -97,6 +95,8 @@ class AccountBankStatementLine(models.Model):
 
                 payment_methods = (total>0) and self.journal_id.inbound_payment_method_ids or self.journal_id.outbound_payment_method_ids
                 currency = self.journal_id.currency_id or self.company_id.currency_id
+                
+                
                 payment = self.env['account.payment'].create({
                     'payment_method_id': payment_methods and payment_methods[0].id or False,
                     'payment_type': total >0 and 'inbound' or 'outbound',
@@ -188,3 +188,24 @@ class AccountBankStatementLine(models.Model):
             raise UserError(_('Operation not allowed. Since your statement line already received a number, you cannot reconcile it entirely with existing journal entries otherwise it would make a gap in the numbering. You should book an entry and make a regular revert of it in case you want to cancel it.'))
         counterpart_moves.assert_balanced()
         return counterpart_moves
+
+    def process_reconciliation(self, counterpart_aml_dicts=None,
+                               payment_aml_rec=None, new_aml_dicts=None):
+        invoice_ids = []
+        for aml_dict in counterpart_aml_dicts or []:
+            if aml_dict['move_line'].invoice_id:
+                invoice_ids.append(aml_dict['move_line'].invoice_id.id)
+        res = super(AccountBankStatementLine, self.with_context(
+            l10n_mx_edi_manual_reconciliation=False)).process_reconciliation(
+                counterpart_aml_dicts=counterpart_aml_dicts,
+                payment_aml_rec=payment_aml_rec, new_aml_dicts=new_aml_dicts)
+        if not self.l10n_mx_edi_is_required():
+            return res
+        payments = res.mapped('line_ids.payment_id')
+        payment_method = self.journal_id.l10n_mx_edi_payment_method_id.id or self.l10n_mx_edi_payment_method_id.id
+        payments.write({
+            'l10n_mx_edi_payment_method_id': payment_method,
+            'invoice_ids': [(6, 0, invoice_ids)]
+        })
+        payments._l10n_mx_edi_retry()
+        return res 
