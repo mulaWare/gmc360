@@ -29,6 +29,7 @@
         'views/views.xml',
         'views/templates.xml',
         'views/payments.xml',
+        'views/sale_view.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
