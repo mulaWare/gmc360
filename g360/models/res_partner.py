@@ -7,6 +7,7 @@ import datetime
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
+    fecha_probable = fields.Date(string='Fecha Probla de Cierre')
     name_short = fields.Char(string="Nombre Corto", required=False)
     casfim = fields.Char(string="CASFIM", required=False)
     figura = fields.Selection([('00','No disponible'),
