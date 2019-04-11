@@ -17,5 +17,8 @@ from odoo.tools.misc import formatLang
 from odoo.addons import decimal_precision as dp
 
 
-class ResPartner(models.Model):
-    _inherit = "res.partner"
+class SaleOrder(models.Model):
+    _inherit = "sale.order"
+
+    fecha_prueba = fields.Date(comodel_name='res_partner',string="Fecha de Prueba")
+    fecha_prueba2 = fields.Date(related="fecha_probable", string="fecha prueba2")
