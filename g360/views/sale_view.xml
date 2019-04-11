@@ -6,7 +6,7 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
               <xpath expr="//field[@name='payment_term_id']" position="after">
-                <field="fecha_probable"/>
+                <field="fecha_prueba2"/>
               </xpath>
             </field>
         </record>
