@@ -20,4 +20,4 @@ from odoo.addons import decimal_precision as dp
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    fecha_probable = fields.Date(string="Fecha Probable de Cierre")    
+    fecha_probable = fields.datetime(string="Fecha Probable de Cierre")    
