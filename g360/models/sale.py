@@ -17,5 +17,5 @@ from odoo.tools.misc import formatLang
 from odoo.addons import decimal_precision as dp
 
 
-class SaleOrder(models.Model):
-    _inherit = "sale.order"
+class ResPartner(models.Model):
+    _inherit = "res.partner"
