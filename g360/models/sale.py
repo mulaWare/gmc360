@@ -19,5 +19,3 @@ from odoo.addons import decimal_precision as dp
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
-
-    fecha_probable = fields.Date(comodel_name='res.partner',string="Fecha de Prueba")
