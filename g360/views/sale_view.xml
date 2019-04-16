@@ -3,9 +3,9 @@
         <record id="view_order_g360" model="ir.ui.view">
             <field name="name">sale.order.g360</field>
             <field name="model">sale.order</field>
-            <field name="sale.order" ref="sale.view_order_form"/>
+            <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-              <xpath expr="//field[@name="payment_term_id"]" position="after">
+              <xpath expr="//field[@name='validity_date']" position="after">
                 <field name="fecha_probable"/>
               </xpath>
             </field>
