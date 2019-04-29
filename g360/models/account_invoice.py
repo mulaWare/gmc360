@@ -21,17 +21,6 @@ from odoo.tools import float_round
 from odoo.exceptions import UserError
 from odoo.tools.float_utils import float_repr
 
-CFDI_TEMPLATE = 'l10n_mx_edi.cfdiv32'
-CFDI_TEMPLATE_33 = 'l10n_mx_edi.cfdiv33'
-CFDI_XSLT_CADENA = 'l10n_mx_edi/data/%s/cadenaoriginal.xslt'
-CFDI_XSLT_CADENA_TFD = 'l10n_mx_edi/data/xslt/3.3/cadenaoriginal_TFD_1_1.xslt'
-# Mapped from original SAT state to l10n_mx_edi_sat_status selection value
-# https://consultaqr.facturaelectronica.sat.gob.mx/ConsultaCFDIService.svc?wsdl
-CFDI_SAT_QR_STATE = {
-    'No Encontrado': 'not_found',
-    'Cancelado': 'cancelled',
-    'Vigente': 'valid',
-}
 
 _logger = logging.getLogger(__name__)
 
