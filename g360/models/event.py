@@ -13,8 +13,7 @@ from dateutil.relativedelta import relativedelta
 
 
 class EventEvent(models.Model):
-    """Event"""
-    _inherit = ['event.event']
+    _inherit = "event.event"
 
 
     youtube_live = fields.Html(string='YouTube Live URL')
