@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+
+        <record model="ir.ui.view" id="view_event_g360">
+            <field name="name">event.event.g360</field>
+            <field name="model">event.event</field>
+            <field name="inherit_id" ref="event.event.form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='twitter_hashtag']" position="after">
+                      <field name="youtube_live"/>
+                      <field name="facebook_live"/> 
+                </xpath>            
+            
+            </field>
+        </record>
+
+
+    </data>
+</odoo>
