@@ -30,6 +30,7 @@
         'views/views.xml',
         'views/templates.xml',
         'views/payments.xml',
+        'views/event.xml',        
     ],
     # only loaded in demonstration mode
     'demo': [
