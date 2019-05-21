@@ -9,12 +9,8 @@ from odoo.tools.translate import html_translate
 
 from dateutil.relativedelta import relativedelta
 
-
-
-
 class EventEvent(models.Model):
     _inherit = "event.event"
-
 
     youtube_live = fields.Html(string='YouTube Live URL')
     facebook_live = fields.Html(string='Facebook Live URL')
