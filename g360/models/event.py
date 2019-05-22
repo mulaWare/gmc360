@@ -13,8 +13,8 @@ class EventEvent(models.Model):
     _inherit = "event.event"
     
     youtube_live = fields.Char(
-        string='Youtube Live URL',  translate=html_translate, sanitize_attributes=False,
+        string='Youtube Live URL', 
         readonly=False, states={'done': [('readonly', True)]})
     facebook_live = fields.Char(
-        string='Facebook Live URL', translate=html_translate, sanitize_attributes=False,
+        string='Facebook Live URL',
         readonly=False, states={'done': [('readonly', True)]})
