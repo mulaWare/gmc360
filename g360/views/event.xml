@@ -6,7 +6,7 @@
             <field name="model">event.event</field>
             <field name="inherit_id" ref="event.view_event_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='date_begin']" position="before">
+                <xpath expr="//field[@name='event_type_id']" position="before">
                       <field name="youtube_live"/>
                       <field name="facebook_live"/> 
                 </xpath>            
