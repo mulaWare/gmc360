@@ -12,5 +12,9 @@ from dateutil.relativedelta import relativedelta
 class EventEvent(models.Model):
     _inherit = "event.event"
     
-    youtube_live = fields.Char(string='YouTube Live URL')
-    facebook_live = fields.Char(string='Facebook Live URL')
+    youtube_live = fields.Html(
+        string='Youtube Live URL'  translate=html_translate, sanitize_attributes=False,
+        readonly=False, states={'done': [('readonly', True)]})
+    facebook_live = fields.Html(
+        string='Facebook Live URL', translate=html_translate, sanitize_attributes=False,
+        readonly=False, states={'done': [('readonly', True)]})
