@@ -12,6 +12,7 @@ from dateutil.relativedelta import relativedelta
 class EventEvent(models.Model):
     _inherit = "event.event"
     
+    auto_confirm = fields.Boolean(string='Autoconfirm Registrations', default=True)    
     youtube_live = fields.Char(
         string='Youtube Live URL', 
         readonly=False, states={'done': [('readonly', True)]})
