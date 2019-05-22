@@ -6,7 +6,7 @@
             <field name="model">event.event</field>
             <field name="inherit_id" ref="event.view_event_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='twitter_hashtag']" position="after">
+                <xpath expr="//field[@name='twitter_hashtag']" position="before">
                       <field name="youtube_live"/>
                       <field name="facebook_live"/> 
                 </xpath>            
