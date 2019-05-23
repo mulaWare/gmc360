@@ -198,5 +198,6 @@
 </td></tr>
 % endif
 </table>
+</field>
     </data>
 </odoo>
