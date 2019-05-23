@@ -197,6 +197,6 @@
     </table>
 </td></tr>
 % endif
-
+</table>
     </data>
 </odoo>
