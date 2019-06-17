@@ -12,6 +12,6 @@ class SalePrueba(models.Model):
     @api.multi
     def unlink(self):
         for order in self:
-            if order.state not in ('draft',):
+            if order.state not in ('draft','cancel','sale',):
                 raise UserError(_('You can not delete a sent quotation or a confirmed sales order. You must first cancel it.'))
         return super(SaleOrder, self).unlink()
