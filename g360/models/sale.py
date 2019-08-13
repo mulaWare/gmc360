@@ -8,6 +8,7 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     fecha_probable = fields.Date(string="Fecha Probable de cierre")
+    plazo = fields.Char(string="Plazo")
 
     @api.multi
     def unlink(self):
