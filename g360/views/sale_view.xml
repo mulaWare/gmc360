@@ -11,10 +11,7 @@
                       <field name="plazo"/>
                       <field name="anticipo"/>
                       <field name="precio_total"/>
-                      <field name="name" placeholder="Nombre"/>
-                      <field name="puesto" placeholder="Puesto"/>
-                      <field name="telefono" placeholder="Telefono"/>
-                      <field name="correo" placeholder="Correo"/>
+                      <field name="name"/>
                 </xpath>
             </field>
         </record>
