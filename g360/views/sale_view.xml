@@ -18,10 +18,10 @@
                       <field name="pago_iguala"/>
                       <label string="Datos de tesorería del cliente"/>
                             <div class="o_address_format">
-                              <field name="nombre" placeholder="Nombre del Cliente"/>
-                              <field name="puesto" placeholder="Puesto del Cliente"/>
-                              <field name="telefono" placeholder="Telefono del Cliente"/>
-                              <field name="correo" placeholder="Correo del Cliente"/>
+                              <field name="nombre" />
+                              <field name="puesto"/>
+                              <field name="telefono"/>
+                              <field name="correo"/>
                             </div>
                 </xpath>
             </field>
