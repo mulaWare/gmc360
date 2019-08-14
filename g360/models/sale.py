@@ -11,10 +11,11 @@ class SaleOrder(models.Model):
     plazo = fields.Char(string="Plazo")
     anticipo = fields.Char(string="% de anticipo")
     precio_total = fields.Char(string="Precio Total")
-    name = fields.Char(string="Nombre del cliente")
-    puesto = fields.Char(string="Puesto del cliente")}
-    telefono = fields.Char(string="Telefono")
-    correo = fields.Char(string="Correo")
+    fecha_pago = fields.Date(string="Fecha de Pago")
+    pago_total = fields.Char(string="Pago Total")
+    pago_contado = fields.Char(string="Pago Contado")
+    pago_anticipo = fields.Char(string="Pago Anticipo")
+    pago_iguala = fields.Char(string="Pago Iguala")
 
     @api.multi
     def unlink(self):

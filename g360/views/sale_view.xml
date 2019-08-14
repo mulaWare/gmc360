@@ -11,7 +11,11 @@
                       <field name="plazo"/>
                       <field name="anticipo"/>
                       <field name="precio_total"/>
-                      <field name="name"/>
+                      <field name="fecha_pago"/>
+                      <field name="pago_total"/>
+                      <field name="pago_contado"/>
+                      <field name="pago_anticipo"/>
+                      <field name="pago_iguala"/>
                 </xpath>
             </field>
         </record>
