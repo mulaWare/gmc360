@@ -12,12 +12,10 @@
                       <field name="anticipo"/>
                       <field name="precio_total"/>
                       <label string="Datos de tesorería del cliente"/>
-                            <div>
-                                <field name="name" placeholder="Nombre"/>
-                                <field name="puesto" placeholder="Puesto"/>
-                                <field name="telefono" placeholder="Telefono"/>
-                                <field name="correo" placeholder="Correo"/>
-                            </div>
+                        <field name="name" placeholder="Nombre"/>
+                        <field name="puesto" placeholder="Puesto"/>
+                        <field name="telefono" placeholder="Telefono"/>
+                        <field name="correo" placeholder="Correo"/>
                 </xpath>
             </field>
         </record>
