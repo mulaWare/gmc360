@@ -28,7 +28,6 @@
         'views/account_invoice_send_views.xml',
       	'views/res_partner_view.xml',
         'views/sale_view.xml',
-        'views/sale_view2.xml',
         'views/views.xml',
         'views/templates.xml',
         'views/payments.xml',
