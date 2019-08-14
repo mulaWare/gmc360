@@ -9,6 +9,19 @@
                 <xpath expr="//field[@name='validity_date']" position="after">
                       <field name="fecha_probable"/>
                       <field name="plazo"/>
+                      <field name="anticipo"/>
+                      <field name="precio_total"/>
+                      <group name="person_" string="Datos de tesorería del cliente">
+                        <field name="name"/>
+                        <field name="puesto"/>
+                        <field name="telefono"/>
+                        <field name="correo"/>
+                      </group>
+                      <field name="fecha_pago"/>
+                      <field name="pago_total"/>
+                      <field name="pago_contado"/>
+                      <field name="pago_anticipo"/>
+                      <field name="pago_iguala"/>
                 </xpath>
             </field>
         </record>
