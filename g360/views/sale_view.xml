@@ -16,12 +16,11 @@
                       <field name="pago_contado"/>
                       <field name="pago_anticipo"/>
                       <field name="pago_iguala"/>
-                      <group name="person" string="Datos de tesorería del cliente">
-                        <field name="nombre"/>
-                        <field name="puesto"/>
-                        <field name="telefono"/>
-                        <field name="correo"/>
-                      </group>
+                      <label string="Datos de tesorería del cliente">
+                      <field name="nombre"/>
+                      <field name="puesto"/>
+                      <field name="telefono"/>
+                      <field name="correo"/>
                 </xpath>
             </field>
         </record>
