@@ -11,7 +11,7 @@
                       <field name="plazo"/>
                       <field name="anticipo"/>
                       <field name="precio_total"/>
-                      <label for="street" string="Datos de tesorería del cliente"/>
+                      <label string="Datos de tesorería del cliente"/>
                             <div>
                                 <field name="name" placeholder="Nombre"/>
                                 <field name="puesto" placeholder="Puesto"/>
