@@ -16,6 +16,10 @@ class SaleOrder(models.Model):
     pago_contado = fields.Char(string="Pago Contado")
     pago_anticipo = fields.Char(string="Pago Anticipo")
     pago_iguala = fields.Char(string="Pago Iguala")
+    nombre = fields.Char(string="Nombre del cliente")
+    puesto = fields.Char(string="Puesto del cliente")}
+    telefono = fields.Char(string="Telefono")
+    correo = fields.Char(string="Correo")
 
     @api.multi
     def unlink(self):

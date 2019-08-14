@@ -16,6 +16,10 @@
                       <field name="pago_contado"/>
                       <field name="pago_anticipo"/>
                       <field name="pago_iguala"/>
+                      <field name="nombre"/>
+                      <field name="puesto"/>
+                      <field name="telefono"/>
+                      <field name="correo"/>
                 </xpath>
             </field>
         </record>
