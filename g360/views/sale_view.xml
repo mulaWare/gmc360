@@ -8,6 +8,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='validity_date']" position="after">
                       <field name="fecha_probable"/>
+                      <field name="fecha_facturacion"/>
                       <field name="plazo"/>
                       <field name="anticipo"/>
                       <field name="precio_total"/>
