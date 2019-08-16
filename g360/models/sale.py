@@ -16,10 +16,10 @@ class SaleOrder(models.Model):
     pago_contado = fields.Char(string="Pago Contado")
     pago_anticipo = fields.Char(string="Pago Anticipo")
     pago_iguala = fields.Char(string="Pago Iguala")
-    nombre = fields.Char(string="Nombre del cliente")
-    puesto = fields.Char(string="Puesto del cliente")
-    telefono = fields.Char(string="Telefono")
-    correo = fields.Char(string="Correo")
+    nombre = fields.Char(string="Nombre del Tesorero")
+    puesto = fields.Char(string="Puesto del Tesorero")
+    telefono = fields.Char(string="Telefono del Tesorero")
+    correo = fields.Char(string="Correo del Tesorero")
     metodo = fields.Selection([
                                 ('00','Tranferencia'),
                                 ('01','Deposito a cuenta'),
