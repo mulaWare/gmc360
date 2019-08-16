@@ -25,7 +25,7 @@ class SaleOrder(models.Model):
                                 ('01','Deposito a cuenta'),
                                 ('02','Pago Electronico'),
                                 ],
-                                string="Metodo de pago", required=False, help="Metodo de pago", default='husb')
+                                string="Metodo de pago", required=False, help="Metodo de pago")
 
     @api.multi
     def unlink(self):
