@@ -16,7 +16,7 @@ class SaleOrder(models.Model):
     pago_total = fields.Float(string="Pago Total")
     pago_contado = fields.Float(string="Pago Contado")
     pago_anticipo = fields.Float(string="Pago Anticipo")
-    pago_iguala = fields.Char(string="Pago Iguala")
+    pago_iguala = fields.Float(string="Pago Iguala")
     metodo = fields.Selection([
                                 ('00','Tranferencia'),
                                 ('01','Deposito a cuenta'),
@@ -25,7 +25,7 @@ class SaleOrder(models.Model):
                                 string="Metodo de pago", required=False, help="Metodo de pago")
     nombre = fields.Char(string="Nombre del Tesorero")
     puesto = fields.Char(string="Puesto del Tesorero")
-    telefono = fields.Integer(string="Telefono del Tesorero")
+    telefono = fields.Char(string="Telefono del Tesorero")
     correo = fields.Char(string="Correo del Tesorero")
 
     @api.multi
