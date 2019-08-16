@@ -16,6 +16,11 @@ class SaleOrder(models.Model):
     pago_contado = fields.Char(string="Pago Contado")
     pago_anticipo = fields.Char(string="Pago Anticipo")
     pago_iguala = fields.Char(string="Pago Iguala")
+    metodo = Selection([('00','Tranferencia'),
+                               ('01','Deposito a Cuenta'),
+                               ('02','Pago en Linea'),
+                              ],
+                              string="Metodo de Pago", required=False)
     nombre = fields.Char(string="Nombre del cliente")
     puesto = fields.Char(string="Puesto del cliente")
     telefono = fields.Char(string="Telefono")
