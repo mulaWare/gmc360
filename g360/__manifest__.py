@@ -32,7 +32,7 @@
         'views/templates.xml',
         'views/payments.xml',
         'views/event.xml',
-        'data/email_template.xml',                
+        'data/email_template.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
