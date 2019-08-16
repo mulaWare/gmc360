@@ -16,7 +16,6 @@
                       <field name="pago_contado"/>
                       <field name="pago_anticipo"/>
                       <field name="pago_iguala"/>
-                      <field name="metodo_pago"/>
                       <label for="street" string="Datos de tesorería del cliente"/>
                       <field name="nombre"/>
                       <field name="puesto"/>
