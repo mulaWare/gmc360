@@ -9,10 +9,10 @@
                 <xpath expr="//field[@name='validity_date']" position="after">
                       <field name="fecha_probable"/>
                       <field name="fecha_facturacion"/>
+                      <field name="plazo"/>
                       <field name="anticipo"/>
                       <field name="precio_total"/>
                       <field name="fecha_pago"/>
-                      <field name="pago_anticipo"/>
                       <field name="pago_iguala"/>
                       <field name="metodo"/>
                       <label for="street" string="Datos de tesorería del cliente"/>
