@@ -13,8 +13,6 @@ class SaleOrder(models.Model):
     anticipo = fields.Float(string="% de anticipo")
     precio_total = fields.Float(string="Precio Total")
     fecha_pago = fields.Date(string="Fecha de Pago")
-    pago_total = fields.Float(string="Pago Total")
-    pago_contado = fields.Float(string="Pago Contado")
     pago_anticipo = fields.Float(string="Pago Anticipo")
     pago_iguala = fields.Float(string="Pago Iguala")
     metodo = fields.Selection([
