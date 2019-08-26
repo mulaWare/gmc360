@@ -7,4 +7,4 @@ import datetime
 class HrEmployee(models.Model):
     _inherit = "hr.employee"
 
-    alergico = fields.Char(string="Alérgico a:", required=True)
+    alergico = fields.Char(string="Alérgico a:", required=False)
