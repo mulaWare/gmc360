@@ -22,6 +22,9 @@
                       <field name="correo"/>
                       <field name="asofich"/>
                 </xpath>
+                <xpath expr="//field[@name='company_id']" position="after">
+                      <field name="asofich"/>
+                </xpath>
             </field>
         </record>
     </data>
