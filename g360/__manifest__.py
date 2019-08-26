@@ -32,6 +32,7 @@
         'views/templates.xml',
         'views/payments.xml',
         'views/event.xml',
+        'views/hr_employee.xml',
         'data/email_template.xml',
     ],
     # only loaded in demonstration mode
