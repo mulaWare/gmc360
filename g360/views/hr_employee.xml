@@ -6,7 +6,7 @@
             <field name="model">hr.employee</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='work_phone']" position="after">
+                <xpath expr="//field[@name='visa_expire']" position="after">
                       <field name="alergico"/>
                 </xpath>
             </field>
