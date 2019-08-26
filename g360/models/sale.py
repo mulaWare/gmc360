@@ -25,6 +25,8 @@ class SaleOrder(models.Model):
     telefono = fields.Char(string="Telefono del Tesorero")
     correo = fields.Char(string="Correo del Tesorero")
     asofich = fields.Boolean(string="ASOFICH")
+    amsofipo = fields.Boolean(string="AMSOFIPO")
+    asofom = fields.Boolean(string="ASOFOM")
 
     @api.multi
     def unlink(self):
