@@ -21,6 +21,11 @@
                       <field name="telefono"/>
                       <field name="correo"/>
                 </xpath>
+                <xpath expr="//field[@name='company_id']" position="after">
+                      <field name="asofich"/>
+                      <field name="amsofipo"/>
+                      <field name="asofom"/>
+                </xpath>
             </field>
         </record>
     </data>
