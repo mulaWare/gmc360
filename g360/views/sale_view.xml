@@ -21,6 +21,9 @@
                       <field name="telefono"/>
                       <field name="correo"/>
                 </xpath>
+                <xpath expr="//field[@name='sale_order_template_id']" position="after">
+                      <field name="asofich"/>
+                </xpath>
             </field>
         </record>
     </data>
