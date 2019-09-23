@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import pytz
+import pytz 
 
 from odoo import _, api, fields, models
 from odoo.addons.mail.models.mail_template import format_tz
