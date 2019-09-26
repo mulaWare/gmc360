@@ -10,7 +10,7 @@
                     <page name="info_sat_sync" string="CFDI 3.3 Sat Sync">
                             <separator string="SAT Synchronization" />
 			                <group>
-			                	<field name="l10n_mx_esignature_ids"/>
+			                	<field name="l10n_mx_esignature_ids"/> 
 			                </group>
 			                            
                             <group cols="4">
