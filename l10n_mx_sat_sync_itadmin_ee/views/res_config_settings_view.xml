@@ -29,8 +29,8 @@
                         <div class="o_setting_right_pane">
                             <div class="content-group">
                                 <div class="row mt16">
-                                <!--	<label for="product_type_default" class="col-md-3 o_light_label"/>
-                                    <field name="product_type_default"/>-->
+                                	<label for="product_type_default" class="col-md-3 o_light_label"/>
+                                    <field name="product_type_default"/>
                                 </div>
                             </div>
                         </div>
