@@ -12,7 +12,9 @@ class ResConfigSettings(models.TransientModel):
     l10n_mx_esignature_ids = fields.Many2many(related='company_id.l10n_mx_esignature_ids', 
         string='MX E-signature', readonly=False)
     last_cfdi_fetch_date = fields.Datetime("Last CFDI fetch date", related="company_id.last_cfdi_fetch_date", readonly=False)
-    product_type_default = fields.Selection(selection=_selection_product_type, string='Crear Productos', required=True,
+    product_type_default = fields.Selection([
+        ('consu', 'Consumable'),
+        ('service', 'Service')],string='Crear Productos', required=True,
         help='A stockable product is a product for which you manage stock. The "Inventory" app has to be installed.\n'
              'A consumable product, on the other hand, is a product for which stock is not managed.\n'
              'A service is a non-material product you provide.\n'
