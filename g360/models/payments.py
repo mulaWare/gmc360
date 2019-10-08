@@ -35,4 +35,4 @@ class AccountPayment(models.Model):
         attribute = '//pago10:Pago[1]'
         namespace = {'pago10': 'http://www.sat.gob.mx/Pagos'}
         node = cfdi.Complemento.xpath(attribute, namespaces=namespace)
-        return node[0] if node else None
+        return node[0] if node else None 
