@@ -20,7 +20,7 @@
     'version': '0.2',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','account','l10n_mx_edi',],
+    'depends': ['base','account','l10n_mx_edi','crm',],
 
     # always loaded
     'data': [
