@@ -34,6 +34,7 @@
         'views/event.xml',
         'views/hr_employee.xml',
         'data/email_template.xml',
+        'data/crm.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
