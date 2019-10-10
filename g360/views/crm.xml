@@ -9,6 +9,9 @@
                 <xpath expr="//field[@name='campaign_id']" position="attributes">
                   <attribute name="required">True</attribute>
                 </xpath>
+                <xpath expr="//field[@name='medium_id']" position="attributes">
+                  <attribute name="required">True</attribute>
+                </xpath>
             </field>
         </record>
     </data>
