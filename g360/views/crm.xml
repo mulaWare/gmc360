@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="crm_m" model="ir.ui.view">
+            <field name="name">crm.lead.new</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='campaign_id']" position="attributes">
+                  <attribute name="required">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='medium_id']" position="attributes">
+                  <attribute name="required">True</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
