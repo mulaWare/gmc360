@@ -4,6 +4,6 @@ import urllib.parse
 import requests
 
 class Lead(models.Model):
-    _inherit = "crm.lead.lost"
+    _inherit = "crm.lead"
 
     razon = fields.Text(string="Razón", required=True)
