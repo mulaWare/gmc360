@@ -3,7 +3,7 @@
     <data>
         <record id="crm_m" model="ir.ui.view">
             <field name="name">crm.lead.lost.new</field>
-            <field name="model">crm.lead.lost.form</field>
+            <field name="model">crm.lead</field>
             <field name="inherit_id" ref="crm.crm_lead_lost_view_form"/>
             <field name="arch" type="xml">
               <xpath expr="//field[@name='lost_reason_id']" position="after">

@@ -3,7 +3,7 @@ from odoo import fields, models
 import urllib.parse
 import requests
 
-class Crm(models.Model):
-    _inherit = "crm.lead.lost.form"
+class Lead(models.Model):
+    _inherit = "crm.lead"
 
     razon = fields.Text(string="Razón", required=True)
