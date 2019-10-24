@@ -33,7 +33,7 @@
         'views/payments.xml',
         'views/event.xml',
         'views/crm.xml',
-        'views/crm_lost.xml',
+        'views/crm_lead_lost_views.xml',
         'views/hr_employee.xml',
         'data/email_template.xml',
     ],
