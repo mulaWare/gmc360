@@ -89,7 +89,7 @@
     </record>
 
     <menuitem id="main_manu_attachment_cfdi_invoices"
-    		  parent="account.accountant" 	
+    		  parent="account.account_account_menu" 	
     		  sequence="3"
     		  name="ADD"
     		  />
