@@ -1,10 +1,9 @@
-from odoo import api, fields, models
+from odoo import fields, models
 
 import urllib.parse
 import requests
-import datetime
 
-class CrmLost(models.Model):
-    _inherit = "crm.lead.lost"
+class Crm(models.Model):
+    _inherit = "crm.lead.lost.form"
 
     razon = fields.Text(string="Razón", required=True)
