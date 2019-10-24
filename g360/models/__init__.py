@@ -7,3 +7,4 @@ from . import account_bank_statement
 from . import account_invoice
 from . import event
 from . import hr_employee
+from . import crm_lost
