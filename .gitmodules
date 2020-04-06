@@ -169,3 +169,8 @@
 	path = OCA/website
 	url = git@github.com:OCA/website.git
 	branch = 12.0
+
+[submodule "OCA/rest-framework"]
+	path = OCA/rest-framework
+	url = git@github.com:OCA/rest-framework.git
+	branch = 12.0
