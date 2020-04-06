@@ -74,3 +74,8 @@
 	path = OCA/account-fiscal-rule
 	url = git@github.com:OCA/account-fiscal-rule.git
 	branch = 12.0
+
+[submodule "OCA/account-budgeting"]
+	path = OCA/account-budgeting
+	url = git@github.com:OCA/account-budgeting.git
+	branch = 12.0
