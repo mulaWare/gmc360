@@ -89,3 +89,8 @@
 	path = OCA/bank-payment
 	url = git@github.com:OCA/bank-payment.git
 	branch = 12.0
+
+[submodule "OCA/business-requirement"]
+	path = OCA/business-requirement
+	url = git@github.com:OCA/business-requirement.git
+	branch = 12.0
