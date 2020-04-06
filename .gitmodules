@@ -14,3 +14,8 @@
 	path = ursais/osi-addons
 	url = git@github.com:ursais/osi-addons.git
 	branch = 12.0
+
+[submodule "OCA/contract"]
+	path = OCA/contract
+	url = git@github.com:OCA/contract.git
+	branch = 12.0
