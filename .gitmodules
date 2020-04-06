@@ -24,3 +24,8 @@
 	path = OCA/bank-statement-import
 	url = git@github.com:OCA/bank-statement-import.git
 	branch = 12.0
+
+[submodule "OCA/sale-workflow"]
+	path = OCA/sale-workflow
+	url = git@github.com:OCA/sale-workflow.git
+	branch = 12.0
