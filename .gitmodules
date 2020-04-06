@@ -79,3 +79,8 @@
 	path = OCA/account-budgeting
 	url = git@github.com:OCA/account-budgeting.git
 	branch = 12.0
+
+[submodule "OCA/account-consolidation"]
+	path = OCA/account-consolidation
+	url = git@github.com:OCA/account-consolidation.git
+	branch = 12.0
