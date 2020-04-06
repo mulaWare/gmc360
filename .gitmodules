@@ -54,3 +54,8 @@
 	path = OCA/account-analytic
 	url = git@github.com:OCA/account-analytic.git
 	branch = 12.0
+
+[submodule "OCA/account-reconcile"]
+	path = OCA/account-reconcile
+	url = git@github.com:OCA/account-reconcile.git
+	branch = 12.0
