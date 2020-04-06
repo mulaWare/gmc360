@@ -114,3 +114,8 @@
 	path = OCA/timesheet
 	url = git@github.com:OCA/timesheet.git
 	branch = 12.0
+
+[submodule "OCA/project"]
+	path = OCA/project
+	url = git@github.com:OCA/project.git
+	branch = 12.0
