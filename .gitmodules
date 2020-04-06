@@ -119,3 +119,8 @@
 	path = OCA/project
 	url = git@github.com:OCA/project.git
 	branch = 12.0
+
+[submodule "OCA/server-ux"]
+	path = OCA/server-ux
+	url = git@github.com:OCA/server-ux.git
+	branch = 12.0
