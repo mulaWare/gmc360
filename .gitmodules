@@ -19,3 +19,8 @@
 	path = OCA/contract
 	url = git@github.com:OCA/contract.git
 	branch = 12.0
+
+[submodule "OCA/bank-statement-import"]
+	path = OCA/bank-statement-import
+	url = git@github.com:OCA/bank-statement-import.git
+	branch = 12.0
