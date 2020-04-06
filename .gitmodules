@@ -134,3 +134,8 @@
 	path = OCA/server-backend
 	url = git@github.com:OCA/server-backend.git
 	branch = 12.0
+
+[submodule "OCA/e-commerce"]
+	path = OCA/e-commerce
+	url = git@github.com:OCA/e-commerce.git
+	branch = 12.0
