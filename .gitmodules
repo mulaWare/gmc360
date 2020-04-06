@@ -154,3 +154,8 @@
 	path = OCA/social
 	url = git@github.com:OCA/social.git
 	branch = 12.0
+
+[submodule "OCA/crm"]
+	path = OCA/crm
+	url = git@github.com:OCA/crm.git
+	branch = 12.0
