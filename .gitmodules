@@ -149,3 +149,8 @@
 	path = OCA/sale-reporting
 	url = git@github.com:OCA/sale-reporting.git
 	branch = 12.0
+
+[submodule "OCA/social"]
+	path = OCA/social
+	url = git@github.com:OCA/social.git
+	branch = 12.0
