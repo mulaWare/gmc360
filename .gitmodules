@@ -174,3 +174,8 @@
 	path = OCA/rest-framework
 	url = git@github.com:OCA/rest-framework.git
 	branch = 12.0
+
+[submodule "luisvzqz/payment_conekta_oxoo"]
+	path = luisvzqz/payment_conekta_oxoo
+	url = git@github.com:luisvzqz/payment_conekta_oxoo.git
+	branch = master
