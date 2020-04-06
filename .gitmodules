@@ -9,3 +9,8 @@
 	path = OCA/server-tools
 	url = git@github.com:OCA/server-tools.git
 	branch = 12.0
+
+[submodule "ursais/osi-addons"]
+	path = ursais/osi-addons
+	url = git@github.com:ursais/osi-addons.git
+	branch = 12.0
