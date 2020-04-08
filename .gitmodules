@@ -184,3 +184,8 @@
 	path = OCA/product-variant
 	url = git@github.com:OCA/product-variant.git
 	branch = 12.0
+
+[submodule "OCA/product-pack"]
+	path = OCA/product-pack
+	url = git@github.com:OCA/product-pack.git
+	branch = 12.0
