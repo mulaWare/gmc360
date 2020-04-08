@@ -189,3 +189,8 @@
 	path = OCA/product-pack
 	url = git@github.com:OCA/product-pack.git
 	branch = 12.0
+
+[submodule "OCA/brand"]
+	path = OCA/brand
+	url = git@github.com:OCA/brand.git
+	branch = 12.0
