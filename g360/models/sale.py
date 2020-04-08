@@ -30,9 +30,9 @@ class SaleOrder(models.Model):
 
     @api.multi
     def unlink(self):
-        for order in self:
-            if order.state not in ('draft','cancel','sale',):
-                raise UserError(_('You can not delete a sent quotation or a confirmed sales order. You must first cancel it.'))
+        #for order in self:
+        #    if order.state not in ('draft','cancel','sale',):
+        #        raise UserError(_('You can not delete a sent quotation or a confirmed sales order. You must first cancel it.'))
         return super(SaleOrder, self).unlink()
 
     def erase_public(self):
@@ -47,4 +47,5 @@ class SaleOrder(models.Model):
 
                 for sale in sale_ids:
                     if sale:
+                        sale.state = 'draft'
                         sale.unlink()
