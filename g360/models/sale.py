@@ -34,3 +34,17 @@ class SaleOrder(models.Model):
             if order.state not in ('draft','cancel','sale',):
                 raise UserError(_('You can not delete a sent quotation or a confirmed sales order. You must first cancel it.'))
         return super(SaleOrder, self).unlink()
+
+    def erase_public(self):
+
+              for rec in self:
+                sale_cr = self.env['sale.order']
+
+                partner = self.env['res.partner'].search([('name','=','Public User')])
+
+
+                sale_ids = sale_cr.search([('partner_id','=',partner)])
+
+                for sale in sale_ids:
+                    if sale:
+                        sale.unlink()
