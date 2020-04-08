@@ -179,3 +179,18 @@
 	path = luisvzqz/payment_conekta_oxoo
 	url = git@github.com:luisvzqz/payment_conekta_oxoo.git
 	branch = master
+
+[submodule "OCA/product-variant"]
+	path = OCA/product-variant
+	url = git@github.com:OCA/product-variant.git
+	branch = 12.0
+
+[submodule "OCA/product-pack"]
+	path = OCA/product-pack
+	url = git@github.com:OCA/product-pack.git
+	branch = 12.0
+
+[submodule "OCA/brand"]
+	path = OCA/brand
+	url = git@github.com:OCA/brand.git
+	branch = 12.0
