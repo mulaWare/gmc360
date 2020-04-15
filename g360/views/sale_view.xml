@@ -6,7 +6,7 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='validity_date']" position="after">
+            <!--    <xpath expr="//field[@name='validity_date']" position="after">
                       <field name="fecha_probable"/>
                       <field name="fecha_facturacion"/>
                       <field name="plazo"/>
@@ -26,8 +26,8 @@
                 <xpath expr="//field[@name='company_id']" position="after">
                       <field name="asofich"/>
                       <field name="amsofipo"/>
-                      <field name="asofom"/> 
-                </xpath>
+                      <field name="asofom"/>
+                </xpath> -->
             </field>
         </record>
     </data>
