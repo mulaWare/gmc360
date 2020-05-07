@@ -9,6 +9,15 @@
                 <field name="last_date_invoiced"/>
           </xpath>
 
+      </field>
+  </record>
+
+  <record id="contract_g360" model="ir.ui.view">
+      <field name="name">contract_g360</field>
+      <field name="model">contract.contract</field>
+      <field name="inherit_id" ref="contract.contract_contract_form_view"/>
+      <field name="arch" type="xml">
+
           <xpath expr="//button[@name='recurring_create_invoice']" position="replace">
             <button name="recurring_create_invoice"
                     type="object"
