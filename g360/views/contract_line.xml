@@ -8,6 +8,15 @@
           <xpath expr="//field[@name='last_date_invoiced']" position="replace">
                 <field name="last_date_invoiced"/>
           </xpath>
+
+          <xpath expr="//button[@name='recurring_create_invoice']" position="replace">
+            <button name="recurring_create_invoice"
+                    type="object"
+                    attrs="{'invisible': ['|', ('create_invoice_visibility', '=', False)]}"
+                    string="Create invoices"
+                    groups="base.group_user"/>
+          </xpath>
+
       </field>
   </record>
 </odoo>
