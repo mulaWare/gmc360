@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="contract_line_g360" model="ir.ui.view">
+      <field name="name">contract_line_g360</field>
+      <field name="model">contract.line</field>
+      <field name="inherit_id" ref="contract.contract_line_form_view"/>
+      <field name="arch" type="xml">
+          <xpath expr="//field[@name='last_date_invoiced']" position="replace">
+                <field name="last_date_invoiced"/>
+          </xpath>
+      </field>
+  </record>
+</odoo>
