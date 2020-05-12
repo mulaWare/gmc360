@@ -37,6 +37,7 @@
         'views/hr_employee.xml',
         'data/email_template.xml',
         'views/contract_line.xml',
+        'report/report.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
