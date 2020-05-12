@@ -194,3 +194,6 @@
 	path = OCA/brand
 	url = git@github.com:OCA/brand.git
 	branch = 12.0
+[submodule "odoo-usability"]
+	path = odoo-usability
+	url = https://github.com/akretion/odoo-usability.git
