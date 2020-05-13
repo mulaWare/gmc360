@@ -77,3 +77,14 @@ class SaleOrder(models.Model):
                 'id': self.sign_template_id.id,
             },
         }
+
+    @api.multi
+    def action_open_sign_request(self):
+        self.ensure_one()
+
+        return {
+            "type": "ir.actions.act_window",
+            "res_model": "sign.request",
+            "views": [[False, "form"]],
+            "res_id": self.sign_template_id.sign_request_ids.id,
+        }
