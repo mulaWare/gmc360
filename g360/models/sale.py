@@ -33,4 +33,21 @@ class SaleOrder(models.Model):
                                         })
         sign_template_id = self.env['sign.template'].create({'attachment_id': attachment.id, 'favorited_ids': [(4, self.env.user.id)], 'active': True})
         self.sign_template_id = sign_template_id.id
-        self.sign_template_id.sale_id = self.id 
+        self.sign_template_id.sale_id = self.id
+
+
+        sign1_name = self.sign_reference + '_sign1'
+        sign1_type_id = self.env['sign.item.type'].search(['type','=','signature'], limit=1)
+        sign1_responsible_id = self.env['sign.item.role'].search([], limit=1)
+        sign1 = self.env['sign.item'].create({
+                                        'template_id': sign_template_id.id,
+                                        'name': sign1_name,
+                                        'type_id': sign1_type_id.id,
+                                        'required': True,
+                                        'responsible_id': sign1_responsible_id.id,
+                                        'page': 1,
+                                        'posX': 0.728,
+                                        'posY': 0.899,
+                                        'width': 0.2,
+                                        'height': 0.05,
+                                        })
