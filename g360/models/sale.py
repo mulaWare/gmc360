@@ -29,5 +29,5 @@ class SaleOrder(models.Model):
                                         'res_id': self.id,
                                         'mimetype': 'application/x-pdf'
                                         })
-        sign_template_id = self.env['sign.template'].create({'attachment_id': attachment.id, 'favorited_ids': [(4, self.env.user.id)], 'active': active})
+        sign_template_id = self.env['sign.template'].create({'attachment_id': attachment.id, 'favorited_ids': [(4, self.env.user.id)], 'active': True})
         self.sign_template_id = sign_template_id.id
