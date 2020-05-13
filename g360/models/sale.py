@@ -33,4 +33,4 @@ class SaleOrder(models.Model):
                                         })
         sign_template_id = self.env['sign.template'].create({'attachment_id': attachment.id, 'favorited_ids': [(4, self.env.user.id)], 'active': True})
         self.sign_template_id = sign_template_id.id
-        self.sign_template_id.sale_id = seld.id 
+        self.sign_template_id.sale_id = self.id 
