@@ -6,6 +6,10 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
+              <xpath expr="//field[@name='state']" position="before">
+                    <button name="action_cps_send" string="CPS" type="object" states="sent,sale"/>
+              </xpath>
+
             <!--    <xpath expr="//field[@name='validity_date']" position="after">
                       <field name="fecha_probable"/>
                       <field name="fecha_facturacion"/>

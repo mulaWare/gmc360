@@ -4,26 +4,29 @@ import urllib.parse
 import requests
 import datetime
 
+import base64
+
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-#    fecha_probable = fields.Date(string="Fecha Probable de cierre")
-#    fecha_facturacion = fields.Date(string="Fecha de facturación")
-#    plazo = fields.Float(string="Plazo")
-#    anticipo = fields.Float(string="% de anticipo")
-#    precio_total = fields.Float(string="Precio Total")
-#    fecha_pago = fields.Date(string="Fecha de Pago")
-#    pago_iguala = fields.Float(string="Pago Iguala")
-#    metodo = fields.Selection([
-#                                ('00','Tranferencia'),
-#                                ('01','Deposito a cuenta'),
-#                                ('02','Pago Electronico'),
-#                                ],
-#                                string="Metodo de pago", required=False, help="Metodo de pago")
-#    nombre = fields.Char(string="Nombre del Tesorero")
-#    puesto = fields.Char(string="Puesto del Tesorero")
-#    telefono = fields.Char(string="Telefono del Tesorero")
-#    correo = fields.Char(string="Correo del Tesorero")
-#    asofich = fields.Boolean(string="ASOFICH")
-#    amsofipo = fields.Boolean(string="AMSOFIPO")
-#    asofom = fields.Boolean(string="ASOFOM")
+
+    sign_template_id = fields.Many2one('sign.template', string="Template")
+    sign_reference = fields.Char(string="Filename")
+
+    @api.multi
+    def action_cps_send(self):
+        '''
+        This function opens a window to compose an email, with the edi sale template message loaded by default
+        '''
+        self.ensure_one()
+
+        pdf = self.env['report'].sudo().get_pdf([self.id], 'g360.action_report_cps')
+        attachment = self.env['ir.attachment'].create({
+                                        'name': self.name,
+                                        'type': 'binary',
+                                        'datas': base64.encodestring(pdf),
+                                        'res_model': 'sale.order',
+                                        'res_id': self.id,
+                                        'mimetype': 'application/x-pdf'
+                                        })
+        sign_template_id = self.env['sign.sign.template'].create({'attachment_id': attachment.id, 'favorited_ids': [(4, self.env.user.id)], 'active': active})
