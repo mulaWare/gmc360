@@ -51,3 +51,28 @@ class SaleOrder(models.Model):
                                         'width': 0.2,
                                         'height': 0.05,
                                         })
+
+        sign2_name = self.sign_reference + '_sign2'
+        sign2_type_id = self.env['sign.item.type'].search([('type','=','signature')], limit=1)
+        sign2_responsible_id = self.env['sign.item.role'].search([], limit=1)
+        sign2 = self.env['sign.item'].create({
+                                        'template_id': sign_template_id.id,
+                                        'name': sign2_name,
+                                        'type_id': sign2_type_id.id,
+                                        'required': True,
+                                        'responsible_id': sign2_responsible_id.id,
+                                        'page': 2,
+                                        'posX': 0.074,
+                                        'posY': 0.803,
+                                        'width': 0.2,
+                                        'height': 0.05,
+                                        })
+
+        return {
+            'name': "Template \"%(name)s\"" % {'name': self.sign_template_id.attachment_id.name},
+            'type': 'ir.actions.client',
+            'tag': 'sign.Template',
+            'context': {
+                'id': self.sign_template_id.id,
+            },
+        }
