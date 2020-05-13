@@ -9,29 +9,10 @@
               <xpath expr="//field[@name='state']" position="before">
                     <button name="action_cps_send" string="CPS" type="object" states="sent,sale"/>
               </xpath>
+              <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="sign_template_id"/>
+              </xpath>
 
-            <!--    <xpath expr="//field[@name='validity_date']" position="after">
-                      <field name="fecha_probable"/>
-                      <field name="fecha_facturacion"/>
-                      <field name="plazo"/>
-                      <field name="anticipo"/>
-                      <field name="precio_total"/>
-                      <field name="fecha_pago"/>
-                      <field name="pago_iguala"/>
-                      <field name="metodo"/>
-                      <label for="street" string="Datos de tesorería del cliente"/>
-                      <field name="nombre"/>
-                      <field name="puesto"/>
-                      <field name="telefono"/>
-                      <field name="correo"/>
-                      <button name="erase_public"
-                      type="object" string="Erase Public" />
-                </xpath>
-                <xpath expr="//field[@name='company_id']" position="after">
-                      <field name="asofich"/>
-                      <field name="amsofipo"/>
-                      <field name="asofom"/>
-                </xpath> -->
             </field>
         </record>
     </data>

@@ -20,9 +20,11 @@ class SaleOrder(models.Model):
         '''
         self.ensure_one()
         pdf = self.env.ref("g360.action_report_cps").render([self.id])[0]
-        #pdf, pdf_type  = self.env.ref("report_py3o.res_users_report_py3o")self.env['report_py3o.py3o.report'].sudo().create_report('g360.action_report_cps')
+
+        self.sign_reference = self.name + '.pdf'
+
         attachment = self.env['ir.attachment'].create({
-                                        'name': self.name,
+                                        'name': self.sign_reference,
                                         'type': 'binary',
                                         'datas': base64.encodestring(pdf),
                                         'res_model': 'sale.order',
@@ -31,3 +33,4 @@ class SaleOrder(models.Model):
                                         })
         sign_template_id = self.env['sign.template'].create({'attachment_id': attachment.id, 'favorited_ids': [(4, self.env.user.id)], 'active': True})
         self.sign_template_id = sign_template_id.id
+        self.sign_template_id.sale_id = seld.id 
