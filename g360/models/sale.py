@@ -21,11 +21,12 @@ class SaleOrder(models.Model):
         self.ensure_one()
         pdf = self.env.ref("g360.action_report_cps").render([self.id])[0]
 
-        self.sign_reference = self.name + '.pdf'
+        self.sign_reference = self.name
 
         attachment = self.env['ir.attachment'].create({
                                         'name': self.sign_reference,
                                         'type': 'binary',
+                                        'datas_fname': self.sign_reference + '.pdf',
                                         'datas': base64.encodestring(pdf),
                                         'res_model': 'sale.order',
                                         'res_id': self.id,
