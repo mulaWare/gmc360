@@ -7,10 +7,10 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
               <xpath expr="//field[@name='state']" position="before">
-                    <button name="action_cps_send" string="CPS" type="object" states="sent,sale"/>
+                    <button name="action_cps_send" string="Firma CPS" type="object" states="sale" attrs="{'invisible': [('sign_template_id', '!=',False)]}"/>
               </xpath>
               <xpath expr="//field[@name='partner_id']" position="after">
-                    <field name="sign_template_id"/>
+                    <field name="sign_template_id" string="Documento para Firma" attrs="{'invisible': [('sign_template_id', '=',False)]}"/>
               </xpath>
 
             </field>
