@@ -19,7 +19,7 @@ class SaleOrder(models.Model):
         This function opens a window to compose an email, with the edi sale template message loaded by default
         '''
         self.ensure_one()
-        pdf = self.env.ref("report_py3o.res_users_report_py3o").render(self.id)
+        pdf = self.env.ref("report_py3o.res_users_report_py3o").render([self.id])
         #pdf, pdf_type  = self.env.ref("report_py3o.res_users_report_py3o")self.env['report_py3o.py3o.report'].sudo().create_report('g360.action_report_cps')
         attachment = self.env['ir.attachment'].create({
                                         'name': self.name,
@@ -29,4 +29,4 @@ class SaleOrder(models.Model):
                                         'res_id': self.id,
                                         'mimetype': 'application/x-pdf'
                                         })
-        sign_template_id = self.env['sign.sign.template'].create({'attachment_id': attachment.id, 'favorited_ids': [(4, self.env.user.id)], 'active': active})
+        self.sign_template_id = self.env['sign.sign.template'].create({'attachment_id': attachment.id, 'favorited_ids': [(4, self.env.user.id)], 'active': active})
