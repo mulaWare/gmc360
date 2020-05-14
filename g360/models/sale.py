@@ -12,6 +12,8 @@ class SaleOrder(models.Model):
 
     sign_template_id = fields.Many2one('sign.template', string="Template")
     sign_reference = fields.Char(string="Filename")
+    sign_request_ids = fields.One2many('sign.request', 'template_id', related='sign_template_id.sign_request_ids', string="Signature Requests")
+
 
     @api.multi
     def action_cps_send(self):
