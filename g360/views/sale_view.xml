@@ -14,10 +14,11 @@
                   <label for="sign_template_id" string="Documento para Firma" states="sale"/>
                   <div class="o_row">
                       <field name="sign_template_id"  attrs="{'invisible': [('sign_template_id', '=',False)]}"/>
+                      <field name="sign_request_ids"  invisible="1"/>
                       <button name="action_open_sign_request" string="Ver firma" class="oe_link" type="object" attrs="{'invisible': [('sign_request_ids', '=',False)]}"/>
                   </div>
               </xpath>
-              
+
 
             </field>
         </record>
