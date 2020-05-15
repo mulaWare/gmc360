@@ -49,8 +49,8 @@ class SaleOrder(models.Model):
                                         'required': True,
                                         'responsible_id': sign1_responsible_id.id,
                                         'page': 1,
-                                        'posX': 0.728,
-                                        'posY': 0.899,
+                                        'posX': 0.064,
+                                        'posY': 0.648,
                                         'width': 0.2,
                                         'height': 0.05,
                                         })
@@ -65,12 +65,27 @@ class SaleOrder(models.Model):
                                         'required': True,
                                         'responsible_id': sign2_responsible_id.id,
                                         'page': 2,
-                                        'posX': 0.074,
-                                        'posY': 0.803,
+                                        'posX': 0.398,
+                                        'posY': 0.513,
                                         'width': 0.2,
                                         'height': 0.05,
                                         })
 
+        sign3_name = self.sign_reference + '_sign3'
+        sign3_type_id = self.env['sign.item.type'].search([('type','=','signature')], limit=1)
+        sign3_responsible_id = self.env['sign.item.role'].search([], limit=1)
+        sign3 = self.env['sign.item'].create({
+                                        'template_id': sign_template_id.id,
+                                        'name': sign3_name,
+                                        'type_id': sign3_type_id.id,
+                                        'required': True,
+                                        'responsible_id': sign3_responsible_id.id,
+                                        'page': 3,
+                                        'posX': 0.741,
+                                        'posY': 0.095,
+                                        'width': 0.2,
+                                        'height': 0.05,
+                                        })
         return {
             'name': "Template \"%(name)s\"" % {'name': self.sign_template_id.attachment_id.name},
             'type': 'ir.actions.client',
