@@ -14,4 +14,16 @@
   <field name="binding_type">report</field>
 </record>
 
+<record id="g360.action_report_cps_integral" model="ir.actions.report">
+  <field name="name">CPS Integral</field>
+  <field name="type">ir.actions.report</field>
+  <field name="model">sale.order</field>
+  <field name="report_name">cps_integral</field>
+  <field name="report_type">py3o</field>
+  <field name="py3o_filetype">pdf</field>
+  <field name="module">g360</field>
+  <field name="py3o_template_fallback">report/cps_integral.odt</field>
+  <field name="binding_model_id" ref="sale.model_sale_order" />
+  <field name="binding_type">report</field>
+</record>
 </odoo>
