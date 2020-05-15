@@ -93,7 +93,7 @@ class SaleOrder(models.Model):
             'context': {
                 'id': self.sign_template_id.id,
             },
-        }
+        } 
 
     @api.multi
     def action_open_sign_request(self):
