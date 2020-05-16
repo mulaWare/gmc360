@@ -625,7 +625,7 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign37_responsible_id.id,
                                         'page': 5,
                                         'posX': 0.057,
-                                        'posY': 0.264,
+                                        'posY': 0.634,
                                         'width': 0.200,
                                         'height': 0.050,
                                         })
