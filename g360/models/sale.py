@@ -225,7 +225,7 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign12_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.580,
-                                        'posY': 0.372,
+                                        'posY': 0.374,
                                         'width': 0.100,
                                         'height': 0.013,
                                         })
@@ -241,7 +241,7 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign13_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.681,
-                                        'posY': 0.372,
+                                        'posY': 0.374,
                                         'width': 0.056,
                                         'height': 0.013,
                                         })
@@ -257,7 +257,7 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign14_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.293,
-                                        'posY': 0.372,
+                                        'posY': 0.374,
                                         'width': 0.057,
                                         'height': 0.013,
                                         })
@@ -273,7 +273,7 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign15_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.352,
-                                        'posY': 0.372,
+                                        'posY': 0.374,
                                         'width': 0.140,
                                         'height': 0.013,
                                         })
@@ -289,7 +289,7 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign16_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.739,
-                                        'posY': 0.372,
+                                        'posY': 0.374,
                                         'width': 0.110,
                                         'height': 0.013,
                                         })
@@ -305,7 +305,7 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign17_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.194,
-                                        'posY': 0.372,
+                                        'posY': 0.374,
                                         'width': 0.100,
                                         'height': 0.013,
                                         })
@@ -321,7 +321,7 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign18_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.850,
-                                        'posY': 0.372,
+                                        'posY': 0.374,
                                         'width': 0.098,
                                         'height': 0.013,
                                         })
@@ -337,7 +337,7 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign19_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.492,
-                                        'posY': 0.372,
+                                        'posY': 0.374,
                                         'width': 0.086,
                                         'height': 0.013,
                                         })
@@ -417,7 +417,7 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign24_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.134,
-                                        'posY': 0.673,
+                                        'posY': 0.675,
                                         'width': 0.061,
                                         'height': 0.013,
                                         })
@@ -433,7 +433,7 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign25_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.055,
-                                        'posY': 0.673,
+                                        'posY': 0.675,
                                         'width': 0.076,
                                         'height': 0.013,
                                         })
@@ -449,7 +449,7 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign26_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.850,
-                                        'posY': 0.673,
+                                        'posY': 0.675,
                                         'width': 0.098,
                                         'height': 0.013,
                                         })
@@ -465,7 +465,7 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign27_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.293,
-                                        'posY': 0.673,
+                                        'posY': 0.675,
                                         'width': 0.057,
                                         'height': 0.013,
                                         })
@@ -481,7 +481,7 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign28_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.196,
-                                        'posY': 0.673,
+                                        'posY': 0.675,
                                         'width': 0.096,
                                         'height': 0.013,
                                         })
@@ -497,7 +497,7 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign29_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.738,
-                                        'posY': 0.673,
+                                        'posY': 0.675,
                                         'width': 0.114,
                                         'height': 0.013,
                                         })
@@ -513,7 +513,7 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign30_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.492,
-                                        'posY': 0.673,
+                                        'posY': 0.675,
                                         'width': 0.087,
                                         'height': 0.013,
                                         })
@@ -529,7 +529,7 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign31_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.579,
-                                        'posY': 0.673,
+                                        'posY': 0.675,
                                         'width': 0.100,
                                         'height': 0.013,
                                         })
@@ -545,7 +545,7 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign32_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.680,
-                                        'posY': 0.673,
+                                        'posY': 0.675,
                                         'width': 0.056,
                                         'height': 0.013,
                                         })
@@ -561,7 +561,7 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign33_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.350,
-                                        'posY': 0.673,
+                                        'posY': 0.675,
                                         'width': 0.141,
                                         'height': 0.013,
                                         })
@@ -595,7 +595,7 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign36_responsible_id.id,
                                         'page': 3,
                                         'posX': 0.754,
-                                        'posY': 0.943,
+                                        'posY': 0.945,
                                         'width': 0.200,
                                         'height': 0.050,
                                         })
