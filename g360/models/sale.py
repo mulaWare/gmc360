@@ -65,9 +65,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign2_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.134,
-                                        'posY': 0.262,
+                                        'posY': 0.300,
                                         'width': 0.060,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign3_name = self.sign_reference + '_sign3'
@@ -81,9 +81,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign3_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.056,
-                                        'posY': 0.262,
+                                        'posY': 0.300,
                                         'width': 0.060,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign4_name = self.sign_reference + '_sign4'
@@ -97,9 +97,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign4_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.850,
-                                        'posY': 0.288,
+                                        'posY': 0.300,
                                         'width': 0.101,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign5_name = self.sign_reference + '_sign5'
@@ -113,9 +113,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign5_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.680,
-                                        'posY': 0.288,
+                                        'posY': 0.300,
                                         'width': 0.056,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign6_name = self.sign_reference + '_sign6'
@@ -129,9 +129,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign6_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.194,
-                                        'posY': 0.288,
+                                        'posY': 0.300,
                                         'width': 0.097,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign7_name = self.sign_reference + '_sign7'
@@ -145,9 +145,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign7_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.292,
-                                        'posY': 0.288,
+                                        'posY': 0.300,
                                         'width': 0.059,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign8_name = self.sign_reference + '_sign8'
@@ -161,9 +161,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign8_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.581,
-                                        'posY': 0.288,
+                                        'posY': 0.300,
                                         'width': 0.098,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign9_name = self.sign_reference + '_sign9'
@@ -177,9 +177,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign9_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.740,
-                                        'posY': 0.288,
+                                        'posY': 0.300,
                                         'width': 0.112,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign10_name = self.sign_reference + '_sign10'
@@ -193,9 +193,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign10_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.352,
-                                        'posY': 0.288,
+                                        'posY': 0.300,
                                         'width': 0.138,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign11_name = self.sign_reference + '_sign11'
@@ -209,9 +209,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign11_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.492,
-                                        'posY': 0.288,
+                                        'posY': 0.300,
                                         'width': 0.138,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign12_name = self.sign_reference + '_sign12'
@@ -225,9 +225,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign12_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.580,
-                                        'posY': 0.365,
+                                        'posY': 0.368,
                                         'width': 0.100,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign13_name = self.sign_reference + '_sign13'
@@ -241,9 +241,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign13_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.681,
-                                        'posY': 0.365,
+                                        'posY': 0.368,
                                         'width': 0.056,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign14_name = self.sign_reference + '_sign14'
@@ -257,9 +257,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign14_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.293,
-                                        'posY': 0.365,
+                                        'posY': 0.368,
                                         'width': 0.057,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign15_name = self.sign_reference + '_sign15'
@@ -273,9 +273,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign15_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.352,
-                                        'posY': 0.365,
+                                        'posY': 0.368,
                                         'width': 0.140,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign16_name = self.sign_reference + '_sign16'
@@ -289,9 +289,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign16_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.739,
-                                        'posY': 0.365,
+                                        'posY': 0.368,
                                         'width': 0.110,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign17_name = self.sign_reference + '_sign17'
@@ -305,9 +305,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign17_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.194,
-                                        'posY': 0.365,
+                                        'posY': 0.368,
                                         'width': 0.100,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign18_name = self.sign_reference + '_sign18'
@@ -321,9 +321,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign18_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.850,
-                                        'posY': 0.365,
+                                        'posY': 0.368,
                                         'width': 0.098,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign19_name = self.sign_reference + '_sign19'
@@ -337,9 +337,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign19_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.492,
-                                        'posY': 0.365,
+                                        'posY': 0.368,
                                         'width': 0.086,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign20_name = self.sign_reference + '_sign20'
@@ -353,9 +353,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign20_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.171,
-                                        'posY': 0.365,
+                                        'posY': 0.368,
                                         'width': 0.015,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign21_name = self.sign_reference + '_sign21'
@@ -369,9 +369,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign21_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.099,
-                                        'posY': 0.365,
+                                        'posY': 0.368,
                                         'width': 0.015,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign22_name = self.sign_reference + '_sign22'
@@ -384,10 +384,10 @@ class SaleOrder(models.Model):
                                         'required': True,
                                         'responsible_id': sign22_responsible_id.id,
                                         'page': 2,
-                                        'posX': 0.162,
+                                        'posX': 0.164,
                                         'posY': 0.585,
                                         'width': 0.416,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign23_name = self.sign_reference + '_sign23'
@@ -403,7 +403,7 @@ class SaleOrder(models.Model):
                                         'posX': 0.738,
                                         'posY': 0.585,
                                         'width': 0.206,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign24_name = self.sign_reference + '_sign24'
@@ -419,7 +419,7 @@ class SaleOrder(models.Model):
                                         'posX': 0.134,
                                         'posY': 0.585,
                                         'width': 0.061,
-                                        'height': 0.063,
+                                        'height': 0.013,
                                         })
 
         sign25_name = self.sign_reference + '_sign25'
@@ -435,7 +435,7 @@ class SaleOrder(models.Model):
                                         'posX': 0.055,
                                         'posY': 0.585,
                                         'width': 0.076,
-                                        'height': 0.063,
+                                        'height': 0.013,
                                         })
 
         sign26_name = self.sign_reference + '_sign26'
@@ -449,9 +449,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign26_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.850,
-                                        'posY': 0.671,
+                                        'posY': 0.673,
                                         'width': 0.098,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign27_name = self.sign_reference + '_sign27'
@@ -465,9 +465,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign27_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.293,
-                                        'posY': 0.671,
+                                        'posY': 0.673,
                                         'width': 0.057,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign28_name = self.sign_reference + '_sign28'
@@ -481,9 +481,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign28_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.196,
-                                        'posY': 0.671,
+                                        'posY': 0.673,
                                         'width': 0.096,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign29_name = self.sign_reference + '_sign29'
@@ -497,9 +497,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign29_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.738,
-                                        'posY': 0.671,
+                                        'posY': 0.673,
                                         'width': 0.114,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign30_name = self.sign_reference + '_sign30'
@@ -513,9 +513,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign30_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.492,
-                                        'posY': 0.671,
+                                        'posY': 0.673,
                                         'width': 0.087,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign31_name = self.sign_reference + '_sign31'
@@ -529,9 +529,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign31_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.579,
-                                        'posY': 0.671,
+                                        'posY': 0.673,
                                         'width': 0.100,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign32_name = self.sign_reference + '_sign32'
@@ -545,9 +545,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign32_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.680,
-                                        'posY': 0.671,
+                                        'posY': 0.673,
                                         'width': 0.056,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign33_name = self.sign_reference + '_sign33'
@@ -561,9 +561,9 @@ class SaleOrder(models.Model):
                                         'responsible_id': sign33_responsible_id.id,
                                         'page': 2,
                                         'posX': 0.350,
-                                        'posY': 0.671,
+                                        'posY': 0.673,
                                         'width': 0.141,
-                                        'height': 0.015,
+                                        'height': 0.013,
                                         })
 
         sign34_name = self.sign_reference + '_sign34'
@@ -582,21 +582,7 @@ class SaleOrder(models.Model):
                                         'height': 0.050,
                                         })
 
-        sign35_name = self.sign_reference + '_sign35'
-        sign35_type_id = self.env['sign.item.type'].search([('type','=','signature')], limit=1)
-        sign35_responsible_id = self.env['sign.item.role'].search([], limit=1)
-        sign35 = self.env['sign.item'].create({
-                                        'template_id': sign_template_id.id,
-                                        'name': sign35_name,
-                                        'type_id': sign35_type_id.id,
-                                        'required': True,
-                                        'responsible_id': sign35_responsible_id.id,
-                                        'page': 3,
-                                        'posX': 0.780,
-                                        'posY': 0.938,
-                                        'width': 0.200,
-                                        'height': 0.050,
-                                        })
+
 
         sign36_name = self.sign_reference + '_sign36'
         sign36_type_id = self.env['sign.item.type'].search([('type','=','signature')], limit=1)
@@ -607,7 +593,7 @@ class SaleOrder(models.Model):
                                         'type_id': sign36_type_id.id,
                                         'required': True,
                                         'responsible_id': sign36_responsible_id.id,
-                                        'page': 4,
+                                        'page': 3,
                                         'posX': 0.754,
                                         'posY': 0.943,
                                         'width': 0.200,
@@ -623,7 +609,7 @@ class SaleOrder(models.Model):
                                         'type_id': sign37_type_id.id,
                                         'required': True,
                                         'responsible_id': sign37_responsible_id.id,
-                                        'page': 5,
+                                        'page': 4,
                                         'posX': 0.057,
                                         'posY': 0.634,
                                         'width': 0.200,
@@ -639,7 +625,7 @@ class SaleOrder(models.Model):
                                         'type_id': sign38_type_id.id,
                                         'required': True,
                                         'responsible_id': sign38_responsible_id.id,
-                                        'page': 6,
+                                        'page': 5,
                                         'posX': 0.774,
                                         'posY': 0.944,
                                         'width': 0.200,
@@ -655,7 +641,7 @@ class SaleOrder(models.Model):
                                         'type_id': sign39_type_id.id,
                                         'required': True,
                                         'responsible_id': sign39_responsible_id.id,
-                                        'page': 7,
+                                        'page': 6,
                                         'posX': 0.060,
                                         'posY': 0.247,
                                         'width': 0.200,
@@ -671,7 +657,7 @@ class SaleOrder(models.Model):
                                         'type_id': sign40_type_id.id,
                                         'required': True,
                                         'responsible_id': sign40_responsible_id.id,
-                                        'page': 8,
+                                        'page': 7,
                                         'posX': 0.770,
                                         'posY': 0.944,
                                         'width': 0.200,
@@ -687,7 +673,7 @@ class SaleOrder(models.Model):
                                         'type_id': sign41_type_id.id,
                                         'required': True,
                                         'responsible_id': sign41_responsible_id.id,
-                                        'page': 9,
+                                        'page': 8,
                                         'posX': 0.057,
                                         'posY': 0.289,
                                         'width': 0.200,
@@ -703,7 +689,7 @@ class SaleOrder(models.Model):
                                         'type_id': sign42_type_id.id,
                                         'required': True,
                                         'responsible_id': sign42_responsible_id.id,
-                                        'page': 10,
+                                        'page': 9,
                                         'posX': 0.731,
                                         'posY': 0.071,
                                         'width': 0.200,
