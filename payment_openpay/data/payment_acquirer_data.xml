@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="payment_acquirer_openpay" model="payment.acquirer">
+            <field name="name">Openpay</field>
+            <field name="image" type="base64" file="payment_openpay/static/src/img/openpay_icon.png"/>
+            <field name="provider">openpay</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="view_template_id" ref="openpay_form"/>
+            <field name="registration_view_template_id" ref="openpay_s2s_form"/>
+            <field name="environment">test</field>
+            <field name="pre_msg"><![CDATA[
+<p>You will be prompted with Openpay Payment page for payment information.</p>]]></field>
+            <field name="openpay_id">mnukgn8xkniw73btvkcm</field>
+            <field name="openpay_secret_key">sk_4fef431db65e4713976046d305e75309</field>
+            <field name="openpay_publishable_key">pk_71c3f8a70a724d389c4353ce486f23d1</field>
+            <field name="openpay_transferencia">False</field>
+            <field name="openpay_sandbox">True</field>
+
+            <field name="description" type="html">
+                <p>
+                    A payment gateway to accept online payments via credit cards.
+                </p>
+                <ul class="list-inline">
+                    <li class="list-inline-item">
+                        <i class="fa fa-check"/>Online Payment
+                    </li>
+                </ul>
+            </field>
+        </record>
+    </data>
+</odoo>
