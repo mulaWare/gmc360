@@ -11,8 +11,8 @@ from odoo.tools.translate import _
 
 
 HOST = '127.0.0.1'
-PORT = tools.config['xmlrpc_port']
-
+#PORT = tools.config['xmlrpc_port']
+PORT = '8069'
 
 class Webhook(models.Model):
     _inherit = 'webhook'
