@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <templates id="template" xml:space="preserve">
+      <t t-name="ChartOfAccountsHierarchy">        
+        
+        <div class="o_control_panel">          
+          <ol class="breadcrumb" role="navigation" style="width:100% !important"><li class="breadcrumb-item active">Chart of Accounts Hierarchy</li></ol>
+          <div class="o_cp_left">
+            <div class="o_cp_buttons" role="toolbar" aria-label="Control panel toolbar">
+              <div class="o_list_buttons" role="toolbar" aria-label="Main actions">
+                <button id="download_pdf" type="button" class="btn btn-primary " accesskey="c" data-original-title="" title="">
+                  Export PDF
+                </button>
+                <button id="download_xls" type="button" class="btn btn-primary">
+                  Export Excel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="o_view_controller">
+          <div class="table-responsive" id="coaData">
+            <table class="o_list_view table table-sm table-hover table-striped o_list_view_ungrouped" id="coa_hierarchy">
+              <thead>
+                <tr>
+                  <th class="o_column_sortable">Code</th>
+                  <th class="o_column_sortable">Name</th>
+                  <th class="o_column_sortable">Type</th>
+                  <th class="o_column_sortable">Debit</th>
+                  <th class="o_column_sortable">Credit</th>
+                  <th class="o_column_sortable">Balance</th>
+                </tr>
+              </thead>
+              <tbody class="ui-sortable" id="togglerow"></tbody>
+            </table>
+          </div>
+        </div>
+        
+      </t>
+    </templates>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="chart_of_accounts_hierarchy.report_coa_hierarchy">
+        <t t-call="web.html_container">
+            <t t-set="o" t-value="res_company"/>
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2> Chart of Accounts </h2>
+                    
+                    <table class="table table-sm o_main_table" name="invoice_line_table">
+                        <thead>
+                            <tr>
+                                <th class="">Code</th>
+                                <th class="">Parent Code</th>
+                                <th class="">Name</th>
+                                <th class="">Type</th>
+                                <th class="">Debit</th>
+                                <th class="">Credit</th>
+                                <th class="">Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="data" t-as="data">
+                                <tr>
+                                    <td><span t-esc="data['Code']"/></td>
+                                    <td><span t-esc="data['Parent Code']"/></td>
+                                    <td><span t-esc="data['Name']"/></td>                              
+                                    <td><span t-esc="data['Type']"/></td>                              
+                                    <td><span t-esc="data['Debit']"/></td>                              
+                                    <td><span t-esc="data['Credit']"/></td>                              
+                                    <td><span t-esc="data['Balance']"/></td>                              
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+                </div>
+            </t>
+        </t>
+    </template>
+
+
+    </data>
+</odoo>

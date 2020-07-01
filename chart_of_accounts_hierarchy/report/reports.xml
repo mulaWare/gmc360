@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report 
+            id="report_chart_of_accounts_hierarchy"
+            model="account.account"
+            string="Chart of Accounts Hierarchy"
+            name="chart_of_accounts_hierarchy.report_coa_hierarchy"
+            file="chart_of_accounts_hierarchy.report_coa_hierarchy"
+            report_type="qweb-pdf"
+            menu="False"/>
+    </data>
+</odoo>

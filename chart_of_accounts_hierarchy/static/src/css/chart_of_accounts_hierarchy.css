@@ -1,0 +1,44 @@
+.ccollapse .toggle {
+    background: url("../img/caret-down-solid.svg") no-repeat;   
+    padding-left: 20px;
+}
+.cexpand .toggle {
+    background: url("../img/caret-right-solid.svg") no-repeat;
+    padding-left: 20px;
+}
+.ccollapse td span{
+    padding-left: 20px;
+}
+.cexpand td span{
+    padding-left: 20px;
+}
+.clevel1 td:first-child {
+    padding-left: 10px !important;
+}
+.clevel2 td:first-child {
+    padding-left: 20px !important;
+}
+.clevel3 td:first-child {
+    padding-left: 30px !important;
+}
+.clevel4 td:first-child {
+    padding-left: 40px !important;
+}
+.clevel5 td:first-child {
+    padding-left: 50px !important;
+}
+.clevel6 td:first-child {
+    padding-left: 60px !important;
+}
+.clevel7 td:first-child {
+    padding-left: 70px !important;
+}
+.clevel8 td:first-child {
+    padding-left: 75px !important;
+}
+.clevel9 td:first-child {
+    padding-left: 80px !important;
+}
+.clevel10 td:first-child {
+    padding-left: 85px !important;
+}
