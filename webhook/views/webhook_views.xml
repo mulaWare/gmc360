@@ -15,6 +15,7 @@
                             </tree>
                         </field>
                         <field name="python_code_get_event"/>
+                        <field name="last_request"/>
                         <field name="active"/>
                     </group>
                 </form>
