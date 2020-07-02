@@ -18,8 +18,6 @@ PORT = '8069'
 class Webhook(models.Model):
     _inherit = 'webhook'
 
-    last_request = fields.Text(string="Last Request")
-
     @api.multi
     def run_thinkific_order_created(self):
         self.ensure_one()

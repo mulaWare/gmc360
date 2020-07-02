@@ -69,6 +69,7 @@ class Webhook(models.Model):
                 '\nrequest.httprequest.remote_addr',
 
     )
+    last_request = fields.Text(string="Last Request")    
     active = fields.Boolean(default=True)
 
     @api.multi
