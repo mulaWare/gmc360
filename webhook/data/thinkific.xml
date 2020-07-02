@@ -3,7 +3,7 @@
 
         <record id="thinkific_order_created" model="webhook">
             <field name="name">thinkific_order_created</field>
-            <field name="python_code_get_event">request.jsonrequest()</field>
+            <field name="python_code_get_event">request.httprequest.headers.get('X-Thinkific-Topic')</field>
         </record>
 
         <record id="thinkific_address_360educa" model="webhook.address">

@@ -20,7 +20,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/webhook_views.xml',
-        'views/thinkific.xml',        
+        'data/thinkific.xml',        
     ],
     'demo': [
         'demo/webhook_demo.xml',
