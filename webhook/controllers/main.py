@@ -37,5 +37,5 @@ class WebhookController(http.Controller):
                     remote_addr,
                     pprint.pformat(request.jsonrequest)[:450]
                 )))
-        pprint.pformat(request.jsonrequest)[:450]        
+      
         webhook.run_webhook(request)
