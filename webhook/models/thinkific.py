@@ -23,7 +23,7 @@ class Webhook(models.Model):
     @api.multi
     def run_thinkific_order_created(self):
         self.ensure_one()
-        self.last_request = self.env.request.jsonrequest
+        self.last_request = self.env.request.jsonrequest['resource']
         pprint.pformat(self.env.request.jsonrequest)[:450]
         if self.env.request.jsonrequest['foo'] != 'bar':
             raise exceptions.ValidationError(_("Wrong value received"))
