@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="view_thinkific_form" model="ir.ui.view">
+            <field name="name">view.thinkific.form</field>
+            <field name="model">thinkific.sale</field>
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+
+                        <field name="order_state"/>
+                        <field name="sale_id"/>
+                        <field name="state"/>
+                        <field name="partner_id"/>
+                        <field name="name"/>
+                        <field name="resource"/>
+                        <field name="action"/>
+                        <field name="tenant_id"/>
+                        <field name="tenant_global_id"/>
+                        <field name="created_at"/>
+                        <field name="timestamp"/>
+                        <field name="order_affiliate_referral_code"/>
+                        <field name="order_amount_cents"/>
+                        <field name="order_amount_dollars"/>
+                        <field name="order_billing_name"/>
+                        <field name="order_coupon"/>
+                        <field name="order_coupon_id"/>
+                        <field name="order_created_at"/>
+                        <field name="order_id"/>
+                        <field name="order_number"/>
+                        <field name="order_payment_type"/>
+                        <field name="order_product_id"/>
+                        <field name="order_product_name"/>
+                        <field name="order_status"/>
+                        <field name="order_user_id"/>
+                        <field name="order_user_email"/>
+                        <field name="order_user_first_name"/>
+                        <field name="order_user_first_name"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_thinkific_tree" model="ir.ui.view">
+            <field name="name">view.thinkific.tree</field>
+            <field name="model">thinkific.sale</field>
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                <tree>
+                  <field name="order_state"/>
+                  <field name="sale_id"/>
+                  <field name="state"/>
+                  <field name="partner_id"/>
+                  <field name="name"/>
+                  <field name="resource"/>
+                  <field name="action"/>
+                  <field name="tenant_id"/>
+                  <field name="tenant_global_id"/>
+                  <field name="created_at"/>
+                  <field name="timestamp"/>
+                  <field name="order_affiliate_referral_code"/>
+                  <field name="order_amount_cents"/>
+                  <field name="order_amount_dollars"/>
+                  <field name="order_billing_name"/>
+                  <field name="order_coupon"/>
+                  <field name="order_coupon_id"/>
+                  <field name="order_created_at"/>
+                  <field name="order_id"/>
+                  <field name="order_number"/>
+                  <field name="order_payment_type"/>
+                  <field name="order_product_id"/>
+                  <field name="order_product_name"/>
+                  <field name="order_status"/>
+                  <field name="order_user_id"/>
+                  <field name="order_user_email"/>
+                  <field name="order_user_first_name"/>
+                  <field name="order_user_first_name"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_thinkific">
+            <field name="name">Thinkific</field>
+            <field name="res_model">thinkific.sale</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="thinkific_menu_action" name="Thinkific" parent="base.menu_automation" action="action_thinkific"/>
+
+        <record  model="ir.ui.view" id="product_view_thinkific">
+            <field name="name">product_view_thinkific</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='categ_id']" position="after">
+                      <field name="thinkific_id" attrs="{'invisible':['|',('thinkific_id', '=', False)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record  model="ir.ui.view" id="partner_view_thinkific">
+            <field name="name">partner_view_thinkific</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='lang']" position="after">
+                      <field name="thinkific_id" attrs="{'invisible':['|',('thinkific_id', '=', False)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record  model="ir.ui.view" id="sale_view_thinkific">
+            <field name="name">sale_view_thinkific</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                      <field name="thinkific_id" attrs="{'invisible':['|',('thinkific_id', '=', False)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="thinkific_so_cron" model="ir.cron">
+    			<field name="name">Thinkific Sale Order</field>
+    			<field name="active" eval="True" />
+    			<field name="interval_number">3</field>
+    			<field name="interval_type">minutes</field>
+    			<field name="numbercall">-1</field>
+    			<field name="model_id" ref="model_thinkific_sale" />
+    			<field name="state">code</field>
+    			<field name="code">model.thinkific_so_cron()</field>
+    			<field name="doall" eval="False" />
+    		</record>
+</odoo>

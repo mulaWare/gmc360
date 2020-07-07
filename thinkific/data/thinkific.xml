@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+
+        <record id="thinkific_order_created" model="webhook">
+            <field name="name">thinkific_so</field>
+            <field name="python_code_get_event">request.httprequest.headers.get('X-Thinkific-Topic')</field>
+        </record>
+
+        <record id="thinkific_address_360educa" model="webhook.address">
+            <field name="name">52.7.134.85</field>
+            <field name="webhook_id" ref="thinkific_order_created"/>
+        </record>
+
+</odoo>

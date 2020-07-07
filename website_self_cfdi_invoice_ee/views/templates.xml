@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <template id="index">
+          <title>Portal de Facturacion</title>
+                    <t t-call="website.layout">
+          <form method="post" data-model_name="website.self.invoice.web" action="/portal/facturacliente/results" class="form-horizontal container-fluid mt32" enctype="multipart/form-data">
+              <section class="s_text_block">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-12 text-center mt16 mb32">
+                      <h2 class="o_default_snippet_text">
+                        Portal de Facturacion 
+                        
+                    </h2>
+                    </div>
+                    <div class="col-md-12 mb16 mt16">
+                      <p class="o_default_snippet_text">
+                      	Llene los campos siguientes para generar su factura.
+                    </p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+                    <!-- <t name="Main layout" t-name="website.layout">
+                        <span t-field="website.name"></span>
+                    </t> -->
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        
+                        <div class="form-group form-field">
+                            <label class="col-md-3 col-sm-4 control-label" for="partner_name">Nombre, Denominación o Razón Social</label>
+                            <div class="col-md-4 col-sm-6">
+                                <input type="text" class="form-control o_website_self_cfdi_invoice_input" name="partner_name" t-att-value="request.params.get('partner_name', '')" />
+                            </div>
+                        </div>
+                        <div class="form-group form-field">
+                            <label class="col-md-3 col-sm-4 control-label" for="rfc_partner">Introduce tu RFC *</label>
+                            <div class="col-md-4 col-sm-6">
+                                <input type="text" class="form-control o_website_self_cfdi_invoice_input" name="rfc_partner" t-att-value="request.params.get('rfc_partner', '')" />
+                            </div>
+                        </div>
+                        <div class="form-group form-field">
+                            <label class="col-md-3 col-sm-4 control-label" for="order_number">Folio de Venta *</label>
+                            <div class="col-md-4 col-sm-6">
+                                <input type="text" class="form-control" name="order_number" t-att-value="request.params.get('order_number', '')" />
+                            </div>
+                        </div>
+                        <div class="form-group form-field">
+                            <label class="col-md-3 col-sm-4 control-label" for="monto_total">Monto Total * (Sin comas ",")</label>
+                            <div class="col-md-4 col-sm-6">
+                                <input type="text" class="form-control" name="monto_total" t-att-value="request.params.get('monto_total', '')" />
+                            </div>
+                        </div>
+                        <div class="form-group form-field">
+                            <label class="col-md-3 col-sm-4 control-label" for="correo_electronico">Correo electrónico</label>
+                            <div class="col-md-4 col-sm-6">
+                                <input type="text" class="form-control" name="correo_electronico" t-att-value="request.params.get('correo_electronico', '')" />
+                            </div>
+                        </div>
+                        <div class="form-group form-field">
+			                <label class="col-md-3 col-sm-4 control-label" for="uso_del_cfdi">Uso del CFDI</label>
+						    <div class="col-md-4 col-sm-6">
+							    <select id="uso_del_cfdi" name="uso_del_cfdi" class="form-control">
+				                        <option value='G01' t-att-selected="request.params.get('uso_del_cfdi', '') == 'G01'">Adquisición de mercancías</option>
+										<option value='G02' t-att-selected="request.params.get('uso_del_cfdi', '') == 'G02'">Devoluciones, descuentos o bonificaciones</option>
+										<option value='G03' t-att-selected="request.params.get('uso_del_cfdi', '') == 'G03'">Gastos en general</option>
+										<option value='I01' t-att-selected="request.params.get('uso_del_cfdi', '') == 'I01'">Construcciones</option>
+										<option value='I02' t-att-selected="request.params.get('uso_del_cfdi', '') == 'I02'">Mobiliario y equipo de oficina por inversiones</option>
+										<option value='I03' t-att-selected="request.params.get('uso_del_cfdi', '') == 'I03'">Equipo de transporte</option>
+										<option value='I04' t-att-selected="request.params.get('uso_del_cfdi', '') == 'I04'">Equipo de cómputo y accesorios</option>
+										<option value='I05' t-att-selected="request.params.get('uso_del_cfdi', '') == 'I05'">Dados, troqueles, moldes, matrices y herramental</option>
+										<option value='I06' t-att-selected="request.params.get('uso_del_cfdi', '') == 'I06'">Comunicacion telefónica</option>
+										<option value='I07' t-att-selected="request.params.get('uso_del_cfdi', '') == 'I07'">Comunicación Satelital</option>
+										<option value='I08' t-att-selected="request.params.get('uso_del_cfdi', '') == 'I08'">Otra maquinaria y equipo</option>
+										<option value='D01' t-att-selected="request.params.get('uso_del_cfdi', '') == 'D01'">Honorarios médicos, dentales y gastos hospitalarios</option>
+										<option value='D02' t-att-selected="request.params.get('uso_del_cfdi', '') == 'D02'">Gastos médicos por incapacidad o discapacidad</option>
+										<option value='D03' t-att-selected="request.params.get('uso_del_cfdi', '') == 'D03'">Gastos funerales</option>
+										<option value='D04' t-att-selected="request.params.get('uso_del_cfdi', '') == 'D04'">Donativos</option>
+										<option value='D07' t-att-selected="request.params.get('uso_del_cfdi', '') == 'D07'">Primas por seguros de gastos médicos</option>
+										<option value='D08' t-att-selected="request.params.get('uso_del_cfdi', '') == 'D08'">Gastos de transportación escolar obligatoria</option>
+										<option value='D10' t-att-selected="request.params.get('uso_del_cfdi', '') == 'D10'">Pagos por servicios educativos (colegiaturas)</option>
+										<option value='P01' t-att-selected="request.params.get('uso_del_cfdi', '') == 'P01'">Por definir</option>
+				                </select>
+			                </div>
+			            </div> 
+                        <div class="form-group form-field">
+                            <label class="col-md-3 col-sm-4 control-label" for="ticket_pos">Ticket TPV</label>
+                            <div class="col-md-1 col-sm-1">
+                                <input type="radio" class="form-control" name="ticket_pos" t-att-value="request.params.get('ticket_pos', '')" />
+                            </div>
+                        </div>
+                        
+
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-sm-offset-4 col-sm-8 col-md-7">
+                                  <input class="btn btn-primary" type="submit" value="Generar Factura"/>
+
+                                  <a class="btn"></a>
+                                  <a class="btn"></a>
+                                  <a class="btn"></a>
+                                  <a class="btn"></a>
+                                  <input class="btn btn-primary" type="submit" value="Consultar Factura"/>
+
+                            </div>
+                        </div> 
+						<section class="s_text_block">
+			                <div class="container">
+			                  <div class="row">
+                                   <div class="col-md-12 mb16 mt16">
+			                         <h4 class="o_default_snippet_text">
+			                        (*) Campos Obligatorios.
+			                    </h4>
+			                    </div>
+			                  </div>
+			                </div>
+			              </section>
+                    </form>
+                  </t>
+        </template>
+        <template id="html_result_thnks" name="Gracias" > <!-- page="True" -->
+            <t t-call="website.layout">
+                <div id="wrap" class="oe_structure oe_empty">
+                    <section>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h1 class="text-center">Gracias por su Preferencia</h1><br/><br/>
+                                    <h3 class="text-muted o_default_snippet_text">Factura electrónica creada correctamente</h3>
+<!--                                    <table class="table table-hover o_my_status_table">
+                                        <thead>
+                                          <tr class="active">
+                                            <th>Archivo</th>
+                                            <th>Pedido</th>
+                                          </tr>
+                                        </thead>
+                                        <t t-foreach="attachments" t-as="attachment">
+                                            <tr >
+                                                <td>
+                                                    <a download="attachment.datas_fname" t-att-href="'/web/content?model=website.self.invoice.web.attach&amp;field=file&amp;id='+str(attachment.id)+'&amp;download=true&amp;filename_field=datas_fname'">Descargar <a t-field="attachment.datas_fname"/></a>
+                                                </td>
+                                                <td>
+                                                  <p t-field="attachment.website_auto_id"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        
+                                    </table> --><br/><br/>
+                                    <h3 class="text-center">La factura fue generadas de acuerdo a la información en su compra. El archivo PDF y XML fueron enviados a su correo electrónico. Si existe alguna informacion erronea no dude en contactarnos <h3 t-field="res_company.name" class="text-center"/>.</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </t>
+        </template>
+
+        <template id="html_result_error_inv" name="Detalles del Error" > <!-- page="True" -->
+            <t t-call="website.layout">
+                <div id="wrap" class="oe_structure oe_empty">
+                    <section>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                  <h1 class="text-center">Su solicitud no pudo ser Procesada.</h1>
+                                  <t t-foreach="errores" t-as="error">
+                                    <h2 class="o_default_snippet_text">
+                                        <p t-esc="error"/>
+                                    </h2>
+                                    </t>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="col-md-offset-3 col-sm-offset-4 col-sm-8 col-md-7">
+                                <a class="btn btn-primary" href="/portal/facturacliente/"><span class="fa fa-home"></span> Regresar</a>
+                              </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </t>
+        </template>
+
+      <!-- Acciones para Website -->
+        <record id="menu_self_invoice_web" model="website.menu">
+            <field name="name">Facturacion</field>
+            <field name="url">/portal/facturacliente/</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">13</field>
+            <!-- <field name="website_id" ref="default_website"/> -->
+        </record>
+
+        <template id="website_mx_inv_tests" name="Website Auto Facturacion" inherit_id="web.assets_common">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/website_self_cfdi_invoice_ee/static/src/js/website.js"></script>
+            </xpath>
+        </template>
+      <!-- Datos para Formularios en Odoo -->
+        <record id="website_self_invoice_web_form" model="ir.ui.view">
+          <field name="name">website_self_invoice_web.form</field>
+          <field name="model">website.self.invoice.web</field>
+          <field name="type">form</field>
+          <field name="arch" type="xml">
+            <header >
+              <field name="state" readonly="1" widget="statusbar"/>
+            </header>
+            <form string="Datos de la Solicitud">
+              <sheet>
+                <group col="4">
+              <field name="create_date" required="1"/>
+              <newline/>
+              <field name="rfc_partner" required="1"/>
+              <field name="order_number" required="1"/>
+              <field name="monto_total" />
+              <field name="mail_to" required="1"/>
+              <field name="ticket_pos" required="1"/>
+            </group>
+            <notebook>
+              <page string="Documentos Adjuntos" >
+                <field name="attachment_ids">
+                  <tree string="Resultado de Facturacion" editable="bottom">
+                    <field name="file"  readonly="1" filename="datas_fname"/>
+                    <field name="datas_fname" invisible="1"/>
+                  </tree>
+                </field>
+              </page>
+              <page string="Errores">
+                <group>
+                  <field name="error_message" nolabel="1" readonly="1"/>
+              </group>
+              </page>
+            </notebook>
+          </sheet>
+        </form>   
+        </field>
+        </record>
+        
+         <!-- Herencia Templates Website Sale -->
+	<!--
+      <template id="checkout_portal" inherit_id="website_sale.address">
+        <xpath expr="//form/div[1]" position="replace">
+           <div t-attf-class="form-group #{error.get('name') and 'has-error' or ''} col-md-8 div_name">
+               <label class="control-label" for="name">Nombre</label>
+               <input type="text" name="name" class="form-control" t-att-value="'name' in checkout and checkout['name']"/>
+           </div>
+			<div t-attf-class="form-group #{error.get('rfc') and 'has-error' or ''} col-md-4 div_rfct">
+                <label class="control-label" for="rfc">RFC</label>
+                <input type="text" name="rfc" required="" class="form-control" t-att-value="'rfc' in checkout and checkout['rfc']"/>
+            </div>
+        </xpath>  
+        <xpath expr="//form/div" position="inside">
+           <div class="clearfix"/>
+           <div t-attf-class="form-group #{error.get('uso_cfdi') and 'has-error' or ''} col-md-6 div_uso_cfdi">
+                <label class="control-label" for="uso_cfdi">En caso de factura, indicar el uso del CFDI</label>
+			    <select id="uso_cfdi" name="uso_cfdi" class="form-control">
+                        <option value='G01'>Adquisición de mercancías</option>
+						<option value='G02'>Devoluciones, descuentos o bonificaciones</option>
+						<option value='G03'>Gastos en general</option>
+						<option value='I01'>Construcciones</option>
+						<option value='I02'>Mobiliario y equipo de oficina por inversiones</option>
+						<option value='I03'>Equipo de transporte</option>
+						<option value='I04'>Equipo de cómputo y accesorios</option>
+						<option value='I05'>Dados, troqueles, moldes, matrices y herramental</option>
+						<option value='I06'>Comunicacion telefónica</option>
+						<option value='I07'>Comunicación Satelital</option>
+						<option value='I08'>Otra maquinaria y equipo</option>
+						<option value='D01'>Honorarios médicos, dentales y gastos hospitalarios</option>
+						<option value='D02'>Gastos médicos por incapacidad o discapacidad</option>
+						<option value='D03'>Gastos funerales</option>
+						<option value='D04'>Donativos</option>
+						<option value='D07'>Primas por seguros de gastos médicos</option>
+						<option value='D08'>Gastos de transportación escolar obligatoria</option>
+						<option value='D10'>Pagos por servicios educativos (colegiaturas)</option>
+						<option value='P01'>Por definir</option>
+                </select>
+            </div> 
+        </xpath>
+      </template>
+      -->
+      <!-- Herencia Templates Website Sale -->
+	<!--
+      <template id="nif_details" inherit_id="portal.portal_my_details">
+        <xpath expr="//div[@class='row']/div[3]" position="after">
+             <div t-attf-class="form-group #{error.get('rfc') and 'has-error' or ''} col-lg-6">
+                 <label class="control-label" for="nif">RFC</label>
+                 <input type="text" name="rfc" class="form-control" t-att-value="rfc or partner.rfc" />
+             </div>
+        </xpath>
+        <xpath expr="//div[@class='row']/div[8]" position="replace">
+        </xpath>
+           <xpath expr="//div[@class='row']/div[12]" position="after">
+           <div class="clearfix"/> 
+           <div t-attf-class="form-group #{error.get('uso_cfdi') and 'has-error' or ''} col-md-6 div_uso_cfdi">
+                <label class="control-label" for="uso_cfdi">En caso de factura, indicar el uso del CFDI</label>
+			    <select id="uso_cfdi" name="uso_cfdi" class="form-control" >
+                        <option value='G01' t-att-selected="'G01' == partner.uso_cfdi">Adquisición de mercancías</option>
+						<option value='G02' t-att-selected="'G02' == partner.uso_cfdi">Devoluciones, descuentos o bonificaciones</option>
+						<option value='G03' t-att-selected="'G03' == partner.uso_cfdi">Gastos en general</option>
+						<option value='I01' t-att-selected="'I01' == partner.uso_cfdi">Construcciones</option>
+						<option value='I02' t-att-selected="'I02' == partner.uso_cfdi">Mobiliario y equipo de oficina por inversiones</option>
+						<option value='I03' t-att-selected="'I03' == partner.uso_cfdi">Equipo de transporte</option>
+						<option value='I04' t-att-selected="'I04' == partner.uso_cfdi">Equipo de cómputo y accesorios</option>
+						<option value='I05' t-att-selected="'I05' == partner.uso_cfdi">Dados, troqueles, moldes, matrices y herramental</option>
+						<option value='I06' t-att-selected="'I06' == partner.uso_cfdi">Comunicacion telefónica</option>
+						<option value='I07' t-att-selected="'I07' == partner.uso_cfdi">Comunicación Satelital</option>
+						<option value='I08' t-att-selected="'I08' == partner.uso_cfdi">Otra maquinaria y equipo</option>
+						<option value='D01' t-att-selected="'D01' == partner.uso_cfdi">Honorarios médicos, dentales y gastos hospitalarios</option>
+						<option value='D02' t-att-selected="'D02' == partner.uso_cfdi">Gastos médicos por incapacidad o discapacidad</option>
+						<option value='D03' t-att-selected="'D03' == partner.uso_cfdi">Gastos funerales</option>
+						<option value='D04' t-att-selected="'D04' == partner.uso_cfdi">Donativos</option>
+						<option value='D07' t-att-selected="'D07' == partner.uso_cfdi">Primas por seguros de gastos médicos</option>
+						<option value='D08' t-att-selected="'D08' == partner.uso_cfdi">Gastos de transportación escolar obligatoria</option>
+						<option value='D10' t-att-selected="'D10' == partner.uso_cfdi">Pagos por servicios educativos (colegiaturas)</option>
+						<option value='P01' t-att-selected="'P01' == partner.uso_cfdi">Por definir</option>
+                </select>
+            </div> 
+        </xpath>
+      </template>
+        -->
+        <record id="website_self_invoice_web_tree" model="ir.ui.view">
+          <field name="name">website_self_invoice_web.tree</field>
+          <field name="model">website.self.invoice.web</field>
+          <field name="type">tree</field>
+          <field name="arch" type="xml">
+            <tree string="Solicitudes de Facturacion del Portal" decoration-bf="state=='done'" decoration-info="state=='draft'" decoration-muted="state=='error'">
+              <field name="rfc_partner" />
+              <field name="order_number" />
+              <field name="monto_total" />
+              <field name="ticket_pos" />
+              <field name="create_date" />
+              <field name="state" />
+            </tree>   
+        </field>
+        </record>
+        
+    <record id="action_modulo_autoinv" model="ir.actions.act_window">
+          <field name="name">Solicitudes Procesadas</field>
+          <field name="res_model">website.self.invoice.web</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+       </record>
+    <menuitem name="Solicitudes de Facturacion" id="id_modulo_autofact" parent="base.menu_custom" sequence="100"/> 
+    <menuitem action="action_modulo_autoinv" id="id_modulo_website_autoinv_ctalg" parent="id_modulo_autofact" sequence="100"/>
+</odoo>

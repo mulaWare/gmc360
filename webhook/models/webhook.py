@@ -19,6 +19,8 @@ except ImportError as err:
 
 class WebhookAddress(models.Model):
     _name = 'webhook.address'
+    _description = "Webhook Address"
+    _order = "id desc"
 
     name = fields.Char(
         'IP or Network Address',
@@ -33,6 +35,8 @@ class WebhookAddress(models.Model):
 
 class Webhook(models.Model):
     _name = 'webhook'
+    _description = "Webhook"
+    _order = "id desc"
 
     name = fields.Char(
         'Consumer name',
@@ -90,9 +94,10 @@ class Webhook(models.Model):
             # copy context to prevent side-effects of eval
             'context': dict(self.env.context),
         }
-        print(" *********  request--->",request)
+
         try:
             res = safe_eval(python_code, eval_dict)
+            #print(" *********  request--->",request,python_code,eval_dict)
         except BaseException:
             error = tools.ustr(traceback.format_exc())
             _logger.debug(
@@ -152,6 +157,7 @@ class Webhook(models.Model):
         returns: List of methods with that start wtih method base
         """
         # TODO: Filter just callable attributes
+        #print('event_method_base ---->',event_method_base)
         return sorted(
             attr for attr in dir(self) if attr.startswith(
                 event_method_base)
@@ -184,10 +190,14 @@ class Webhook(models.Model):
         if not event:
             raise exceptions.ValidationError(_(
                 'event is not defined'))
+        else:
+            event = event.replace('.','_')
+
         method_event_name_base = \
             'run_' + self.name + \
             '_' + event
         methods_event_name = self.get_event_methods(method_event_name_base)
+        #print('event, method_event_name_base ------>',event, method_event_name_base)
         if not methods_event_name:
             # if is a 'ping' event then return True
             # because the request is received fine.
