@@ -253,7 +253,7 @@ class SaleOrder(models.Model):
         '''
         self.ensure_one()
 
-        template_id = self.env.ref('sale.email_template_edi_sale').id
+        template_id = self.env.ref('thinkific.thinkific_so_email').id
 
         template = self.env['mail.template'].browse(template_id)
 
@@ -273,32 +273,8 @@ class SaleOrder(models.Model):
             'force_email': True
         })
 
-        template.with_context(ctx).send_mail(self.id, force_send=True)
-
-#        ir_model_data = self.env['ir.model.data']
-#        try:
-#            template_id = ir_model_data.get_object_reference('sale', 'email_template_edi_sale')[1]
-#        except ValueError:
-#            template_id = False
-#        try:
-#            compose_form_id = ir_model_data.get_object_reference('mail', 'email_compose_message_wizard_form')[1]
-#        except ValueError:
-#            compose_form_id = False
-#        lang = self.env.context.get('lang')
-#        template = template_id and self.env['mail.template'].browse(template_id)
-#        if template and template.lang:
-#            lang = template._render_template(template.lang, 'sale.order', self.ids[0])
-#
-#        if template_id:
-#            vals = template.generate_email(self.id, fields=None)
-#            vals['email_from'] = self.env.user.partner_id.email
-#            vals['email_to'] = self.partner_id.email
-#            vals['res_id'] = self.ids[0]
-#            msg_id = self.env['mail.mail'].create(vals)
-#            if msg_id:
-#                self.env['mail.mail'].send([msg_id])
-
-
+        send_mail = template.with_context(ctx).send_mail(self.id, force_send=True)
+        print("ctx ----->>", send_mail, ctx)
         return
 
 

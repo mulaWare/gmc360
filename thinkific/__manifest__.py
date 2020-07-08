@@ -21,6 +21,7 @@
         'security/ir.model.access.csv',
         'views/thinkific_views.xml',
         'data/thinkific.xml',
+        'data/thinkific_mail_template.xml',        
     ],
     'demo': [
 
