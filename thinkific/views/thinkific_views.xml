@@ -131,4 +131,16 @@
     			<field name="code">model.thinkific_so_cron()</field>
     			<field name="doall" eval="False" />
     		</record>
+
+        <record id="view_order_thinkific" model="ir.ui.view">
+            <field name="name">sale.order.thinkific</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+              <xpath expr="//field[@name='state']" position="before">
+                    <button name="action_order_send" string="Reenviar Pedido"  attrs="{'invisible':['|',('thinkific_id', '=', False)]}" type="object" states="sale"/>
+              </xpath>
+
+            </field>
+        </record>
 </odoo>
