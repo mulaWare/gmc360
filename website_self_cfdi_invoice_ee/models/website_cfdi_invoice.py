@@ -9,21 +9,21 @@ _logger = logging.getLogger(__name__)
 
 class website_self_invoice_web(models.Model):
     _name = 'website.self.invoice.web'
-    _description = 'Portal de Autofacturacion Integrado a Odoo' 
-    _rec_name = 'order_number' 
-    _order = 'create_date desc' 
+    _description = 'Portal de Autofacturacion Integrado a Odoo'
+    _rec_name = 'order_number'
+    _order = 'create_date desc'
 
     datas_fname = fields.Char('File Name',size=256)
     file = fields.Binary('Layout')
     download_file = fields.Boolean('Descargar Archivo')
     cadena_decoding = fields.Text('Binario sin encoding')
-    type = fields.Selection([('csv','CSV'),('xlsx','Excel')], 'Tipo Exportacion', 
+    type = fields.Selection([('csv','CSV'),('xlsx','Excel')], 'Tipo Exportacion',
                             required=False, )
     rfc_partner = fields.Char('RFC', size=15)
     order_number = fields.Char('Folio Pedido de Venta', size=128)
     monto_total = fields.Float('Monto total')
     mail_to = fields.Char('Correo Electronico', size=256)
-    ticket_pos = fields.Boolean('Ticket')
+    ticket_pos = fields.Boolean('Ticket', default=False)
     state = fields.Selection([('draft','Borrador'),('error','Error'),('done','Relizado')])
 
     attachment_ids = fields.One2many('website.self.invoice.web.attach','website_auto_id','Adjuntos del Portal')
@@ -94,7 +94,7 @@ class website_self_invoice_web(models.Model):
                 """, ('%'+result.rfc_partner.upper()+'%',))
             cr_res = self.env.cr.fetchall()
             order_id = False
-    
+
             try:
                 partner_id = cr_res[0][0]
                 if not partner_id:
@@ -131,6 +131,7 @@ class website_self_invoice_web(models.Model):
                         'state': 'error',
                     })
                 return result
+'''
         else:
             self.env.cr.execute("""
                 select id from pos_order where UPPER(pos_reference)= %s and amount_total=%s;
@@ -150,10 +151,12 @@ class website_self_invoice_web(models.Model):
                         'state': 'error',
                     })
                 return result
+'''
         if order_id and result.ticket_pos == False:
             order_obj =  self.env['sale.order'].sudo()
             order_br = order_obj.browse(order_id)
 
+'''
             picking_obj  = self.env['stock.picking'].sudo()
             picking_br = picking_obj.search([('origin','=',order_br.name)])
             if order_br.state in ('draft','sent'):
@@ -169,7 +172,7 @@ class website_self_invoice_web(models.Model):
                     line.quantity_done = line.product_uom_qty
                 if picking_br.state in ['confirmed','assigned']:
                     picking_br.button_validate()
-            
+'''
             if order_br.invoice_status != 'no': # not in('invoiced','no'):
                 if True:
                     invoice_return = None
@@ -220,10 +223,10 @@ class website_self_invoice_web(models.Model):
 #                        if not attachment_ids:
 #                            Template = self.env['mail.template'].sudo()
 #                            Attachment = self.env['ir.attachment'].sudo()
-                            
+
 #                            report_template = self.sudo().env.ref('account.account_invoices')
 #                            report, format = report_template.render_qweb_pdf([invoice_br.id])
-                            
+
                             #report = Template.env['report'].get_pdf([invoice_br.id], 'account.report_invoice')
 #                            report = base64.b64encode(report)
 #                            fname =  'CDFI_' + invoice_br.number.replace('/', '_') + '.pdf'
@@ -249,10 +252,10 @@ class website_self_invoice_web(models.Model):
 #                        elif len(attachment_ids)==1 and attachment_ids.datas_fname.endswith('.xml'):
 #                            Template = self.env['mail.template'].sudo()
 #                            Attachment = self.env['ir.attachment'].sudo()
-#                            
+#
 #                            report_template = self.sudo().env.ref('account.account_invoices')
 #                            report, format = report_template.render_qweb_pdf([invoice_br.id])
-                            
+
                             #report = Template.env['report'].get_pdf([invoice_br.id], 'account.report_invoice')
 #                            report = base64.b64encode(report)
 #                            fname =  invoice_br.l10n_mx_edi_cfdi_name.replace('.xml', '.pdf')
@@ -264,7 +267,7 @@ class website_self_invoice_web(models.Model):
 #                                'res_id': invoice_br.id,
 #                            }
 #                            attachment_ids += Attachment.create(attachment_data)
-                            
+
 #                        if attachment_ids:
 #                            attachment_web =[]
 #                            for attach in attachment_ids:
@@ -293,6 +296,7 @@ class website_self_invoice_web(models.Model):
                             'state': 'error',
                         })
                 return result
+'''
         if order_id and result.ticket_pos == True:
             invoice_obj = self.env['account.invoice'].sudo()
             pos_order_obj = self.env['pos.order'].sudo()
@@ -303,7 +307,7 @@ class website_self_invoice_web(models.Model):
                     result.write({
                                 'error_message':'El RFC %s no pertenece al Relacionado con el Pedido de Venta %s.' % (result.rfc_partner,result.order_number,),
                                 'state': 'error',
-                            }) 
+                            })
                     return result
             if pos_br.state != 'cancel':
                 if True:
@@ -371,7 +375,7 @@ class website_self_invoice_web(models.Model):
                                 'res_model': 'account.invoice',
                                 'res_id': invoice_br.id,
                             }
-                            
+
                             #xml_file = open(invoice_br.xml_invoice_link, 'rb').read()
                             fname_xml = 'CDFI_' + invoice_br.number.replace('/', '_') + '.xml'
                             attachment_xml = {
@@ -381,9 +385,9 @@ class website_self_invoice_web(models.Model):
                                 'res_model': 'account.invoice',
                                 'res_id': invoice_br.id,
                             }
-                            
+
                             attachment_ids = [Attachment.create(attachment_data), Attachment.create(attachment_xml)]
-                    
+
                         if attachment_ids:
                             attachment_web =[]
                             for attach in attachment_ids:
@@ -413,6 +417,7 @@ class website_self_invoice_web(models.Model):
                             'state': 'error',
                         })
                 return result
+'''
         #### Ligar Adjuntos de Facturacion al one2many por el campo attach_id ####
         return result
 # URL ejemplo:

@@ -9,8 +9,8 @@
                   <div class="row">
                     <div class="col-md-12 text-center mt16 mb32">
                       <h2 class="o_default_snippet_text">
-                        Portal de Facturacion 
-                        
+                        Portal de Facturacion
+
                     </h2>
                     </div>
                     <div class="col-md-12 mb16 mt16">
@@ -25,7 +25,7 @@
                         <span t-field="website.name"></span>
                     </t> -->
                         <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                        
+
                         <div class="form-group form-field">
                             <label class="col-md-3 col-sm-4 control-label" for="partner_name">Nombre, Denominación o Razón Social</label>
                             <div class="col-md-4 col-sm-6">
@@ -81,14 +81,14 @@
 										<option value='P01' t-att-selected="request.params.get('uso_del_cfdi', '') == 'P01'">Por definir</option>
 				                </select>
 			                </div>
-			            </div> 
-                        <div class="form-group form-field">
+			            </div>
+                    <!--    <div class="form-group form-field">
                             <label class="col-md-3 col-sm-4 control-label" for="ticket_pos">Ticket TPV</label>
                             <div class="col-md-1 col-sm-1">
                                 <input type="radio" class="form-control" name="ticket_pos" t-att-value="request.params.get('ticket_pos', '')" />
                             </div>
                         </div>
-                        
+                      -->
 
                         <div class="form-group">
                             <div class="col-md-offset-3 col-sm-offset-4 col-sm-8 col-md-7">
@@ -101,7 +101,7 @@
                                   <input class="btn btn-primary" type="submit" value="Consultar Factura"/>
 
                             </div>
-                        </div> 
+                        </div>
 						<section class="s_text_block">
 			                <div class="container">
 			                  <div class="row">
@@ -142,7 +142,7 @@
                                                 </td>
                                             </tr>
                                         </t>
-                                        
+
                                     </table> --><br/><br/>
                                     <h3 class="text-center">La factura fue generadas de acuerdo a la información en su compra. El archivo PDF y XML fueron enviados a su correo electrónico. Si existe alguna informacion erronea no dude en contactarnos <h3 t-field="res_company.name" class="text-center"/>.</h3>
                                 </div>
@@ -211,7 +211,7 @@
               <field name="order_number" required="1"/>
               <field name="monto_total" />
               <field name="mail_to" required="1"/>
-              <field name="ticket_pos" required="1"/>
+              <field name="ticket_pos" invisible="1"/> -->
             </group>
             <notebook>
               <page string="Documentos Adjuntos" >
@@ -229,10 +229,10 @@
               </page>
             </notebook>
           </sheet>
-        </form>   
+        </form>
         </field>
         </record>
-        
+
          <!-- Herencia Templates Website Sale -->
 	<!--
       <template id="checkout_portal" inherit_id="website_sale.address">
@@ -245,7 +245,7 @@
                 <label class="control-label" for="rfc">RFC</label>
                 <input type="text" name="rfc" required="" class="form-control" t-att-value="'rfc' in checkout and checkout['rfc']"/>
             </div>
-        </xpath>  
+        </xpath>
         <xpath expr="//form/div" position="inside">
            <div class="clearfix"/>
            <div t-attf-class="form-group #{error.get('uso_cfdi') and 'has-error' or ''} col-md-6 div_uso_cfdi">
@@ -271,7 +271,7 @@
 						<option value='D10'>Pagos por servicios educativos (colegiaturas)</option>
 						<option value='P01'>Por definir</option>
                 </select>
-            </div> 
+            </div>
         </xpath>
       </template>
       -->
@@ -287,7 +287,7 @@
         <xpath expr="//div[@class='row']/div[8]" position="replace">
         </xpath>
            <xpath expr="//div[@class='row']/div[12]" position="after">
-           <div class="clearfix"/> 
+           <div class="clearfix"/>
            <div t-attf-class="form-group #{error.get('uso_cfdi') and 'has-error' or ''} col-md-6 div_uso_cfdi">
                 <label class="control-label" for="uso_cfdi">En caso de factura, indicar el uso del CFDI</label>
 			    <select id="uso_cfdi" name="uso_cfdi" class="form-control" >
@@ -311,7 +311,7 @@
 						<option value='D10' t-att-selected="'D10' == partner.uso_cfdi">Pagos por servicios educativos (colegiaturas)</option>
 						<option value='P01' t-att-selected="'P01' == partner.uso_cfdi">Por definir</option>
                 </select>
-            </div> 
+            </div>
         </xpath>
       </template>
         -->
@@ -324,19 +324,19 @@
               <field name="rfc_partner" />
               <field name="order_number" />
               <field name="monto_total" />
-              <field name="ticket_pos" />
+              <field name="ticket_pos" invisible="1"/> -->
               <field name="create_date" />
               <field name="state" />
-            </tree>   
+            </tree>
         </field>
         </record>
-        
+
     <record id="action_modulo_autoinv" model="ir.actions.act_window">
           <field name="name">Solicitudes Procesadas</field>
           <field name="res_model">website.self.invoice.web</field>
           <field name="view_type">form</field>
           <field name="view_mode">tree,form</field>
        </record>
-    <menuitem name="Solicitudes de Facturacion" id="id_modulo_autofact" parent="base.menu_custom" sequence="100"/> 
+    <menuitem name="Solicitudes de Facturacion" id="id_modulo_autofact" parent="base.menu_custom" sequence="100"/>
     <menuitem action="action_modulo_autoinv" id="id_modulo_website_autoinv_ctalg" parent="id_modulo_autofact" sequence="100"/>
 </odoo>
