@@ -131,48 +131,48 @@ class website_self_invoice_web(models.Model):
                         'state': 'error',
                     })
                 return result
-'''
-        else:
-            self.env.cr.execute("""
-                select id from pos_order where UPPER(pos_reference)= %s and amount_total=%s;
-                """, (result.order_number.upper(),result.monto_total or 0))
-            cr_res = self.env.cr.fetchall()
-            try:
-                order_id = cr_res[0][0]
-                if not order_id:
-                    result.write({
-                            'error_message':'El Ticket %s no existe en la Base de Datos.' % result.order_number,
-                            'state': 'error',
-                        })
-                    return result
-            except:
-                result.write({
-                        'error_message':'El Ticket %s no existe en la Base de Datos.' % result.order_number,
-                        'state': 'error',
-                    })
-                return result
-'''
+
+#        else:
+#            self.env.cr.execute("""
+#                select id from pos_order where UPPER(pos_reference)= %s and amount_total=%s;
+#                """, (result.order_number.upper(),result.monto_total or 0))
+#            cr_res = self.env.cr.fetchall()
+#            try:
+#                order_id = cr_res[0][0]
+#                if not order_id:
+#                    result.write({
+#                            'error_message':'El Ticket %s no existe en la Base de Datos.' % result.order_number,
+#                            'state': 'error',
+#                        })
+#                    return result
+#            except:
+#                result.write({
+#                        'error_message':'El Ticket %s no existe en la Base de Datos.' % result.order_number,
+#                        'state': 'error',
+#                    })
+#                return result
+
         if order_id and result.ticket_pos == False:
             order_obj =  self.env['sale.order'].sudo()
             order_br = order_obj.browse(order_id)
 
-'''
-            picking_obj  = self.env['stock.picking'].sudo()
-            picking_br = picking_obj.search([('origin','=',order_br.name)])
-            if order_br.state in ('draft','sent'):
-                result.write({
-                            'error_message':'El Pedido %s se encuentra en espera de ser procesado, por favor comuniquese con la compañia.' % order_br.name,
-                            'state': 'error',
-                        })
-                return result
-            if picking_br:
-                picking_br = picking_br[0]
+
+#            picking_obj  = self.env['stock.picking'].sudo()
+#            picking_br = picking_obj.search([('origin','=',order_br.name)])
+#            if order_br.state in ('draft','sent'):
+#                result.write({
+#                            'error_message':'El Pedido %s se encuentra en espera de ser procesado, por favor comuniquese con la compañia.' % order_br.name,
+#                            'state': 'error',
+#                        })
+#                return result
+#            if picking_br:
+#                picking_br = picking_br[0]
                 #if picking_br.state=='waiting':
-                for line in picking_br.move_ids_without_package:
-                    line.quantity_done = line.product_uom_qty
-                if picking_br.state in ['confirmed','assigned']:
-                    picking_br.button_validate()
-'''
+#                for line in picking_br.move_ids_without_package:
+#                    line.quantity_done = line.product_uom_qty
+#                if picking_br.state in ['confirmed','assigned']:
+#                    picking_br.button_validate()
+
             if order_br.invoice_status != 'no': # not in('invoiced','no'):
                 if True:
                     invoice_return = None
@@ -296,32 +296,32 @@ class website_self_invoice_web(models.Model):
                             'state': 'error',
                         })
                 return result
-'''
-        if order_id and result.ticket_pos == True:
-            invoice_obj = self.env['account.invoice'].sudo()
-            pos_order_obj = self.env['pos.order'].sudo()
-            pos_br = pos_order_obj.browse(order_id)
-            pos_br.write({'partner_id':partner_id})
-            if pos_br.partner_id:
-                if pos_br.partner_id.id != partner_id:
-                    result.write({
-                                'error_message':'El RFC %s no pertenece al Relacionado con el Pedido de Venta %s.' % (result.rfc_partner,result.order_number,),
-                                'state': 'error',
-                            })
-                    return result
-            if pos_br.state != 'cancel':
-                if True:
-                    invoice_id = None
-                    if pos_br.state == 'invoiced':
-                        invoice_return = invoice_obj.search([('origin', '=', pos_br.name), ('state', '!=', 'cancel')])
-                        invoice_id = invoice_return.id
-                        if invoice_return and invoice_return[0].l10n_mx_edi_cfdi_uuid in['factura_correcta', 'factura_cancelada']:
-                            result.write({
-                                    'error_message':'El Pedido %s ya fue Facturado.' % result.order_number,
-                                    'state': 'error',
-                                })
-                            return result
-                    else:
+
+#        if order_id and result.ticket_pos == True:
+#            invoice_obj = self.env['account.invoice'].sudo()
+#            pos_order_obj = self.env['pos.order'].sudo()
+#            pos_br = pos_order_obj.browse(order_id)
+#            pos_br.write({'partner_id':partner_id})
+#            if pos_br.partner_id:
+#                if pos_br.partner_id.id != partner_id:
+#                    result.write({
+#                                'error_message':'El RFC %s no pertenece al Relacionado con el Pedido de Venta %s.' % (result.rfc_partner,result.order_number,),
+#                                'state': 'error',
+#                            })
+#                    return result
+#            if pos_br.state != 'cancel':
+#                if True:
+#                    invoice_id = None
+#                    if pos_br.state == 'invoiced':
+#                        invoice_return = invoice_obj.search([('origin', '=', pos_br.name), ('state', '!=', 'cancel')])
+#                        invoice_id = invoice_return.id
+#                        if invoice_return and invoice_return[0].l10n_mx_edi_cfdi_uuid in['factura_correcta', 'factura_cancelada']:
+#                            result.write({
+#                                    'error_message':'El Pedido %s ya fue Facturado.' % result.order_number,
+#                                    'state': 'error',
+#                                })
+#                            return result
+#                    else:
 #                         if not pos_br.partner_id.uso_cfdi:
 #                             result.write({
 #                                'error_message':'No tiene asignado un USO DE CFDI en su cuenta de usuario. Favor de asignar uno antes de facturar el Pedido %s.' % result.order_number,
@@ -329,95 +329,95 @@ class website_self_invoice_web(models.Model):
 #                                })
 #                             pos_br.write({'partner_id':False})
 #                             return result
-                        invoice_return = pos_br.action_pos_order_invoice() #action_invoice()
-                        invoice_id = invoice_return['res_id']
-                    invoice_br = invoice_obj.browse(invoice_id)
-                    vals = {'factura_cfdi':True}
-                    if result.l10n_mx_edi_usage:
-                        vals.update({'l10n_mx_edi_usage': result.l10n_mx_edi_usage})
-                    if invoice_br.partner_id.id!= partner_id:
-                        vals.update({'partner_id':partner_id})
+#                        invoice_return = pos_br.action_pos_order_invoice() #action_invoice()
+#                        invoice_id = invoice_return['res_id']
+#                    invoice_br = invoice_obj.browse(invoice_id)
+#                    vals = {'factura_cfdi':True}
+#                    if result.l10n_mx_edi_usage:
+#                        vals.update({'l10n_mx_edi_usage': result.l10n_mx_edi_usage})
+#                    if invoice_br.partner_id.id!= partner_id:
+#                        vals.update({'partner_id':partner_id})
 #                     if not invoice_br.tipo_comprobante:
 #                         vals.update({'tipo_comprobante': 'I'})
 #                     if not invoice_br.uso_cfdi:
 #                         vals.update({'uso_cfdi': pos_br.partner_id.uso_cfdi})
 #                     if not invoice_br.methodo_pago:
 #                         vals.update({'methodo_pago': "PUE"})
-                    if pos_br.statement_ids:
-                        l10n_mx_edi_payment_method = pos_br.statement_ids[0].journal_id.l10n_mx_edi_payment_method_id
-                        payment_method_code = l10n_mx_edi_payment_method.code
-                        if payment_method_code not in ('01', '02', '03', '04', '05', '06', '08', '28', '29'):
-                            result.write({
-                                    'error_message':'Forma de pago desconocido %s: %s.' % (payment_method_code,
-                                                                                         pos_br.statement_ids[0].journal_id.name),
-                                    'state': 'error',
-                                })
-                            return result
-                        vals.update({'l10n_mx_edi_payment_method_id': l10n_mx_edi_payment_method.id})
-                    invoice_br.write(vals)
-                    if True:
-                        if invoice_br.state == 'draft':
-                            invoice_br.action_invoice_open()
+#                    if pos_br.statement_ids:
+#                        l10n_mx_edi_payment_method = pos_br.statement_ids[0].journal_id.l10n_mx_edi_payment_method_id
+#                        payment_method_code = l10n_mx_edi_payment_method.code
+#                        if payment_method_code not in ('01', '02', '03', '04', '05', '06', '08', '28', '29'):
+#                            result.write({
+#                                    'error_message':'Forma de pago desconocido %s: %s.' % (payment_method_code,
+#                                                                                         pos_br.statement_ids[0].journal_id.name),
+#                                    'state': 'error',
+#                                })
+#                            return result
+#                        vals.update({'l10n_mx_edi_payment_method_id': l10n_mx_edi_payment_method.id})
+#                    invoice_br.write(vals)
+#                    if True:
+#                        if invoice_br.state == 'draft':
+#                            invoice_br.action_invoice_open()
 #                         else:
 #                             invoice_br.generate_cfdi_invoice()
-                        ir_attach = self.env['ir.attachment'].sudo()
-                        attachment_ids = ir_attach.search([('res_model','=','account.invoice'),('res_id','=',invoice_br.id)])
-                        if not attachment_ids:
-                            Template = self.env['mail.template'].sudo()
-                            Attachment = self.env['ir.attachment'].sudo()
-                            report = Template.env['report'].get_pdf([invoice_br.id], 'account.report_invoice')
-                            report = base64.b64encode(report)
-                            fname =  'CDFI_' + invoice_br.number.replace('/', '_') + '.pdf'
-                            attachment_data = {
-                                'name': fname,
-                                'datas_fname': fname,
-                                'datas': report,
-                                'res_model': 'account.invoice',
-                                'res_id': invoice_br.id,
-                            }
+#                        ir_attach = self.env['ir.attachment'].sudo()
+#                        attachment_ids = ir_attach.search([('res_model','=','account.invoice'),('res_id','=',invoice_br.id)])
+#                        if not attachment_ids:
+#                            Template = self.env['mail.template'].sudo()
+#                            Attachment = self.env['ir.attachment'].sudo()
+#                            report = Template.env['report'].get_pdf([invoice_br.id], 'account.report_invoice')
+#                            report = base64.b64encode(report)
+#                            fname =  'CDFI_' + invoice_br.number.replace('/', '_') + '.pdf'
+#                            attachment_data = {
+#                                'name': fname,
+#                                'datas_fname': fname,
+#                                'datas': report,
+#                                'res_model': 'account.invoice',
+#                                'res_id': invoice_br.id,
+#                            }
 
                             #xml_file = open(invoice_br.xml_invoice_link, 'rb').read()
-                            fname_xml = 'CDFI_' + invoice_br.number.replace('/', '_') + '.xml'
-                            attachment_xml = {
-                                'name': fname_xml,
-                                'datas_fname': fname_xml,
-                                'datas': invoice_br.l10n_mx_edi_cfdi, #base64.b64encode(xml_file),
-                                'res_model': 'account.invoice',
-                                'res_id': invoice_br.id,
-                            }
+#                            fname_xml = 'CDFI_' + invoice_br.number.replace('/', '_') + '.xml'
+#                            attachment_xml = {
+#                                'name': fname_xml,
+#                                'datas_fname': fname_xml,
+#                                'datas': invoice_br.l10n_mx_edi_cfdi, #base64.b64encode(xml_file),
+#                                'res_model': 'account.invoice',
+#                                'res_id': invoice_br.id,
+#                            }
+#
+#                            attachment_ids = [Attachment.create(attachment_data), Attachment.create(attachment_xml)]
 
-                            attachment_ids = [Attachment.create(attachment_data), Attachment.create(attachment_xml)]
+#                        if attachment_ids:
+#                            attachment_web =[]
+#                            for attach in attachment_ids:
+#                                xval = (0,0,{
+#                                    'attach_id': attach.id,
+#                                    })
+#                                attachment_web.append(xval)
+#                            result.write({'attachment_ids':attachment_web})
+#                            result.write({'state':'done'})
+#                            invoice_br.force_invoice_send()
+#                    else:
+#                        result.write({
+#                            'error_message':'La factura %s no pudo timbrarse con el PAC, comuniquese con la compañia.' % invoice_br.number,
+#                            'state': 'error',
+#                        })
+#                        return result
 
-                        if attachment_ids:
-                            attachment_web =[]
-                            for attach in attachment_ids:
-                                xval = (0,0,{
-                                    'attach_id': attach.id,
-                                    })
-                                attachment_web.append(xval)
-                            result.write({'attachment_ids':attachment_web})
-                            result.write({'state':'done'})
-                            invoice_br.force_invoice_send()
-                    else:
-                        result.write({
-                            'error_message':'La factura %s no pudo timbrarse con el PAC, comuniquese con la compañia.' % invoice_br.number,
-                            'state': 'error',
-                        })
-                        return result
+#                else:
+#                    result.write({
+#                            'error_message':'El Ticket %s tiene problemas para ser procesado comuniquese con la compañia.' % result.order_number,
+#                            'state': 'error',
+#                        })
+#                    return result
+#            else:
+#                result.write({
+#                            'error_message':'El Ticket %s ya fue Facturado.' % result.order_number,
+#                            'state': 'error',
+#                        })
+#                return result
 
-                else:
-                    result.write({
-                            'error_message':'El Ticket %s tiene problemas para ser procesado comuniquese con la compañia.' % result.order_number,
-                            'state': 'error',
-                        })
-                    return result
-            else:
-                result.write({
-                            'error_message':'El Ticket %s ya fue Facturado.' % result.order_number,
-                            'state': 'error',
-                        })
-                return result
-'''
         #### Ligar Adjuntos de Facturacion al one2many por el campo attach_id ####
         return result
 # URL ejemplo:
