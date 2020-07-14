@@ -17,7 +17,7 @@ Permite al Cliente poder generar su Factura mediante la Parte Web.
     'author': "IT Admin",
     'website': "",
     'category': 'Facturacion Electronica',
-    'version': '10.0',
+    'version': '12.0.1',
     'depends': [
     #    'website_sale_stock',
         'website_crm',
