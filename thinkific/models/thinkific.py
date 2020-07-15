@@ -277,7 +277,7 @@ class SaleOrder(models.Model):
             if True:
                 invoice_return = None
                 if order_id.invoice_status == 'invoiced':
-                    invoice_return = order_br.invoice_ids.filtered(lambda r: r.state != 'cancel')
+                    invoice_return = order_id.invoice_ids.filtered(lambda r: r.state != 'cancel')
                     if invoice_return and invoice_return[0].state != 'draft': # in['factura_correcta', 'factura_cancelada']:
                         raise exceptions.ValidationError(_("Error creating Sale Order"))
                 else:
