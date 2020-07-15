@@ -174,7 +174,7 @@ class website_self_invoice_web(models.Model):
 #                    picking_br.button_validate()
 
             if order_br.invoice_status != 'no' or order_br.is_contract: # not in('invoiced','no'):
-                if True:                                            
+                if True:
                     invoice_return = None
                     if order_br.invoice_status == 'invoiced':
                         invoice_return = order_br.invoice_ids.filtered(lambda r: r.state != 'cancel')
@@ -192,10 +192,9 @@ class website_self_invoice_web(models.Model):
                             })
                             return result
                         if order_br.is_contract:
-                            contract_ids = order_br.order_line.mapped('contract_id').filtered(
-                                lambda r: r.active)
-                            if contract_ids:
-                                contract_id = contract_ids[0]
+                            sale_order_line_id = self.env['sale.order.line'].search([('order_id','=',order_br.id),('contract_id','!=',False)],limit=1)
+                            contract_id = sale_order_line_id.contract_id
+                            if contract_id:
                                 invoice_return = contract_id.recurring_create_invoice()
                         else:
                             invoice_return = order_br.action_invoice_create()
