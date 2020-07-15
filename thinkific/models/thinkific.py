@@ -250,13 +250,80 @@ class SaleOrder(models.Model):
 
     def thinkific_so_cron_reminder(self):
         records = self.search([('state','=','sale'),('invoice_ids','=',False),('thinkific_id','!=',False)])
-        today_minus_2 = datetime.today() - timedelta(days=2)
         for rec in records:
             confirmation_date = rec.confirmation_date + timedelta(days=5)
             if confirmation_date <= datetime.today():
                 rec.action_order_send_reminder()
 
                 return True
+
+    def thinkific_so_cron_invoice(self):
+        records = self.search([('state','=','sale'),('invoice_ids','=',False),('thinkific_id','!=',False)])
+        for rec in records:
+            confirmation_date = rec.confirmation_date + timedelta(days=7)
+            if confirmation_date <= datetime.today():
+                rec.action_order_invoice_think(rec)
+
+                return True
+
+    @api.multi
+    def action_order_invoice_think(self,order_id):
+        '''
+        This function opens a new invoice for a given sale order
+        '''
+        self.ensure_one()
+
+        if order_id.invoice_status != 'no' or order_id.is_contract: # not in('invoiced','no'):
+            if True:
+                invoice_return = None
+                if order_id.invoice_status == 'invoiced':
+                    invoice_return = order_br.invoice_ids.filtered(lambda r: r.state != 'cancel')
+                    if invoice_return and invoice_return[0].state != 'draft': # in['factura_correcta', 'factura_cancelada']:
+                        raise exceptions.ValidationError(_("Error creating Sale Order"))
+                else:
+                    if not order_id.l10n_mx_edi_payment_method_id:
+                        order_id.l10n_mx_edi_payment_method_id = self.env.ref('l10n_mx_edi.payment_method_tarjeta_de_credito').id
+                    if not order_id.partner_id.vat:
+                        order_id.partner_id.vat = 'XAXX010101000'
+                    if order_id.is_contract:
+                        sale_order_line_id = self.env['sale.order.line'].search([('order_id','=',order_id.id),('contract_id','!=',False)],limit=1)
+                        contract_id = sale_order_line_id.contract_id
+                        print("contract_id,sale_order_line_id ----->>>", contract_id, sale_order_line_id)
+                        if contract_id:
+                            invoice_return = contract_id.recurring_create_invoice()
+                            invoice_br =invoice_return
+                            print("invoice_return ----->>>", invoice_return)
+                    else:
+                        invoice_return = order_br.action_invoice_create()
+                        print("invoice_return ----->>>", invoice_return)
+                        invoice_obj = self.env['account.invoice'].sudo()
+                        invoice_br = invoice_obj.browse(invoice_return[0])
+                vals = {'factura_cfdi':True, }
+                if not invoice_br.l10n_mx_edi_usage:
+                    vals.update({'l10n_mx_edi_usage': 'G03'})
+
+                if not invoice_br.l10n_mx_edi_payment_method_id:
+                    vals.update({'l10n_mx_edi_payment_method_id': self.env.ref('l10n_mx_edi.payment_method_tarjeta_de_credito').id})
+
+                invoice_br.write(vals)
+                if True:
+                    if invoice_br.state == 'draft':
+                        invoice_br.self_invoice = True
+                        invoice_br.action_invoice_open()
+
+                    _logger.info('uuid %s partner %s nombre %s uso_cfdi %s estus_pac %s', invoice_br.l10n_mx_edi_cfdi_uuid, invoice_br.partner_id.name, invoice_br.name, invoice_br.l10n_mx_edi_usage, invoice_br.l10n_mx_edi_pac_status)
+                else:
+                    raise exceptions.ValidationError(_("Error creating Invoice"))
+                    return
+            else:
+                raise exceptions.ValidationError(_("Error creating Sale Order"))
+                return
+        else:
+            raise exceptions.ValidationError(_("Error creating Invoice, Sale Order already invoice"))
+            return
+
+        return
+
 
     @api.multi
     def action_order_send(self):
