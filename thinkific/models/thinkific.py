@@ -279,7 +279,7 @@ class SaleOrder(models.Model):
                 if order_id.invoice_status == 'invoiced':
                     invoice_return = order_id.invoice_ids.filtered(lambda r: r.state != 'cancel')
                     if invoice_return and invoice_return[0].state != 'draft': # in['factura_correcta', 'factura_cancelada']:
-                        raise exceptions.ValidationError(_("Error creating Sale Order %s",order_id))
+                        raise exceptions.ValidationError(_(order_id))
                 else:
                     if not order_id.l10n_mx_edi_payment_method_id:
                         order_id.l10n_mx_edi_payment_method_id = self.env.ref('l10n_mx_edi.payment_method_tarjeta_de_credito').id
