@@ -288,7 +288,7 @@ class Partner(models.Model):
 
     thinkific_id = fields.Integer(string="Thinkific id")
 
-class ProductTemplate(models.Model):
-    _inherit = 'product.template'
+class ProductProduct(models.Model):
+    _inherit = 'product.product'
 
     thinkific_id = fields.Integer(string="Thinkific id")
