@@ -2,10 +2,10 @@
 <odoo>
     <data noupdate="1">
         <!-- Email template for thinkific so -->
-        <record id="thinkific_so_email" model="mail.template">
-            <field name="name">Pedido de Venta - 360Educa</field>
+        <record id="thinkific_so_email_reminder" model="mail.template">
+            <field name="name">Pedido de Venta Recordatorio - 360Educa</field>
             <field name="model_id" ref="sale.model_sale_order"/>
-            <field name="subject">Su Pedido de Venta: ${object.name}</field>
+            <field name="subject">Su Pedido de Venta: ${object.name} - Recordatorio: NO OLVIDES TU FACTURA</field>
             <field name="email_from">${('"%s" &lt;%s&gt;' % (object.company_id.name, object.company_id.email or user.email))|safe}</field>
             <field name="email_to">${object.partner_id.email_formatted | safe}</field>
             <field name="body_html" type="html">
@@ -37,9 +37,10 @@
                 <tr><td valign="top" style="font-size: 13px;">
                     <div>
                         Estimado ${object.partner_id.name},<br/><br/>
-                        Te agradecemos de antemano tu compra en <strong>360Educa</strong>.
-                        Adjunto encontrarás el Pedido de Venta correspondiente número <strong>${object.name} (ESTE FOLIO SE USARÁ PARA SOLICITAR LA FACTURA)</strong>, por <strong>${format_amount(object.amount_total, object.pricelist_id.currency_id)}</strong> dicho pedido ya está pagado.
-                        Favor de ir a nuestro portal de facturación para obtener la factura correspondiente:<br/>
+                        <h2><strong>¡Importante!</strong></h2>
+                        Te recordamos de tu compra en <strong>360Educa</strong>.
+                        El periodo para la generación en línea de tu factura correspondiente al folio de venta <strong>${object.name}</strong>, por <strong>${format_amount(object.amount_total, object.pricelist_id.currency_id)}</strong> esta por vencer.
+                        Comunícate con nosotros si has tenido algún problema, o ingresa nuevamente a nuestro portal para iniciar el proceso de generación de factura:<br/>
                         <div style="margin: 16px 0px 16px 0px;">
                             <a href="/portal/facturacliente/"
                                 style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
@@ -54,18 +55,16 @@
                                 Pedido de Venta
                             </a>
                         </div>
-                         <br/>
-                         Recuerda tener a la mano:
-                         * Razón Social/ Nombre
-                         * RFC
-                         * Folio de la venta (SO####)
-                         * Monto
-                         * Tu correo electrónico
-                         * Uso del CFDI (Puedes utilizar Gastos en General o Pagos por servicios educativos)
+                        <br/>
+                        Recuerda tener a la mano:
+                        * Razón Social/ Nombre
+                        * RFC
+                        * Folio de la venta (SO####)
+                        * Monto
+                        * Tu correo electrónico
+                        * Uso del CFDI (Puedes utilizar Gastos en General o Pagos por servicios educativos)
 
-                         Recuerda que podrás generar tu factura en línea dentro de los 7 días posteriores a tu pago siempre y cuando estén dentro del mes de la compra.
-
-                         Si tienes algún problema para facturar envíanos un correo a mauricio@gmc360.com.mx y samara@gmc360.com.mx con gusto te atenderemos.
+                        Si tienes algún problema para facturar envíanos un correo a mauricio@gmc360.com.mx y samara@gmc360.com.mx con gusto te atenderemos.
                          <br/><br/>
                         Gracias,<br/>
                         ${user.signature | safe}<br/>

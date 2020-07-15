@@ -123,7 +123,7 @@
         <record id="thinkific_so_cron" model="ir.cron">
     			<field name="name">Thinkific Sale Order</field>
     			<field name="active" eval="True" />
-    			<field name="interval_number">3</field>
+    			<field name="interval_number">30</field>
     			<field name="interval_type">minutes</field>
     			<field name="numbercall">-1</field>
     			<field name="model_id" ref="model_thinkific_sale" />
@@ -131,6 +131,18 @@
     			<field name="code">model.thinkific_so_cron()</field>
     			<field name="doall" eval="False" />
     		</record>
+
+        <record id="thinkific_so_cron_reminder" model="ir.cron">
+          <field name="name">Thinkific Sale Order Reminder</field>
+          <field name="active" eval="True" />
+          <field name="interval_number">1</field>
+          <field name="interval_type">days</field>
+          <field name="numbercall">-1</field>
+          <field name="model_id" ref="model_sale_order" />
+          <field name="state">code</field>
+          <field name="code">model.thinkific_so_cron_reminder()</field>
+          <field name="doall" eval="False" />
+        </record>
 
         <record id="view_order_thinkific" model="ir.ui.view">
             <field name="name">sale.order.thinkific</field>
