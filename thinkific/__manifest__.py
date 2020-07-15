@@ -22,7 +22,7 @@
         'views/thinkific_views.xml',
         'data/thinkific.xml',
         'data/thinkific_mail_template.xml',
-        'data/thinkific_so_email_reminder.xml',               
+        'data/thinkific_mail_reminder.xml',               
     ],
     'demo': [
 
