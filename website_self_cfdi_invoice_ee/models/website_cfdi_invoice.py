@@ -194,10 +194,13 @@ class website_self_invoice_web(models.Model):
                         if order_br.is_contract:
                             sale_order_line_id = self.env['sale.order.line'].search([('order_id','=',order_br.id),('contract_id','!=',False)],limit=1)
                             contract_id = sale_order_line_id.contract_id
+                            print("contract_id,sale_order_line_id ----->>>", contract_id, sale_order_line_id)
                             if contract_id:
                                 invoice_return = contract_id.recurring_create_invoice()
+                                print("invoice_return ----->>>", invoice_return)
                         else:
                             invoice_return = order_br.action_invoice_create()
+                    print("invoice_return ----->>>", invoice_return)        
                     invoice_obj = self.env['account.invoice'].sudo()
                     invoice_br = invoice_obj.browse(invoice_return[0])
                     vals = {'factura_cfdi':True, }
