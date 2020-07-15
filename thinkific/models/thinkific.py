@@ -32,9 +32,9 @@ class Webhook(models.Model):
         self.last_request = request
         if resource == 'order':
             payload = request['payload']
-            print('payload --->>>',payload)
+            #print('payload --->>>',payload)
             user = payload['user']
-            print('user ---->>>',user)
+            #print('user ---->>>',user)
             coupon = payload['coupon']
 
 
@@ -148,6 +148,8 @@ class ThinkificSale(models.Model):
                         'state' : 'draft',
                         'client_order_ref': 'THINK-' + rec.order_number,
                         'thinkific_id': rec.id,
+                        'l10n_mx_edi_payment_method_id': self.env.ref('l10n_mx_edi.payment_method_tarjeta_de_credito').id,
+                        'fiscal_position_id': self.env['res.partner'].search([('id','=',partner_id)]).fiscal_position_id.id or self.env.ref('l10n_mx.account_fiscal_position_616_fr').id,
                 }
 
                 sale_id = self.env['sale.order'].create(vals)
@@ -246,6 +248,16 @@ class ThinkificSale(models.Model):
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
+    def thinkific_so_cron_reminder(self):
+        records = self.search([('state','=','sale'),('invoice_ids','=',False),('thinkific_id','!=',False)])
+        today_minus_2 = datetime.today() - timedelta(days=2)
+        for rec in records:
+            confirmation_date = rec.confirmation_date + timedelta(days=5)
+            if confirmation_date <= datetime.today():
+                rec.action_order_send_reminder()
+
+                return True
+
     @api.multi
     def action_order_send(self):
         '''
@@ -274,9 +286,39 @@ class SaleOrder(models.Model):
         })
 
         send_mail = template.with_context(ctx).send_mail(self.id, force_send=True)
-        print("ctx ----->>", send_mail, ctx)
+        #print("ctx ----->>", send_mail, ctx)
         return
 
+    @api.multi
+    def action_order_send_reminder(self):
+        '''
+        This function opens a window to compose an email, with the edi sale template message loaded by default
+        '''
+        self.ensure_one()
+
+        template_id = self.env.ref('thinkific.thinkific_so_email_reminder').id
+
+        template = self.env['mail.template'].browse(template_id)
+
+        lang = self.env.context.get('lang')
+
+        ctx = self.env.context.copy()
+        ctx.update({
+            'default_model': 'sale.order',
+            'default_res_id': self.ids[0],
+            'default_use_template': bool(template_id),
+            'default_template_id': template_id,
+            'default_composition_mode': 'comment',
+            'mark_so_as_sent': True,
+            'model_description': self.with_context(lang=lang).type_name,
+            'custom_layout': "mail.mail_notification_paynow",
+            'proforma': self.env.context.get('proforma', False),
+            'force_email': True
+        })
+
+        send_mail = template.with_context(ctx).send_mail(self.id, force_send=True)
+        #print("ctx ----->>", send_mail, ctx)
+        return
 
     thinkific_id = fields.Many2one(comodel_name='thinkific.sale',
                               string='Thinkific Order',
