@@ -53,7 +53,7 @@ class Webhook(models.Model):
                     'order_coupon': str(coupon['code']),
                     'order_coupon_id': int(coupon['id']),
                     'order_created_at': payload['created_at'],
-                    'order_id': int(payload['id']),
+                    'rec': int(payload['id']),
                     'order_number': payload['order_number'],
                     'order_payment_type': payload['payment_type'],
                     'order_product_id': int(payload['product_id']),
@@ -165,7 +165,7 @@ class ThinkificSale(models.Model):
                                  'name' : rec.order_product_name,
                                  'price_unit' : rec.order_amount_dollars / 1.16,
                                  'tax_id': [(4, self.env['account.tax'].search([('name','=', 'IVA(16%) VENTAS')], limit=1).id)],
-                                 'order_id' : sale_id.id,
+                                 'rec' : sale_id.id,
                 }
                 sale_line_ids = self.env['sale.order.line'].create(sale_line_vals)
 
@@ -198,7 +198,7 @@ class ThinkificSale(models.Model):
     order_coupon = fields.Char(string="order_coupon")
     order_coupon_id = fields.Integer(string="order_coupon_id")
     order_created_at = fields.Char(string="order_created_at")
-    order_id = fields.Char(string="order_id")
+    rec = fields.Char(string="rec")
     order_number = fields.Char(string="order_number")
     order_payment_type = fields.Char(string="payment_type")
     order_product_id = fields.Integer(string="order_product_id")
@@ -261,31 +261,79 @@ class SaleOrder(models.Model):
         for rec in records:
             confirmation_date = rec.confirmation_date + timedelta(days=7)
             if confirmation_date <= datetime.today():
-                rec.action_order_invoice_think(rec)
+                #rec.action_order_invoice_think(rec)
+                if rec.invoice_status != 'no' or rec.is_contract: # not in('invoiced','no'):
+                    if True:
+                        invoice_return = None
+                        if rec.invoice_status == 'invoiced':
+                            invoice_return = rec.invoice_ids.filtered(lambda r: r.state != 'cancel')
+                            if invoice_return and invoice_return[0].state != 'draft': # in['factura_correcta', 'factura_cancelada']:
+                                raise exceptions.ValidationError(_(rec))
+                        else:
+                            if not rec.l10n_mx_edi_payment_method_id:
+                                rec.l10n_mx_edi_payment_method_id = self.env.ref('l10n_mx_edi.payment_method_tarjeta_de_credito').id
+                            if not rec.partner_id.vat:
+                                rec.partner_id.vat = 'XAXX010101000'
+                            if rec.is_contract:
+                                sale_order_line_id = self.env['sale.order.line'].search([('rec','=',rec.id),('contract_id','!=',False)],limit=1)
+                                contract_id = sale_order_line_id.contract_id
+                                print("contract_id,sale_order_line_id ----->>>", contract_id, sale_order_line_id)
+                                if contract_id:
+                                    invoice_return = contract_id.recurring_create_invoice()
+                                    invoice_br =invoice_return
+                                    print("invoice_return ----->>>", invoice_return)
+                            else:
+                                invoice_return = order_br.action_invoice_create()
+                                print("invoice_return ----->>>", invoice_return)
+                                invoice_obj = self.env['account.invoice'].sudo()
+                                invoice_br = invoice_obj.browse(invoice_return[0])
+                        vals = {'factura_cfdi':True, }
+                        if not invoice_br.l10n_mx_edi_usage:
+                            vals.update({'l10n_mx_edi_usage': 'G03'})
+
+                        if not invoice_br.l10n_mx_edi_payment_method_id:
+                            vals.update({'l10n_mx_edi_payment_method_id': self.env.ref('l10n_mx_edi.payment_method_tarjeta_de_credito').id})
+
+                        invoice_br.write(vals)
+                        if True:
+                            if invoice_br.state == 'draft':
+                                invoice_br.self_invoice = True
+                                invoice_br.action_invoice_open()
+
+                            _logger.info('uuid %s partner %s nombre %s uso_cfdi %s estus_pac %s', invoice_br.l10n_mx_edi_cfdi_uuid, invoice_br.partner_id.name, invoice_br.name, invoice_br.l10n_mx_edi_usage, invoice_br.l10n_mx_edi_pac_status)
+                        else:
+                            raise exceptions.ValidationError(_("Error creating Invoice"))
+                            return
+                    else:
+                        raise exceptions.ValidationError(_("Error creating Sale Order"))
+                        return
+                else:
+                    raise exceptions.ValidationError(_("Error creating Invoice, Sale Order already invoice"))
+                    return
 
                 return True
 
     @api.multi
-    def action_order_invoice_think(self,order_id):
+    def action_order_invoice_think(self,rec):
         '''
         This function opens a new invoice for a given sale order
         '''
         self.ensure_one()
 
-        if order_id.invoice_status != 'no' or order_id.is_contract: # not in('invoiced','no'):
+        if rec.invoice_status != 'no' or rec.is_contract: # not in('invoiced','no'):
             if True:
                 invoice_return = None
-                if order_id.invoice_status == 'invoiced':
-                    invoice_return = order_id.invoice_ids.filtered(lambda r: r.state != 'cancel')
+                if rec.invoice_status == 'invoiced':
+                    invoice_return = rec.invoice_ids.filtered(lambda r: r.state != 'cancel')
                     if invoice_return and invoice_return[0].state != 'draft': # in['factura_correcta', 'factura_cancelada']:
-                        raise exceptions.ValidationError(_(order_id))
+                        raise exceptions.ValidationError(_(rec))
                 else:
-                    if not order_id.l10n_mx_edi_payment_method_id:
-                        order_id.l10n_mx_edi_payment_method_id = self.env.ref('l10n_mx_edi.payment_method_tarjeta_de_credito').id
-                    if not order_id.partner_id.vat:
-                        order_id.partner_id.vat = 'XAXX010101000'
-                    if order_id.is_contract:
-                        sale_order_line_id = self.env['sale.order.line'].search([('order_id','=',order_id.id),('contract_id','!=',False)],limit=1)
+                    if not rec.l10n_mx_edi_payment_method_id:
+                        rec.l10n_mx_edi_payment_method_id = self.env.ref('l10n_mx_edi.payment_method_tarjeta_de_credito').id
+                    if not rec.partner_id.vat:
+                        rec.partner_id.vat = 'XAXX010101000'
+                    if rec.is_contract:
+                        sale_order_line_id = self.env['sale.order.line'].search([('rec','=',rec.id),('contract_id','!=',False)],limit=1)
                         contract_id = sale_order_line_id.contract_id
                         print("contract_id,sale_order_line_id ----->>>", contract_id, sale_order_line_id)
                         if contract_id:
