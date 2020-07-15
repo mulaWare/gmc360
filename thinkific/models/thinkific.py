@@ -249,16 +249,15 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     def thinkific_so_cron_reminder(self):
-        records = self.search([('state','=','sale'),('invoice_ids','=',False),('thinkific_id','!=',False)])
+        records = self.search([('state','=','sale'),('invoice_status','!=','invoiced'),('thinkific_id','!=',False)])
         for rec in records:
             confirmation_date = rec.confirmation_date + timedelta(days=5)
             if confirmation_date <= datetime.today():
                 rec.action_order_send_reminder()
-
                 return True
 
     def thinkific_so_cron_invoice(self):
-        records = self.search([('state','=','sale'),('invoice_ids','=',False),('thinkific_id','!=',False)])
+        records = self.search([('state','=','sale'),('invoice_status','!=','invoiced'),('thinkific_id','!=',False)])
         for rec in records:
             confirmation_date = rec.confirmation_date + timedelta(days=7)
             if confirmation_date <= datetime.today():
