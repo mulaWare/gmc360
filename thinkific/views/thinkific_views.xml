@@ -89,8 +89,8 @@
 
         <record  model="ir.ui.view" id="product_view_thinkific">
             <field name="name">product_view_thinkific</field>
-            <field name="model">product.template</field>
-            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='categ_id']" position="after">
                       <field name="thinkific_id" attrs="{'invisible':['|',('thinkific_id', '=', False)]}"/>
