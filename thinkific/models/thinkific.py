@@ -13,7 +13,7 @@ from datetime import timedelta
 from odoo.tests.common import HttpCase
 from odoo import api, exceptions, fields, models, tools, _
 from odoo.tools.translate import _
-
+_logger = logging.getLogger(__name__)
 
 HOST = '127.0.0.1'
 #PORT = tools.config['xmlrpc_port']
