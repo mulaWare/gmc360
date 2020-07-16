@@ -274,14 +274,14 @@ class SaleOrder(models.Model):
                                 rec.l10n_mx_edi_payment_method_id = self.env.ref('l10n_mx_edi.payment_method_tarjeta_de_credito').id
                             if not rec.partner_id.vat:
                                 rec.partner_id.vat = 'XAXX010101000'
-                            if rec.is_contract:
-                                sale_order_line_id = self.env['sale.order.line'].search([('rec','=',rec.id),('contract_id','!=',False)],limit=1)
-                                contract_id = sale_order_line_id.contract_id
-                                print("contract_id,sale_order_line_id ----->>>", contract_id, sale_order_line_id)
-                                if contract_id:
-                                    invoice_return = contract_id.recurring_create_invoice()
-                                    invoice_br =invoice_return
-                                    print("invoice_return ----->>>", invoice_return)
+                            #if rec.is_contract:
+                            sale_order_line_id = self.env['sale.order.line'].search([('rec','=',rec.id),('contract_id','!=',False)],limit=1)
+                            contract_id = sale_order_line_id.contract_id
+                            print("contract_id,sale_order_line_id ----->>>", contract_id, sale_order_line_id)
+                            if contract_id:
+                                invoice_return = contract_id.recurring_create_invoice()
+                                invoice_br =invoice_return
+                                print("invoice_return ----->>>", invoice_return)
                             else:
                                 invoice_return = order_br.action_invoice_create()
                                 print("invoice_return ----->>>", invoice_return)
