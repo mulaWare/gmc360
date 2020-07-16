@@ -13,6 +13,7 @@ from datetime import timedelta
 from odoo.tests.common import HttpCase
 from odoo import api, exceptions, fields, models, tools, _
 from odoo.tools.translate import _
+from odoo.exceptions import UserError, ValidationError
 
 
 HOST = '127.0.0.1'
@@ -306,6 +307,8 @@ class SaleOrder(models.Model):
                             if invoice_br.state == 'draft':
                                 invoice_br.self_invoice = True
                                 invoice_br.action_invoice_open()
+
+
                                 journal_id = self.env['account.journal'].search([('code','=','STRIP')],limit=1)
                                 ctx = {'active_model': 'account.invoice', 'active_ids': [invoice_br.id], 'default_invoice_ids': [(4, invoice_br.id, None)]}
                                 payment_id = self.env['account.payment'].with_context(
@@ -322,7 +325,9 @@ class SaleOrder(models.Model):
                                         'partner_type': 'customer',
                                         'partner_id': invoice_br.partner_id.id,
                                     })
-                                payment_id.action_validate_invoice_payment()
+                                if invoice_br.l10n_mx_edi_pac_status == 'signed':
+                                    payment_id.action_validate_invoice_payment()
+                                
 
 
                             #_logger.info('uuid %s partner %s nombre %s uso_cfdi %s estus_pac %s', invoice_br.l10n_mx_edi_cfdi_uuid, invoice_br.partner_id.name, invoice_br.name, invoice_br.l10n_mx_edi_usage, invoice_br.l10n_mx_edi_pac_status)
