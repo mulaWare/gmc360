@@ -275,7 +275,7 @@ class SaleOrder(models.Model):
                             if not rec.partner_id.vat:
                                 rec.partner_id.vat = 'XAXX010101000'
                             #if rec.is_contract:
-                            sale_order_line_id = self.env['sale.order.line'].search([('rec','=',rec.id),('contract_id','!=',False)],limit=1)
+                            sale_order_line_id = self.env['sale.order.line'].search([('order_id','=',rec.id),('contract_id','!=',False)],limit=1)
                             contract_id = sale_order_line_id.contract_id
                             print("contract_id,sale_order_line_id ----->>>", contract_id, sale_order_line_id)
                             if contract_id:
