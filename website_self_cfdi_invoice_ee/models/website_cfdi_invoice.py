@@ -218,25 +218,25 @@ class website_self_invoice_web(models.Model):
                         if invoice_br.state == 'draft':
                             invoice_br.self_invoice = True
                             invoice_br.action_invoice_open()
-
-                            journal_id = self.env['account.journal'].search([('code','=','STRIP')],limit=1)
-                            ctx = {'active_model': 'account.invoice', 'active_ids': [invoice_br.id], 'default_invoice_ids': [(4, invoice_br.id, None)]}
-                            payment_id = self.env['account.payment'].with_context(
-                                ctx).create({
-                                        'payment_date': order_br.confirmation_date,
-                                        'payment_method_id': journal_id.inbound_payment_method_ids[0].id,
-                                        'l10n_mx_edi_payment_method_id': self.env.ref('l10n_mx_edi.payment_method_tarjeta_de_credito').id,
-                                        'journal_id': journal_id.id,
-                                        'communication': invoice_br.number,
-                                        'amount': invoice_br.amount_total,
-                                        'currency_id': invoice_br.currency_id.id,
-                                        'payment_difference_handling': 'reconcile',
-                                        'payment_type': 'inbound',
-                                        'partner_type': 'customer',
-                                        'partner_id': invoice_br.partner_id.id,
-                                    })
-                            if invoice_br.l10n_mx_edi_pac_status == 'signed':
-                                payment_id.action_validate_invoice_payment()
+                            if order_br.thinkific_id:
+                                journal_id = self.env['account.journal'].search([('code','=','STRIP')],limit=1)
+                                ctx = {'active_model': 'account.invoice', 'active_ids': [invoice_br.id], 'default_invoice_ids': [(4, invoice_br.id, None)]}
+                                payment_id = self.env['account.payment'].with_context(
+                                    ctx).create({
+                                            'payment_date': order_br.confirmation_date,
+                                            'payment_method_id': journal_id.inbound_payment_method_ids[0].id,
+                                            'l10n_mx_edi_payment_method_id': self.env.ref('l10n_mx_edi.payment_method_tarjeta_de_credito').id,
+                                            'journal_id': journal_id.id,
+                                            'communication': invoice_br.number,
+                                            'amount': invoice_br.amount_total,
+                                            'currency_id': invoice_br.currency_id.id,
+                                            'payment_difference_handling': 'reconcile',
+                                            'payment_type': 'inbound',
+                                            'partner_type': 'customer',
+                                            'partner_id': invoice_br.partner_id.id,
+                                        })
+                                if invoice_br.l10n_mx_edi_pac_status == 'signed':
+                                    payment_id.action_validate_invoice_payment()
 
                         _logger.info('uuid %s partner %s nombre %s uso_cfdi %s estus_pac %s', invoice_br.l10n_mx_edi_cfdi_uuid, invoice_br.partner_id.name, invoice_br.name, invoice_br.l10n_mx_edi_usage, invoice_br.l10n_mx_edi_pac_status)
 #                        if invoice_br.l10n_mx_edi_pac_status=='to_sign':
