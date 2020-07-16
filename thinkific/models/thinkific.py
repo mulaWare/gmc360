@@ -14,7 +14,7 @@ from odoo.tests.common import HttpCase
 from odoo import api, exceptions, fields, models, tools, _
 from odoo.tools.translate import _
 from odoo.exceptions import UserError, ValidationError
-
+from calendar import monthrange
 
 HOST = '127.0.0.1'
 #PORT = tools.config['xmlrpc_port']
@@ -260,6 +260,92 @@ class SaleOrder(models.Model):
                 rec.action_order_send_reminder()
                 return True
 
+    def last_day_of_month(date_value):
+        return date_value.replace(day = monthrange(date_value.year, date_value.month)[1])
+
+    def thinkific_so_cron_invoice_end(self):
+        records = self.search([('state','=','sale'),('invoice_status','!=','invoiced'),('thinkific_id','!=',False)])
+        for rec in records:
+            today = datetime.today().date()
+            end_of_month = self.last_day_of_month(today)
+            if today >= end_of_month:
+                if rec.invoice_status != 'no' or rec.is_contract: # not in('invoiced','no'):
+                    if True:
+                        invoice_return = None
+                        if rec.invoice_status == 'invoiced':
+                            invoice_return = rec.invoice_ids.filtered(lambda r: r.state != 'cancel')
+                            if invoice_return and invoice_return[0].state != 'draft': # in['factura_correcta', 'factura_cancelada']:
+                                raise exceptions.ValidationError(_(rec))
+                        else:
+
+                            rec.l10n_mx_edi_payment_method_id = self.env.ref('l10n_mx_edi.payment_method_tarjeta_de_credito').id
+                            rec.fiscal_position_id = self.env.ref('l10n_mx.account_fiscal_position_616_fr').id
+                            if not rec.partner_id.vat:
+                                rec.partner_id.vat = 'XAXX010101000'
+                            #if rec.is_contract:
+                            sale_order_line_id = self.env['sale.order.line'].search([('order_id','=',rec.id),('contract_id','!=',False)],limit=1)
+                            contract_id = sale_order_line_id.contract_id
+                            print("contract_id,sale_order_line_id ----->>>", contract_id, sale_order_line_id)
+                            if contract_id:
+                                invoice_return = contract_id.recurring_create_invoice()
+                                invoice_br =invoice_return
+                                print("invoice_return ----->>>", invoice_return)
+                            else:
+                                invoice_return = rec.action_invoice_create()
+                                print("invoice_return ----->>>", invoice_return)
+                                invoice_obj = self.env['account.invoice'].sudo()
+                                invoice_br = invoice_obj.browse(invoice_return[0])
+                        vals = {'factura_cfdi':True, }
+                        if not invoice_br.l10n_mx_edi_usage:
+                            vals.update({'l10n_mx_edi_usage': 'G03'})
+
+                        if not invoice_br.l10n_mx_edi_payment_method_id:
+                            vals.update({'l10n_mx_edi_payment_method_id': self.env.ref('l10n_mx_edi.payment_method_tarjeta_de_credito').id})
+
+                        if not invoice_br.fiscal_position_id:
+                            vals.update({'fiscal_position_id': self.env.ref('l10n_mx.account_fiscal_position_616_fr').id})
+
+                        invoice_br.write(vals)
+                        if True:
+                            if invoice_br.state == 'draft':
+                                invoice_br.self_invoice = True
+                                invoice_br.action_invoice_open()
+
+
+                                journal_id = self.env['account.journal'].search([('code','=','STRIP')],limit=1)
+                                ctx = {'active_model': 'account.invoice', 'active_ids': [invoice_br.id], 'default_invoice_ids': [(4, invoice_br.id, None)]}
+                                payment_id = self.env['account.payment'].with_context(
+                                    ctx).create({
+                                        'payment_date': rec.confirmation_date,
+                                        'payment_method_id': journal_id.inbound_payment_method_ids[0].id,
+                                        'l10n_mx_edi_payment_method_id': self.env.ref('l10n_mx_edi.payment_method_tarjeta_de_credito').id,
+                                        'journal_id': journal_id.id,
+                                        'communication': invoice_br.number,
+                                        'amount': invoice_br.amount_total,
+                                        'currency_id': invoice_br.currency_id.id,
+                                        'payment_difference_handling': 'reconcile',
+                                        'payment_type': 'inbound',
+                                        'partner_type': 'customer',
+                                        'partner_id': invoice_br.partner_id.id,
+                                    })
+                                if invoice_br.l10n_mx_edi_pac_status == 'signed':
+                                    payment_id.action_validate_invoice_payment()
+
+
+
+                            #_logger.info('uuid %s partner %s nombre %s uso_cfdi %s estus_pac %s', invoice_br.l10n_mx_edi_cfdi_uuid, invoice_br.partner_id.name, invoice_br.name, invoice_br.l10n_mx_edi_usage, invoice_br.l10n_mx_edi_pac_status)
+                        else:
+                            raise exceptions.ValidationError(_("Error creating Invoice"))
+                            return
+                    else:
+                        raise exceptions.ValidationError(_("Error creating Sale Order"))
+                        return
+                else:
+                    raise exceptions.ValidationError(_("Error creating Invoice, Sale Order already invoice"))
+                    return
+
+                return True
+
     def thinkific_so_cron_invoice(self):
         records = self.search([('state','=','sale'),('invoice_status','!=','invoiced'),('thinkific_id','!=',False)])
         for rec in records:
@@ -327,7 +413,7 @@ class SaleOrder(models.Model):
                                     })
                                 if invoice_br.l10n_mx_edi_pac_status == 'signed':
                                     payment_id.action_validate_invoice_payment()
-                                
+
 
 
                             #_logger.info('uuid %s partner %s nombre %s uso_cfdi %s estus_pac %s', invoice_br.l10n_mx_edi_cfdi_uuid, invoice_br.partner_id.name, invoice_br.name, invoice_br.l10n_mx_edi_usage, invoice_br.l10n_mx_edi_pac_status)
