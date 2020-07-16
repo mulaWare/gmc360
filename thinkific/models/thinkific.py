@@ -198,7 +198,7 @@ class ThinkificSale(models.Model):
     order_coupon = fields.Char(string="order_coupon")
     order_coupon_id = fields.Integer(string="order_coupon_id")
     order_created_at = fields.Char(string="order_created_at")
-    rec = fields.Char(string="rec")
+    order_id = fields.Char(string="order_id")
     order_number = fields.Char(string="order_number")
     order_payment_type = fields.Char(string="payment_type")
     order_product_id = fields.Integer(string="order_product_id")
@@ -351,7 +351,7 @@ class SaleOrder(models.Model):
 
                 if not invoice_br.l10n_mx_edi_payment_method_id:
                     vals.update({'l10n_mx_edi_payment_method_id': self.env.ref('l10n_mx_edi.payment_method_tarjeta_de_credito').id})
- 
+
                 invoice_br.write(vals)
                 if True:
                     if invoice_br.state == 'draft':
