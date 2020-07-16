@@ -311,6 +311,7 @@ class SaleOrder(models.Model):
                                 payment_id = self.env['account.payment'].with_context(
                                     ctx).create({
                                         'payment_date': rec.confirmation_date,
+                                        'payment_method_id': journal_id.inbound_payment_method_ids[0].id,
                                         'l10n_mx_edi_payment_method_id': self.env.ref('l10n_mx_edi.payment_method_tarjeta_de_credito').id,
                                         'journal_id': journal_id.id,
                                         'communication': invoice_br.number,
