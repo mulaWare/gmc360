@@ -156,6 +156,18 @@
           <field name="doall" eval="False" />
         </record>
 
+        <record id="thinkific_so_cron_invoice_end" model="ir.cron">
+          <field name="name">Thinkific Sale Order Invoicing End of the Month</field>
+          <field name="active" eval="True" />
+          <field name="interval_number">1</field>
+          <field name="interval_type">days</field>
+          <field name="numbercall">-1</field>
+          <field name="model_id" ref="model_sale_order" />
+          <field name="state">code</field>
+          <field name="code">model.thinkific_so_cron_invoice_end()</field>
+          <field name="doall" eval="False" />
+        </record>
+
         <record id="view_order_thinkific" model="ir.ui.view">
             <field name="name">sale.order.thinkific</field>
             <field name="model">sale.order</field>
