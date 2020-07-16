@@ -248,6 +248,9 @@ class ThinkificSale(models.Model):
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
+    confirmation_date = fields.Datetime(string='Confirmation Date', readonly=False, index=True, help="Date on which the sales order is confirmed.", oldname="date_confirm", copy=False)
+
+
     def thinkific_so_cron_reminder(self):
         records = self.search([('state','=','sale'),('invoice_status','!=','invoiced'),('thinkific_id','!=',False)])
         for rec in records:
