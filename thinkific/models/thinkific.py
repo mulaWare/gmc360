@@ -260,7 +260,7 @@ class SaleOrder(models.Model):
                 rec.action_order_send_reminder()
                 return True
 
-    def last_day_of_month(date_value):
+    def last_day_of_month(self,date_value):
         return date_value.replace(day = monthrange(date_value.year, date_value.month)[1])
 
     def thinkific_so_cron_invoice_end(self):
