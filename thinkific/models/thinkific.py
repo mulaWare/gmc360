@@ -270,8 +270,9 @@ class SaleOrder(models.Model):
                             if invoice_return and invoice_return[0].state != 'draft': # in['factura_correcta', 'factura_cancelada']:
                                 raise exceptions.ValidationError(_(rec))
                         else:
-                            if not rec.l10n_mx_edi_payment_method_id:
-                                rec.l10n_mx_edi_payment_method_id = self.env.ref('l10n_mx_edi.payment_method_tarjeta_de_credito').id
+
+                            rec.l10n_mx_edi_payment_method_id = self.env.ref('l10n_mx_edi.payment_method_tarjeta_de_credito').id
+                            rec.fiscal_position_id = self.env.ref('l10n_mx.account_fiscal_position_616_fr').id
                             if not rec.partner_id.vat:
                                 rec.partner_id.vat = 'XAXX010101000'
                             #if rec.is_contract:
@@ -294,11 +295,31 @@ class SaleOrder(models.Model):
                         if not invoice_br.l10n_mx_edi_payment_method_id:
                             vals.update({'l10n_mx_edi_payment_method_id': self.env.ref('l10n_mx_edi.payment_method_tarjeta_de_credito').id})
 
+                        if not invoice_br.fiscal_position_id:
+                            vals.update({'fiscal_position_id': self.env.ref('l10n_mx.account_fiscal_position_616_fr').id})
+
                         invoice_br.write(vals)
                         if True:
                             if invoice_br.state == 'draft':
                                 invoice_br.self_invoice = True
                                 invoice_br.action_invoice_open()
+                                journal_id = self.env['account.journal'].search([('code','=','STRIP')],limit=1)
+                                ctx = {'active_model': 'account.invoice', 'active_ids': [invoice_br.id], 'default_invoice_ids': [(4, invoice_br.id, None)]}
+                                payment_id = self.env['account.payment'].with_context(
+                                    ctx).create({
+                                        'payment_date': rec.confirmation_date,
+                                        'l10n_mx_edi_payment_method_id': self.env.ref('l10n_mx_edi.payment_method_tarjeta_de_credito').id,
+                                        'journal_id': journal_id.id,
+                                        'communication': invoice_br.number,
+                                        'amount': invoice_br.amount_total,
+                                        'currency_id': invoice_br.currency_id.id,
+                                        'payment_difference_handling': 'reconcile',
+                                        'payment_type': 'inbound',
+                                        'partner_type': 'customer',
+                                        'partner_id': invoice_br.partner_id.id,
+                                    })
+                                payment_id.action_validate_invoice_payment()
+
 
                             #_logger.info('uuid %s partner %s nombre %s uso_cfdi %s estus_pac %s', invoice_br.l10n_mx_edi_cfdi_uuid, invoice_br.partner_id.name, invoice_br.name, invoice_br.l10n_mx_edi_usage, invoice_br.l10n_mx_edi_pac_status)
                         else:
