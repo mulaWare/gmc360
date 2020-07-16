@@ -283,7 +283,7 @@ class SaleOrder(models.Model):
                                 invoice_br =invoice_return
                                 print("invoice_return ----->>>", invoice_return)
                             else:
-                                invoice_return = order_br.action_invoice_create()
+                                invoice_return = rec.action_invoice_create()
                                 print("invoice_return ----->>>", invoice_return)
                                 invoice_obj = self.env['account.invoice'].sudo()
                                 invoice_br = invoice_obj.browse(invoice_return[0])
