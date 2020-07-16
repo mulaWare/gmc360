@@ -13,7 +13,7 @@ from datetime import timedelta
 from odoo.tests.common import HttpCase
 from odoo import api, exceptions, fields, models, tools, _
 from odoo.tools.translate import _
-_logger = logging.getLogger(__name__)
+
 
 HOST = '127.0.0.1'
 #PORT = tools.config['xmlrpc_port']
@@ -300,7 +300,7 @@ class SaleOrder(models.Model):
                                 invoice_br.self_invoice = True
                                 invoice_br.action_invoice_open()
 
-                            _logger.info('uuid %s partner %s nombre %s uso_cfdi %s estus_pac %s', invoice_br.l10n_mx_edi_cfdi_uuid, invoice_br.partner_id.name, invoice_br.name, invoice_br.l10n_mx_edi_usage, invoice_br.l10n_mx_edi_pac_status)
+                            #_logger.info('uuid %s partner %s nombre %s uso_cfdi %s estus_pac %s', invoice_br.l10n_mx_edi_cfdi_uuid, invoice_br.partner_id.name, invoice_br.name, invoice_br.l10n_mx_edi_usage, invoice_br.l10n_mx_edi_pac_status)
                         else:
                             raise exceptions.ValidationError(_("Error creating Invoice"))
                             return
