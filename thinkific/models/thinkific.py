@@ -351,7 +351,7 @@ class SaleOrder(models.Model):
 
                 if not invoice_br.l10n_mx_edi_payment_method_id:
                     vals.update({'l10n_mx_edi_payment_method_id': self.env.ref('l10n_mx_edi.payment_method_tarjeta_de_credito').id})
-
+ 
                 invoice_br.write(vals)
                 if True:
                     if invoice_br.state == 'draft':
