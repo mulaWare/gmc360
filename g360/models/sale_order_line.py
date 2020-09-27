@@ -160,5 +160,5 @@ class SaleOrderLine(models.Model):
         sale line linked to contracts must not be invoiced from sale order
         """
         res = super()._get_to_invoice_qty()
-        self.filtered('product_id.is_contract').update({'qty_to_invoice': 0.0})
+        #self.filtered('product_id.is_contract').update({'qty_to_invoice': 0.0})
         return res
