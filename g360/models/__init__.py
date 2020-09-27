@@ -2,7 +2,7 @@
 
 from . import res_partner
 from . import sale
-#from . import sale_order_line
+from . import sale_order_line
 from . import payments
 from . import account_bank_statement
 from . import account_invoice
