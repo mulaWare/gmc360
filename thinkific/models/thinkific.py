@@ -150,7 +150,7 @@ class ThinkificSale(models.Model):
                         'client_order_ref': 'THINK-' + rec.order_number,
                         'thinkific_id': rec.id,
                         'l10n_mx_edi_payment_method_id': self.env.ref('l10n_mx_edi.payment_method_tarjeta_de_credito').id,
-                        'fiscal_position_id': self.env['res.partner'].search([('id','=',partner_id)]).fiscal_position_id.id or self.env.ref('l10n_mx.account_fiscal_position_616_fr').id,
+                        'fiscal_position_id': self.env['res.partner'].search([('id','=',partner_id)]).property_account_position_id.id or self.env.ref('l10n_mx.account_fiscal_position_616_fr').id,
                 }
 
                 sale_id = self.env['sale.order'].create(vals)
