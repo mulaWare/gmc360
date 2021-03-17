@@ -166,7 +166,7 @@ class ThinkificSale(models.Model):
                                  'name' : rec.order_product_name,
                                  'price_unit' : rec.order_amount_dollars / 1.16,
                                  'tax_id': [(4, self.env['account.tax'].search([('name','=', 'IVA(16%) VENTAS')], limit=1).id)],
-                                 'rec' : sale_id.id,
+                                 'order_id': sale_id.id,
                 }
                 sale_line_ids = self.env['sale.order.line'].create(sale_line_vals)
 
